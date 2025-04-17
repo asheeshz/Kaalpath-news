@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Tutorial Page JavaScript (v1.0) - For Copy Buttons & Animations
+   Tutorial Page JavaScript (v1.1) - For Copy Buttons & Animations
+   Uses tut- prefixed classes.
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,13 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // डमी टेक्स्ट के बजाय वास्तविक कोड प्राप्त करने के लिए आपको यहाँ लॉजिक जोड़ना होगा
         // फिलहाल, हम मान लेते हैं कि कोड ब्लॉक में सही कोड है (या डमी टेक्स्ट है)
         const codeToCopy = codeBlock.textContent || codeBlock.innerText;
-        const tooltip = buttonElement.closest('.tooltip'); // Find parent tooltip container
-        const tooltipText = tooltip ? tooltip.querySelector('.tooltiptext') : null; // Find tooltip text inside
+        const tooltip = buttonElement.closest('.tut-tooltip'); // Use prefixed class for tooltip container
+        const tooltipText = tooltip ? tooltip.querySelector('.tut-tooltiptext') : null; // Use prefixed class for tooltip text
 
         if (!tooltipText) {
             console.error("टूलटिप टेक्स्ट एलिमेंट नहीं मिला।");
-            // Fallback: बिना टूलटिप के कॉपी करें
+             // Fallback: बिना टूलटिप के कॉपी करें
              navigator.clipboard.writeText(codeToCopy).then(() => {
+                // Use tut- prefixed class if button has it, otherwise default
+                const buttonClass = buttonElement.classList.contains('tut-copy-button') ? 'tut-copy-button' : 'copy-button';
                 buttonElement.innerHTML = '<i class="fas fa-check"></i> कॉपीड!';
                 setTimeout(() => {
                     buttonElement.innerHTML = '<i class="fas fa-copy"></i> कॉपी';
@@ -66,9 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- फेड-इन एनिमेशन (यदि .fade-in क्लास का उपयोग किया गया है) ---
-    document.querySelectorAll('#a14n .fade-in').forEach((el, index) => {
-        // सुनिश्चित करें कि स्टाइल यूनिक आईडी वाले कंटेनर के अंदर के तत्वों पर ही लागू हो
+    // --- फेड-इन एनिमेशन ---
+    // Ensure we only target elements within the tutorial container using the class
+    document.querySelectorAll('.tut-container .tut-fade-in').forEach((el, index) => { // Use .tut-container and .tut-fade-in
         el.style.animationDelay = `${index * 0.1}s`;
     });
 
