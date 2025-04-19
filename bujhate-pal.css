@@ -1,148 +1,165 @@
 /* =====================================
-   हेडर इमेज, अन्य इमेज और वीडियो स्टाइल्स
+   एनिमेटेड हेडिंग स्टाइल्स (v2.1 - 3-कलर ग्रेडिएंट)
    ===================================== */
 
-/* --- हेडर इमेज कंटेनर --- */
-.custom-header-container {
-  position: relative; /* ओवरले और टेक्स्ट पोजिशनिंग के लिए */
-  min-height: 350px; /* हेडर की न्यूनतम ऊंचाई */
-  background-size: cover; /* छवि पूरी तरह कवर करे */
-  background-position: center center; /* छवि केंद्रित रहे */
-  background-repeat: no-repeat;
-  display: flex; /* टेक्स्ट को सेंटर करने के लिए फ्लेक्सबॉक्स */
-  align-items: center; /* वर्टीकल सेंटर */
-  justify-content: center; /* हॉरिजॉन्टल सेंटर */
-  padding: 40px 20px; /* अंदरूनी स्पेसिंग */
-  margin-bottom: 30px; /* नीचे मार्जिन */
-  color: #ffffff; /* डिफ़ॉल्ट टेक्स्ट कलर सफेद */
-  text-align: center;
-  overflow: hidden; /* कोई अतिरिक्त कंटेंट बाहर न जाए */
-  border-radius: 0 0 12px 12px; /* नीचे के कोनों को गोल करें */
+/* --- कॉमन हेडिंग बेस --- */
+.custom-h2, .custom-h3, .custom-h4, .custom-h5, .custom-h6 {
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+  padding: 12px 18px; /* थोड़ी अधिक पैडिंग */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 6px;
+  --border-width: 4px;
+  background-size: 300% 300%; /* ग्रेडिएंट एनिमेशन के लिए */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  color: transparent; /* टेक्स्ट ग्रेडिएंट के लिए */
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
-/* हेडर इमेज पर सेमी-ट्रांसपेरेंट ओवरले (टेक्स्ट कंट्रास्ट के लिए) */
-.custom-header-container::before {
+/* स्यूडो-एलिमेंट (बॉर्डर इफ़ेक्ट के लिए) */
+.custom-h2::before, .custom-h3::before, .custom-h4::before, .custom-h5::before, .custom-h6::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)); /* डार्क ग्रेडिएंट ओवरले */
-  z-index: 1; /* टेक्स्ट के पीछे */
-   border-radius: inherit; /* पैरेंट से रेडियस लें */
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -1;
+  margin: calc(-1 * var(--border-width));
+  border-radius: inherit;
+  background-size: 300% 300%;
+  animation: gradient-border-move 8s linear infinite;
 }
 
-/* हेडर कंटेनर के अंदर H2 के लिए विशिष्ट स्टाइल */
-.custom-header-container .custom-h2 {
-  position: relative; /* ओवरले के ऊपर रखने के लिए */
-  z-index: 2; /* ओवरले के ऊपर */
-  color: #ffffff !important; /* टेक्स्ट सफेद ही रहे */
-  font-size: 2.5em !important; /* बड़ा फॉन्ट साइज़ */
-  font-weight: bold;
-  text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.7); /* टेक्स्ट शैडो स्पष्टता के लिए */
-
-  /* मौजूदा .custom-h2 स्टाइल को ओवरराइड करें जो यहाँ ठीक नहीं लगेंगे */
-  background: none !important; /* कोई ग्रेडिएंट बैकग्राउंड या टेक्स्ट नहीं */
-  padding: 0 !important; /* कोई अतिरिक्त पैडिंग नहीं */
-  border: none !important; /* कोई बॉर्डर नहीं */
-  -webkit-background-clip: unset !important;
-  background-clip: unset !important;
-  animation: none !important; /* हेडर H2 पर कोई एनिमेशन नहीं */
-  margin: 0; /* डिफ़ॉल्ट मार्जिन हटाएं */
+/* --- H2 स्टाइल्स --- */
+.custom-h2 {
+  font-size: 1.8em;
+  /* टेक्स्ट ग्रेडिएंट (3 रंग + पहला रिपीट) */
+  background-image: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff6b6b);
+  animation-name: gradient-text-move, text-pulse; /* टेक्स्ट एनिमेशन */
+  animation-duration: 7s, 3s; /* अलग अवधि */
+  /* सरल बैकग्राउंड */
+  background-color: #fff0f0;
+}
+.custom-h2::before {
+  /* बॉर्डर ग्रेडिएंट (3 रंग + पहला रिपीट) */
+  background-image: linear-gradient(135deg, #ff7979, #badc58, #f9ca24, #ff7979);
+  animation-duration: 8s; /* बॉर्डर एनिमेशन अवधि */
 }
 
-/* --- अन्य छवियों के लिए (कैप्शन के साथ) --- */
-.custom-figure {
-  margin: 25px 0; /* ऊपर/नीचे मार्जिन */
-  padding: 0;
-  text-align: center; /* छवि और कैप्शन को सेंटर करें */
+/* --- H3 स्टाइल्स --- */
+.custom-h3 {
+  font-size: 1.5em;
+  /* टेक्स्ट ग्रेडिएंट (3 रंग + पहला रिपीट) */
+  background-image: linear-gradient(60deg, #55efc4, #74b9ff, #a29bfe, #55efc4);
+  animation-name: gradient-text-move-alt, text-glow;
+  animation-duration: 8s, 4s;
+  /* सरल बैकग्राउंड */
+  background-color: #f0fff8;
+}
+.custom-h3::before {
+  /* बॉर्डर ग्रेडिएंट (3 रंग + पहला रिपीट) */
+  background-image: linear-gradient(200deg, #81ecec, #fab1a0, #ffeaa7, #81ecec);
+  animation-duration: 9s;
 }
 
-.custom-figure .custom-img {
-  /* मौजूदा .custom-img स्टाइल लागू रहेंगे (जैसे होवर प्रभाव) */
-  margin-bottom: 10px; /* छवि और कैप्शन के बीच स्पेस */
+/* --- H4 स्टाइल्स --- */
+.custom-h4 {
+  font-size: 1.3em;
+  /* टेक्स्ट ग्रेडिएंट (3 रंग + पहला रिपीट) */
+  background-image: linear-gradient(90deg, #fd79a8, #f7d794, #a7ff83, #fd79a8);
+   animation-name: gradient-text-move, text-subtle-shift;
+   animation-duration: 6s, 5s;
+   /* सरल बैकग्राउंड */
+   background-color: #fff5f8;
+}
+.custom-h4::before {
+  /* बॉर्डर ग्रेडिएंट (3 रंग + पहला रिपीट) */
+  background-image: linear-gradient(-45deg, #6a89cc, #b8e994, #f8c291, #6a89cc);
+  animation-duration: 7s;
 }
 
-.custom-caption {
-  font-size: 0.9em;
-  color: #666;
-  font-style: italic;
-  line-height: 1.4;
-  padding: 0 10px; /* किनारों से थोड़ी पैडिंग */
+/* --- H5 स्टाइल्स --- */
+.custom-h5 {
+  font-size: 1.15em;
+   /* टेक्स्ट ग्रेडिएंट (3 रंग + पहला रिपीट) */
+  background-image: linear-gradient(120deg, #ff9a8b, #ff6a88, #ff99ac, #ff9a8b);
+   animation-name: gradient-text-move-alt, text-fade-in-out;
+   animation-duration: 9s, 3.5s;
+   /* सरल बैकग्राउंड */
+   background-color: #fff8f5;
+}
+.custom-h5::before {
+  /* बॉर्डर ग्रेडिएंट (3 रंग + पहला रिपीट) */
+  background-image: linear-gradient(300deg, #f6e58d, #ffbe76, #ff7979, #f6e58d);
+  animation-duration: 10s;
 }
 
-/* --- वीडियो कंटेनर (Responsive Iframe) --- */
-.custom-video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  background: #000; /* लोडिंग के समय काला बैकग्राउंड */
-  margin: 25px auto; /* ऊपर/नीचे मार्जिन और सेंटर */
-  border-radius: 8px; /* गोल किनारे */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* हल्का शैडो */
+/* --- H6 स्टाइल्स --- */
+.custom-h6 {
+  font-size: 1.05em;
+  /* टेक्स्ट ग्रेडिएंट (3 रंग + पहला रिपीट) */
+  background-image: linear-gradient(180deg, #7bed9f, #70a1ff, #5352ed, #7bed9f);
+   animation-name: gradient-text-move, text-slight-scale;
+   animation-duration: 7s, 2.5s;
+   /* सरल बैकग्राउंड */
+   background-color: #f5f8ff;
+}
+.custom-h6::before {
+  /* बॉर्डर ग्रेडिएंट (3 रंग + पहला रिपीट) */
+  background-image: linear-gradient(0deg, #48dbfb, #ffdd59, #ff5e57, #48dbfb);
+  animation-duration: 6s;
 }
 
-.custom-video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0; /* iframe का डिफ़ॉल्ट बॉर्डर हटाएं */
+/* =====================================
+   एनिमेशन कीफ्रेम्स (@keyframes) - (पहले जैसे ही रहेंगे)
+   ===================================== */
+
+/* --- ग्रेडिएंट मूवमेंट एनिमेशन --- */
+@keyframes gradient-border-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* --- प्रिंट स्टाइल अपडेट --- */
-@media print {
-  .custom-header-container {
-    min-height: auto;
-    background: none !important;
-    padding: 10px 0;
-    margin-bottom: 15px;
-    border-radius: 0 !important;
-     text-align: left;
-  }
-   .custom-header-container::before {
-      display: none; /* ओवरले हटाएं */
-   }
-
-  .custom-header-container .custom-h2 {
-    color: #000 !important; /* हेडर टेक्स्ट काला */
-    font-size: 1.8em !important; /* फॉन्ट साइज़ कम करें */
-    text-shadow: none !important; /* शैडो हटाएं */
-  }
-
-  .custom-figure {
-    margin: 15px 0;
-    page-break-inside: avoid; /* फिगर को पेज ब्रेक पर टूटने से रोकें */
-  }
-
-  .custom-caption {
-     color: #333 !important;
-  }
-
-  .custom-video-container {
-    display: none !important; /* वीडियो प्रिंट में न दिखाएं */
-  }
+@keyframes gradient-text-move {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
 }
 
-/* छोटे स्क्रीन के लिए हेडर फॉन्ट एडजस्टमेंट */
-@media (max-width: 768px) {
-   .custom-header-container {
-      min-height: 250px; /* थोड़ी कम ऊंचाई */
-   }
-   .custom-header-container .custom-h2 {
-      font-size: 2em !important; /* छोटा फॉन्ट */
-   }
+@keyframes gradient-text-move-alt {
+  0% { background-position: 100% 0%; }
+  50% { background-position: 0% 100%; }
+  100% { background-position: 100% 0%; }
 }
 
-@media (max-width: 480px) {
-   .custom-header-container {
-      min-height: 200px;
-   }
-   .custom-header-container .custom-h2 {
-      font-size: 1.6em !important;
-   }
+/* --- टेक्स्ट इफ़ेक्ट एनिमेशन --- */
+@keyframes text-pulse { /* H2 */
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.02); opacity: 0.95; }
 }
+
+@keyframes text-glow { /* H3 */
+  0%, 100% { text-shadow: 0 0 5px rgba(0,0,0,0.1); } /* कम कंट्रास्ट */
+  50% { text-shadow: 0 0 12px rgba(0,0,0,0.2); }
+}
+
+@keyframes text-subtle-shift { /* H4 */
+   0%, 100% { transform: translateX(0); }
+   50% { transform: translateX(1px); } /* सूक्ष्म */
+}
+
+@keyframes text-fade-in-out { /* H5 */
+   0%, 100% { opacity: 0.9; }
+   50% { opacity: 1; }
+}
+
+@keyframes text-slight-scale { /* H6 */
+   0%, 100% { transform: scale(1); }
+   50% { transform: scale(1.005); } /* बहुत सूक्ष्म */
+}
+
+/* --- मौजूदा CSS कोड यहाँ जारी रहेगा --- */
+/* (पठनीयता, इंटरैक्टिविटी, प्रिंट, हेडर, वीडियो आदि के लिए नियम) */
