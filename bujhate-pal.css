@@ -1,232 +1,148 @@
-/* Global Styles - Custom Prefix for Avoiding Theme Conflict */
-.custom-h2, .custom-h3 {
-    font-family: 'Noto Serif', serif;
-    font-weight: bold;
-    color: #7b3f00;
-    text-align: center;
-    text-transform: capitalize;
-    font-size: 36px;
-    letter-spacing: 1px;
-    animation: custom-fadeIn 2s ease-in-out;
+/* =====================================
+   हेडर इमेज, अन्य इमेज और वीडियो स्टाइल्स
+   ===================================== */
+
+/* --- हेडर इमेज कंटेनर --- */
+.custom-header-container {
+  position: relative; /* ओवरले और टेक्स्ट पोजिशनिंग के लिए */
+  min-height: 350px; /* हेडर की न्यूनतम ऊंचाई */
+  background-size: cover; /* छवि पूरी तरह कवर करे */
+  background-position: center center; /* छवि केंद्रित रहे */
+  background-repeat: no-repeat;
+  display: flex; /* टेक्स्ट को सेंटर करने के लिए फ्लेक्सबॉक्स */
+  align-items: center; /* वर्टीकल सेंटर */
+  justify-content: center; /* हॉरिजॉन्टल सेंटर */
+  padding: 40px 20px; /* अंदरूनी स्पेसिंग */
+  margin-bottom: 30px; /* नीचे मार्जिन */
+  color: #ffffff; /* डिफ़ॉल्ट टेक्स्ट कलर सफेद */
+  text-align: center;
+  overflow: hidden; /* कोई अतिरिक्त कंटेंट बाहर न जाए */
+  border-radius: 0 0 12px 12px; /* नीचे के कोनों को गोल करें */
 }
 
-/* Text Animation */
-@keyframes custom-fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+/* हेडर इमेज पर सेमी-ट्रांसपेरेंट ओवरले (टेक्स्ट कंट्रास्ट के लिए) */
+.custom-header-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)); /* डार्क ग्रेडिएंट ओवरले */
+  z-index: 1; /* टेक्स्ट के पीछे */
+   border-radius: inherit; /* पैरेंट से रेडियस लें */
 }
 
-/* Post Container Styling - Custom Prefix */
-.custom-div {
-    background: linear-gradient(135deg, #fff5e1, #ffe4c4);
-    border: 2px solid #d1a15c;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    animation: custom-slideUp 1.5s ease-in-out;
+/* हेडर कंटेनर के अंदर H2 के लिए विशिष्ट स्टाइल */
+.custom-header-container .custom-h2 {
+  position: relative; /* ओवरले के ऊपर रखने के लिए */
+  z-index: 2; /* ओवरले के ऊपर */
+  color: #ffffff !important; /* टेक्स्ट सफेद ही रहे */
+  font-size: 2.5em !important; /* बड़ा फॉन्ट साइज़ */
+  font-weight: bold;
+  text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.7); /* टेक्स्ट शैडो स्पष्टता के लिए */
+
+  /* मौजूदा .custom-h2 स्टाइल को ओवरराइड करें जो यहाँ ठीक नहीं लगेंगे */
+  background: none !important; /* कोई ग्रेडिएंट बैकग्राउंड या टेक्स्ट नहीं */
+  padding: 0 !important; /* कोई अतिरिक्त पैडिंग नहीं */
+  border: none !important; /* कोई बॉर्डर नहीं */
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  animation: none !important; /* हेडर H2 पर कोई एनिमेशन नहीं */
+  margin: 0; /* डिफ़ॉल्ट मार्जिन हटाएं */
 }
 
-@keyframes custom-slideUp {
-    0% { transform: translateY(50px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
+/* --- अन्य छवियों के लिए (कैप्शन के साथ) --- */
+.custom-figure {
+  margin: 25px 0; /* ऊपर/नीचे मार्जिन */
+  padding: 0;
+  text-align: center; /* छवि और कैप्शन को सेंटर करें */
 }
 
-/* Paragraph and Text Styling - Custom Prefix */
-.custom-p {
-    font-size: 18px;
+.custom-figure .custom-img {
+  /* मौजूदा .custom-img स्टाइल लागू रहेंगे (जैसे होवर प्रभाव) */
+  margin-bottom: 10px; /* छवि और कैप्शन के बीच स्पेस */
+}
+
+.custom-caption {
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+  line-height: 1.4;
+  padding: 0 10px; /* किनारों से थोड़ी पैडिंग */
+}
+
+/* --- वीडियो कंटेनर (Responsive Iframe) --- */
+.custom-video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000; /* लोडिंग के समय काला बैकग्राउंड */
+  margin: 25px auto; /* ऊपर/नीचे मार्जिन और सेंटर */
+  border-radius: 8px; /* गोल किनारे */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* हल्का शैडो */
+}
+
+.custom-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0; /* iframe का डिफ़ॉल्ट बॉर्डर हटाएं */
+}
+
+/* --- प्रिंट स्टाइल अपडेट --- */
+@media print {
+  .custom-header-container {
+    min-height: auto;
+    background: none !important;
+    padding: 10px 0;
     margin-bottom: 15px;
-    line-height: 1.6;
-    color: #5a3c20;
-    transition: all 0.3s ease;
+    border-radius: 0 !important;
+     text-align: left;
+  }
+   .custom-header-container::before {
+      display: none; /* ओवरले हटाएं */
+   }
+
+  .custom-header-container .custom-h2 {
+    color: #000 !important; /* हेडर टेक्स्ट काला */
+    font-size: 1.8em !important; /* फॉन्ट साइज़ कम करें */
+    text-shadow: none !important; /* शैडो हटाएं */
+  }
+
+  .custom-figure {
+    margin: 15px 0;
+    page-break-inside: avoid; /* फिगर को पेज ब्रेक पर टूटने से रोकें */
+  }
+
+  .custom-caption {
+     color: #333 !important;
+  }
+
+  .custom-video-container {
+    display: none !important; /* वीडियो प्रिंट में न दिखाएं */
+  }
 }
 
-.custom-p:hover {
-    color: #7b3f00;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+/* छोटे स्क्रीन के लिए हेडर फॉन्ट एडजस्टमेंट */
+@media (max-width: 768px) {
+   .custom-header-container {
+      min-height: 250px; /* थोड़ी कम ऊंचाई */
+   }
+   .custom-header-container .custom-h2 {
+      font-size: 2em !important; /* छोटा फॉन्ट */
+   }
 }
 
-/* Shlok Section - Custom Prefix */
-.custom-strong {
-    font-size: 20px;
-    color: #b22222;
-}
-
-.custom-span {
-    font-weight: bold;
-    color: #006400;
-}
-
-/* Custom Borders for sections - Custom Prefix */
-.custom-hr {
-    border: 1px solid #d4a373;
-    margin: 20px 0;
-    opacity: 0.5;
-}
-
-/* Buttons (Next Part) - Custom Prefix */
-.custom-a {
-    background: #7b3f00;
-    color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    font-size: 18px;
-    margin-top: 20px;
-}
-
-.custom-a:hover {
-    background: #b48c54;
-    transform: scale(1.1);
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Shimmering Effect on the Header - Custom Prefix */
-.custom-h2::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 10px;
-    height: 3px;
-    background: linear-gradient(90deg, #ffcc33, #ff66cc, #ffcc33);
-    background-size: 200% 100%;
-    animation: custom-shimmer 2s infinite;
-}
-
-@keyframes custom-shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-}
-
-/* Gradients and Background Effects - Custom Prefix */
-.custom-div {
-    background: linear-gradient(45deg, rgba(255, 239, 194, 1), rgba(255, 215, 174, 0.8));
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.custom-div:hover {
-    background: linear-gradient(45deg, rgba(255, 239, 194, 0.8), rgba(255, 215, 174, 1));
-    transform: scale(1.02);
-}
-
-/* Mobile View Adjustments - Custom Prefix */
-@media only screen and (max-width: 768px) {
-    .custom-h2, .custom-h3 {
-        font-size: 28px;
-    }
-
-    .custom-div {
-        padding: 15px;
-        margin: 10px;
-    }
-
-    .custom-a {
-        font-size: 16px;
-    }
-}
-
-/* Hover Effects for Images - Custom Prefix */
-.custom-image:hover {
-    transform: scale(1.05);
-    transition: all 0.3s ease;
-}
-
-/* Footer Styling */
-.custom-footer {
-    background: #7b3f00;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 16px;
-}
-
-.custom-footer a {
-    color: #ffcc33;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.custom-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Additional Enhancements */
-.custom-h2, .custom-h3 {
-    font-family: 'Noto Serif', serif;
-    font-weight: bold;
-    color: #7b3f00;
-    text-align: center;
-    text-transform: capitalize;
-    font-size: 36px;
-    letter-spacing: 1px;
-    animation: custom-fadeIn 2s ease-in-out;
-}
-
-/* Gradient Backgrounds and Hover Effects */
-.custom-div {
-    background: linear-gradient(135deg, #fff5e1, #ffe4c4);
-    border: 2px solid #d1a15c;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    animation: custom-slideUp 1.5s ease-in-out;
-}
-
-@keyframes custom-slideUp {
-    0% { transform: translateY(50px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-}
-
-/* Text Styling - Custom Prefix */
-.custom-p {
-    font-size: 18px;
-    margin-bottom: 15px;
-    line-height: 1.6;
-    color: #5a3c20;
-    transition: all 0.3s ease;
-}
-
-.custom-p:hover {
-    color: #7b3f00;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-/* Buttons (Next Part) - Custom Prefix */
-.custom-a {
-    background: #7b3f00;
-    color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    font-size: 18px;
-    margin-top: 20px;
-}
-
-.custom-a:hover {
-    background: #b48c54;
-    transform: scale(1.1);
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Mobile View Adjustments */
-@media only screen and (max-width: 768px) {
-    .custom-h2, .custom-h3 {
-        font-size: 28px;
-    }
-
-    .custom-div {
-        padding: 15px;
-        margin: 10px;
-    }
-
-    .custom-a {
-        font-size: 16px;
-    }
+@media (max-width: 480px) {
+   .custom-header-container {
+      min-height: 200px;
+   }
+   .custom-header-container .custom-h2 {
+      font-size: 1.6em !important;
+   }
 }
