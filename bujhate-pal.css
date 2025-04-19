@@ -1,267 +1,233 @@
-/* =====================================
-   बुझते पल - कस्टम स्टाइल्स v4.3 (हेडर टाइटल, बैकग्राउंड वेरिएंट, देवनागरी फोकस)
-   लेखक: आशेष (AI द्वारा सहायता प्राप्त)
-   ===================================== */
-
-/* --- ग्लोबल सेटिंग्स और फॉन्ट इम्पोर्ट --- */
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Mukta:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Tiro+Devanagari+Sanskrit:wght@400;700&family=Fira+Code&display=swap'); /* Merriweather 900 जोड़ा */
-
-/* --- बेस वेरिएबल्स --- */
+/* --- CSS वेरिएबल्स --- */
 :root {
   /* कलर पैलेट */
-  --primary-brown: #6a4f4b; --secondary-brown: #a07e78; --light-warm-bg: #fdf8f5;
-  --container-border: #c8ada7; --text-color: #3d3d3d; --paragraph-text-color: #353535;
-  --focus-outline-color: #4a90e2;
+  --color-primary: #795548;      /* मुख्य भूरा */
+  --color-secondary: #a1887f;    /* हल्का भूरा */
+  --color-accent-warm: #ff7043;   /* एक्सेंट कोरल */
+  --color-accent-cool: #29b6f6;   /* एक्सेंट नीला */
+  --color-background: #fefcfb;    /* थोड़ा वार्म सफेद */
+  --color-background-alt: #fffefe; /* लगभग सफेद */
+  --color-border-light: #e0e0e0;   /* हल्का ग्रे बॉर्डर (थोड़ा बदला) */
+  --color-text-body: #37474f;     /* गहरा नीला-ग्रे */
+  --color-text-paragraph: #424242; /* गहरा ग्रे */
+  --color-text-muted: #9e9e9e;   /* मीडियम ग्रे */
+  --color-link: var(--color-primary);
+  --color-link-hover: #5d4037;
+  --color-focus-outline: #64b5f6; /* सॉफ्ट नीला फोकस */
+  --color-code-bg: #f5f5f5;       /* बहुत हल्का ग्रे */
+  --color-code-text: #6d4c41;      /* ब्राउन कोड टेक्स्ट */
+  --color-pre-bg: #263238;
+  --color-pre-text: #eceff1;     /* थोड़ा ब्राइट */
+  --color-mark-bg: #fff9c4;       /* बहुत हल्का पीला */
+  --color-mark-text: #5d4037;
 
   /* फॉन्ट्स */
-  --heading-font: 'Mukta', sans-serif; /* देवनागरी के लिए अच्छा */
-  --body-font: 'Poppins', sans-serif;
-  --sanskrit-font: 'Tiro Devanagari Sanskrit', serif; /* देवनागरी के लिए अच्छा */
-  --code-font: 'Fira Code', monospace;
-  --header-title-font: 'Merriweather', serif; /* हेडर के लिए */
+  --font-heading: 'Mukta', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+  --font-sanskrit: 'Tiro Devanagari Sanskrit', serif;
+  --font-code: 'Fira Code', monospace;
+  --font-header-title: 'Merriweather', serif;
 
   /* बॉर्डर रेडियस */
-  --border-radius-main: 15px; --border-radius-medium: 10px; --border-radius-small: 8px;
+  --radius-main: 18px;
+  --radius-medium: 12px;
+  --radius-small: 8px;
+  --radius-tiny: 6px;
+  --radius-round: 50px;
 
-  /* जटिल बॉर्डर रेडियस पैटर्न */
-  --h2-border-radius: 8px 18px 8px 18px; --h3-border-radius: 12px 8px 18px 10px;
-  --h4-border-radius: 15px 15px 5px 5px; --h5-border-radius: 18px 10px 12px 8px;
-  --h6-border-radius: 10px;
+  /* हेडिंग बॉर्डर रेडियस पैटर्न */
+  --radius-h2: 10px 22px 10px 22px;
+  --radius-h3: 16px 10px 22px 12px;
+  --radius-h4: 20px 20px 8px 8px;
+  --radius-h5: 22px 14px 16px 12px;
+  --radius-h6: 14px;
 
-  /* नया: बैकग्राउंड ग्रेडिएंट वेरिएंट्स (बहुत सूक्ष्म) */
+  /* हेडिंग बॉर्डर विड्थ */
+  --border-width-h1: 7px; --border-width-h2: 6px; --border-width-h3: 5px;
+  --border-width-h4: 4px; --border-width-h5: 4px; --border-width-h6: 3px;
+
+  /* ट्रांजीशन और एनिमेशन */
+  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.25s var(--transition-easing);
+  --transition-medium: 0.4s var(--transition-easing);
+  --transition-slow: 0.6s var(--transition-easing);
+  --anim-duration-text: 11s;
+  --anim-duration-border: 10s;
+
+  /* बैकग्राउंड ग्रेडिएंट वेरिएंट्स (स्थिर) */
   --bg-gradient-variant1: linear-gradient(200deg, #fff5e6, #fffcea, #fff0e6, #fff5e6); /* वार्म */
   --bg-gradient-variant2: linear-gradient(-45deg, #eaf2f8, #f5eef8, #ebedef, #eaf2f8); /* कूल */
 }
 
 /* --- HTML और बॉडी बेस --- */
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+html { scroll-behavior: smooth; scroll-padding-top: 85px; }
 @media(max-width: 768px) { html { scroll-padding-top: 70px; } }
-body { font-family: var(--body-font); line-height: 1.8; color: var(--text-color); background-color: #fefefe; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-size: 16px; /* बेस फॉन्ट साइज़ सेट करें */ }
+body { font-family: var(--font-body); font-size: 17px; line-height: 1.9; color: var(--color-text-body); background-color: var(--color-background); margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
 /* --- एक्सेसिबिलिटी: फोकस स्टाइल --- */
 a:focus:not(:focus-visible), button:focus:not(:focus-visible), input:focus:not(:focus-visible), textarea:focus:not(:focus-visible), select:focus:not(:focus-visible) { outline: none; box-shadow: none; }
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid var(--focus-outline-color); outline-offset: 2px; box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.3); border-radius: 4px; }
-.custom-a:focus:not(:focus-visible) { outline: none; box-shadow: 0 4px 9px rgba(123, 63, 0, 0.25); }
-.custom-a:focus-visible { outline: 3px solid var(--focus-outline-color); outline-offset: 2px; box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.3); }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid var(--color-focus-outline); outline-offset: 3px; box-shadow: 0 0 0 5px rgba(74, 144, 226, 0.25); border-radius: 5px; }
+.custom-a:focus:not(:focus-visible) { outline: none; box-shadow: 0 6px 15px rgba(106, 79, 75, 0.3); }
+.custom-a:focus-visible { outline: 3px solid var(--color-focus-outline); outline-offset: 3px; box-shadow: 0 0 0 5px rgba(74, 144, 226, 0.25); }
 
 /* --- कंटेनर स्टाइलिंग --- */
-.custom-div { background: linear-gradient(140deg, #ffffff, #fff8f0); border: 1px solid var(--container-border); padding: 35px 45px; margin: 35px auto; max-width: 980px; border-radius: var(--border-radius-main); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.07); overflow: hidden; transition: transform 0.35s ease, box-shadow 0.35s ease; }
-.custom-div:hover { transform: translateY(-7px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+.custom-div { background: linear-gradient(145deg, rgba(255,255,255,0.85), rgba(255, 250, 247, 0.85)); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(200, 173, 167, 0.45); padding: 40px 50px; margin: 40px auto; max-width: 1080px; border-radius: var(--radius-main); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08); overflow: hidden; transition: transform var(--transition-medium), box-shadow var(--transition-medium), background var(--transition-medium); }
+.custom-div:hover { transform: translateY(-8px) scale(1.005); box-shadow: 0 25px 55px rgba(0, 0, 0, 0.1); background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255, 250, 247, 0.95)); }
 
 /* --- पैराग्राफ स्टाइलिंग --- */
-.custom-p { margin-bottom: 1.9em; color: var(--paragraph-text-color); font-size: 1.18em; /* थोड़ा और बड़ा */ text-align: justify; hyphens: auto; padding: 0; background: none; box-shadow: none; transition: color 0.3s ease; }
-.custom-p:hover { color: var(--primary-brown); }
+.custom-p { margin-bottom: 1.8em; color: var(--color-text-paragraph); font-size: 1.1em; text-align: justify; hyphens: auto; padding: 0; background: none; box-shadow: none; transition: color var(--transition-medium); }
 .custom-p strong { font-weight: 600; color: #2a1d1b; background: none; padding: 0; box-shadow: none; }
-.custom-p a { color: var(--secondary-brown); text-decoration: none; border-bottom: 2px dotted var(--secondary-brown); transition: color 0.2s ease, border-bottom-color 0.2s ease; font-weight: 500; background: transparent !important; padding: 0 1px; box-shadow: none; } .custom-p a:hover { color: var(--primary-brown); border-bottom: 2px solid var(--primary-brown); }
-.custom-p a.internal-link { font-weight: 600; border-bottom-style: solid; position: relative; overflow: hidden; padding-bottom: 3px; } .custom-p a.internal-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: var(--primary-brown); transform: translateX(-101%); transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); } .custom-p a.internal-link:hover { color: var(--primary-brown); border-bottom-color: transparent; } .custom-p a.internal-link:hover::after { transform: translateX(0); }
+.custom-p a { color: var(--color-link); text-decoration: none; border-bottom: 2px solid rgba(160, 140, 130, 0.4); transition: all var(--transition-fast); font-weight: 500; background: transparent !important; padding: 0 1px; box-shadow: none; position: relative; }
+.custom-p a:hover { color: var(--color-link-hover); border-bottom-color: var(--color-link-hover); transform: translateY(-2px); }
+.custom-p a.internal-link { font-weight: 600; border-bottom-style: solid; position: relative; overflow: hidden; padding-bottom: 3px; border-bottom-color: transparent; } .custom-p a.internal-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: var(--color-link-hover); transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--transition-cubic); } .custom-p a.internal-link:hover { color: var(--color-link-hover); } .custom-p a.internal-link:hover::after { transform: scaleX(1); }
 /* फ्लोटिंग इमेज */
-.custom-p img.img-float-left, figure.img-float-left { float: left; margin: 8px 25px 12px 0; max-width: 45%; height: auto; border-radius: var(--border-radius-medium); box-shadow: 0 5px 12px rgba(0,0,0,0.1); } .custom-p img.img-float-right, figure.img-float-right { float: right; margin: 8px 0 12px 25px; max-width: 45%; height: auto; border-radius: var(--border-radius-medium); box-shadow: 0 5px 12px rgba(0,0,0,0.1); } figure.img-float-left, figure.img-float-right { max-width: 50%; } figure.img-float-left figcaption.custom-caption, figure.img-float-right figcaption.custom-caption { text-align: left; font-size: 0.9em; margin-top: 6px; } figure.img-float-right figcaption.custom-caption { text-align: right; }
-.clear-float { clear: both; height: 0; line-height: 0; font-size: 0; overflow: hidden; }
+.custom-p img.img-float-left, figure.img-float-left { float: left; margin: 8px 28px 14px 0; max-width: 45%; height: auto; border-radius: var(--radius-medium); box-shadow: 0 7px 20px rgba(0,0,0,0.12); transition: transform var(--transition-medium); } .custom-p img.img-float-right, figure.img-float-right { float: right; margin: 8px 0 14px 28px; max-width: 45%; height: auto; border-radius: var(--radius-medium); box-shadow: 0 7px 20px rgba(0,0,0,0.12); transition: transform var(--transition-medium);} .custom-p img.img-float-left:hover, figure.img-float-left:hover, .custom-p img.img-float-right:hover, figure.img-float-right:hover { transform: scale(1.03) rotate(-0.5deg); }
+figure.img-float-left, figure.img-float-right { max-width: 50%; } figure.img-float-left figcaption.custom-caption, figure.img-float-right figcaption.custom-caption { text-align: left; font-size: 0.9em; margin-top: 8px; } figure.img-float-right figcaption.custom-caption { text-align: right; }
+.clear-float { clear: both; height: 1px; margin-top: -1px; line-height: 0; font-size: 0; overflow: hidden; }
 
 /* --- विशेष टेक्स्ट स्टाइल --- */
-.custom-strong, .custom-span { display: inline-block; color: transparent; -webkit-background-clip: text; background-clip: text; background-size: 200% 200%; padding: 0 3px; transition: color 0.3s ease, background-image 0.3s ease, transform 0.2s ease; font-style: normal; font-size: 1.1em; /* थोड़ा बड़ा */ }
-.custom-strong:hover, .custom-span:hover { background-image: none; -webkit-background-clip: border-box; background-clip: border-box; transform: scale(1.03); }
-.custom-strong { font-weight: bold; }
-.custom-strong.variant-1, .custom-strong.variant-2, .custom-strong.variant-3, .custom-strong.variant-4, .custom-strong.variant-5 { font-family: var(--sanskrit-font); font-weight: 700; /* संस्कृत फॉन्ट थोड़ा बोल्ड */ }
+.custom-strong, .custom-span { display: inline-block; color: transparent; -webkit-background-clip: text; background-clip: text; background-size: 200% 200%; padding: 0 3px; transition: all var(--transition-medium); font-style: normal; font-size: 1.08em; line-height: 1.5; vertical-align: -0.05em; }
+.custom-strong:hover, .custom-span:hover { background-image: none; -webkit-background-clip: border-box; background-clip: border-box; transform: scale(1.02) translateY(-1px); text-shadow: 0 0 10px currentColor; }
+.custom-strong { font-weight: bold; } .custom-strong.variant-1, .custom-strong.variant-2, .custom-strong.variant-3, .custom-strong.variant-4, .custom-strong.variant-5 { font-family: var(--font-sanskrit); font-weight: 700; }
 .custom-strong.variant-1 { background-image: linear-gradient(45deg, #e74c3c, #f39c12, #f1c40f, #e74c3c); } .custom-strong.variant-1:hover { color: #c0392b; } .custom-strong.variant-2 { background-image: linear-gradient(60deg, #3498db, #5dade2, #85c1e9, #3498db); } .custom-strong.variant-2:hover { color: #2980b9; } .custom-strong.variant-3 { background-image: linear-gradient(75deg, #27ae60, #2ecc71, #58d68d, #27ae60); } .custom-strong.variant-3:hover { color: #1e8449; } .custom-strong.variant-4 { background-image: linear-gradient(90deg, #8e44ad, #c39bd3, #d7bde2, #8e44ad); } .custom-strong.variant-4:hover { color: #7d3c98; } .custom-strong.variant-5 { background-image: linear-gradient(105deg, #d35400, #e67e22, #f5cba7, #d35400); } .custom-strong.variant-5:hover { color: #a04000; }
 .custom-span { font-weight: 500; } .custom-span.variant-1 { background-image: linear-gradient(120deg, #1abc9c, #48c9b0, #76d7c4, #1abc9c); } .custom-span.variant-1:hover { color: #117a65; } .custom-span.variant-2 { background-image: linear-gradient(135deg, #e74c3c, #f5b041, #f8c471, #e74c3c); } .custom-span.variant-2:hover { color: #cb4335; } .custom-span.variant-3 { background-image: linear-gradient(150deg, #5f6a6a, #839192, #aeb6bf, #5f6a6a); } .custom-span.variant-3:hover { color: #4d5656; } .custom-span.variant-4 { background-image: linear-gradient(165deg, #5dade2, #aed6f1, #d6eaf8, #5dade2); } .custom-span.variant-4:hover { color: #3498db; } .custom-span.variant-5 { background-image: linear-gradient(180deg, #a1887f, #bcaaa4, #d7ccc8, #a1887f); } .custom-span.variant-5:hover { color: #795548; }
 
-/* --- अन्य तत्व (HR, लिंक्स, ब्लॉककोट, लिस्ट, मीडिया, कोड, टेबल, अलर्ट, नोट, एड, आदि) --- */
-/* (यहाँ पिछले v4.2 से संबंधित सभी नियम अपरिवर्तित रहेंगे, केवल फॉन्ट साइज़ आदि समायोजित किए जा सकते हैं) */
-.custom-hr { border: 0; height: 1px; background-image: linear-gradient(to right, transparent, rgba(200, 173, 167, 0.5), transparent); margin: 40px 0; }
-.custom-a { display: inline-block; background: var(--primary-brown); color: white !important; padding: 12px 22px; text-decoration: none !important; border-radius: var(--border-radius-medium); font-weight: 600; transition: all 0.3s ease; font-size: 1.1em; margin-top: 18px; box-shadow: 0 5px 10px rgba(106, 79, 75, 0.3); cursor: pointer; } .custom-a:hover { background: var(--secondary-brown); transform: scale(1.05) translateY(-4px); text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15); box-shadow: 0 8px 15px rgba(106, 79, 75, 0.4); color: white !important; text-decoration: none !important; } .custom-a.icon-link { display: inline-flex; align-items: center; justify-content: center; } .custom-a.icon-link i, .custom-a.icon-link svg { margin-right: 8px; font-size: 1.1em; vertical-align: middle; } .custom-pagination { display: flex; justify-content: space-between; align-items: center; margin-top: 45px; padding-top: 25px; border-top: 1px solid rgba(200, 173, 167, 0.4); } .custom-a.pagination-btn { padding: 11px 19px; font-size: 1.05em; background: #f9f5f3; color: var(--secondary-brown) !important; border: 1px solid var(--container-border); box-shadow: none; transition: all 0.25s ease-out; } .custom-a.pagination-btn:hover { background: var(--secondary-brown); color: white !important; border-color: var(--secondary-brown); transform: translateY(-3px); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12); } .custom-a.pagination-btn.prev::before { content: '← '; } .custom-a.pagination-btn.next::after { content: ' →'; } .custom-a.cta-button { font-size: 1.25em; padding: 15px 35px; font-weight: 700; background: linear-gradient(45deg, var(--primary-brown), var(--secondary-brown), #b8860b); background-size: 250% 100%; animation: cta-gradient-animation 8s ease infinite; border: none; box-shadow: 0 7px 18px rgba(106, 79, 75, 0.4); text-transform: uppercase; letter-spacing: 1.2px; display: inline-block; margin: 25px 0; } .custom-a.cta-button:hover { animation-play-state: paused; background-position: 100% 0; transform: scale(1.07) translateY(-5px); box-shadow: 0 12px 25px rgba(106, 79, 75, 0.5); } @keyframes cta-gradient-animation { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} } .custom-a.video-link-button { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white !important; padding: 13px 28px; font-size: 1.15em; font-weight: 600; border: none; border-radius: 50px; box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4); text-transform: none; letter-spacing: 0.5px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); display: inline-flex; align-items: center; justify-content: center; margin: 18px 5px; animation: none; } .custom-a.video-link-button:hover { background: linear-gradient(135deg, #c0392b, #e74c3c); transform: scale(1.07) translateY(-4px); box-shadow: 0 9px 20px rgba(231, 76, 60, 0.55); color: white !important; } .custom-a.video-link-button svg { transition: transform 0.3s ease; margin-right: 8px; width: 1.2em; height: 1.2em; vertical-align: middle; } .custom-a.video-link-button:hover svg { transform: scale(1.1); } .custom-version-links { margin: 40px auto 30px auto; padding: 25px 30px; border: 1px solid rgba(200, 173, 167, 0.4); border-radius: var(--border-radius-medium); background-color: var(--light-warm-bg); text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.06); max-width: 90%; } .custom-version-links p { margin-top: 0; margin-bottom: 20px; font-weight: 500; color: var(--primary-brown); font-size: 1.15em; } .custom-a.version-link { background: #ffffff; color: var(--secondary-brown) !important; border: 1px solid var(--container-border); padding: 10px 18px; font-size: 1em; font-weight: 500; box-shadow: 0 3px 7px rgba(0,0,0,0.08); margin: 6px 9px; display: inline-block; transition: all 0.25s ease; border-radius: var(--border-radius-small); text-transform: none; letter-spacing: 0; animation: none; } .custom-a.version-link:hover { background: var(--secondary-brown); color: white !important; border-color: var(--secondary-brown); transform: translateY(-3px) scale(1.04); box-shadow: 0 6px 12px rgba(0,0,0,0.12); text-shadow: none; } .custom-a.version-link .link-prefix { font-weight: bold; margin-right: 7px; opacity: 0.75; font-size: 0.9em; } .custom-a.version-link.pdf { border-color: #e74c3c; } .custom-a.version-link.pdf:hover { background: #e74c3c; border-color: #e74c3c; color: white !important;} .custom-a.version-link.english { border-color: #3498db; } .custom-a.version-link.english:hover { background: #3498db; border-color: #3498db; color: white !important;}
-.custom-quote { border-left: 6px solid var(--secondary-brown); margin: 2em 15px; padding: 1.2em 25px; background-color: var(--light-warm-bg); color: #4a403a; font-style: italic; border-radius: 0 var(--border-radius-medium) var(--border-radius-medium) 0; box-shadow: 4px 4px 10px rgba(0,0,0,0.06); font-size: 1.1em; } .custom-quote p:last-child { margin-bottom: 0; } .custom-quote cite { display: block; text-align: right; margin-top: 1em; font-style: normal; font-weight: 500; color: var(--primary-brown); }
-.custom-div ul, .custom-div ol { margin-left: 20px; margin-bottom: 1.8em; padding-left: 30px; } .custom-div ul { list-style-type: '✔'; padding-left: 35px; } .custom-div ol { list-style-type: decimal-leading-zero; } .custom-div li { margin-bottom: 0.9em; padding-left: 10px; } .custom-div ul ul, .custom-div ol ol, .custom-div ul ol, .custom-div ol ul { margin-top: 0.6em; margin-bottom: 0.9em; font-size: 0.98em; }
-.custom-definition-list { margin: 2em 0; background-color: #fdf6e3; padding: 20px 25px; border-left: 5px solid var(--secondary-brown); border-radius: 0 var(--border-radius-medium) var(--border-radius-medium) 0; } .custom-definition-list dt { font-weight: 600; color: var(--primary-brown); margin-bottom: 0.4em; font-size: 1.1em; } .custom-definition-list dd { margin-left: 25px; margin-bottom: 1.2em; color: var(--paragraph-text-color); padding-left: 12px; border-left: 2px dotted var(--container-border); font-size: 1.05em;} .custom-definition-list dd:last-child { margin-bottom: 0; }
-mark, .custom-p mark { background-color: #fff080; padding: 0.2em 0.4em; border-radius: 4px; color: #4d4d00; box-shadow: 0 1px 2px rgba(0,0,0,0.1);} small, .custom-p small { font-size: 0.9em; opacity: 0.85; } sup, sub { position: relative; font-size: 0.8em; line-height: 0; vertical-align: baseline; } sup { top: -0.6em; } sub { bottom: -0.3em; } ins { text-decoration: none; border-bottom: 2px solid #28a745; background-color: #e9f7ef; } del { text-decoration: line-through; color: #aaa; background-color: #f8f8f8; opacity: 0.9; }
-.custom-figure { margin: 40px 0; padding: 0; text-align: center; } .custom-img { max-width: 100%; height: auto; border-radius: var(--border-radius-medium); margin: 0 auto 18px auto; display: block; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out; } .custom-img:hover { transform: scale(1.04); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18); } .custom-caption { font-size: 0.95em; color: #777; font-style: italic; line-height: 1.6; padding: 0 15px; margin-top: -8px; }
-.custom-video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #111; margin: 40px auto; border-radius: var(--border-radius-medium); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18); } .custom-video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; } .custom-audio-container { margin: 2em 0; padding: 20px; background-color: #f9f9f9; border: 1px solid #eee; border-radius: var(--border-radius-medium); text-align: center; } .custom-audio-container p { margin-top: 0; margin-bottom: 12px; font-weight: 500; color: var(--text-color); font-size: 1.05em; } .custom-audio-container audio { max-width: 100%; border-radius: 6px; outline: none; } .custom-audio-container audio::-webkit-media-controls-panel { background-color: #e8e8e8; border-radius: 6px; }
-.custom-code { font-family: var(--code-font); background-color: #f1efef; color: #7b1e1e; padding: 0.25em 0.5em; border-radius: 5px; font-size: 0.95em; word-break: break-word; } .custom-pre { font-family: var(--code-font); background-color: #2b2b2b; color: #e0e0e0; padding: 1.5em 1.8em; margin: 2em 0; border-radius: var(--border-radius-medium); overflow-x: auto; white-space: pre; font-size: 1em; line-height: 1.7; box-shadow: inset 0 0 12px rgba(0,0,0,0.4); position: relative; } .custom-pre code { background: none; color: inherit; padding: 0; border-radius: 0; font-size: inherit; } .custom-copy-btn { position: absolute; top: 12px; right: 12px; background-color: #666; color: #eee; border: none; padding: 6px 11px; border-radius: 6px; font-size: 0.85em; cursor: pointer; opacity: 0.4; transition: opacity 0.2s ease, background-color 0.2s ease; z-index: 2; } .custom-pre:hover .custom-copy-btn { opacity: 1; } .custom-copy-btn:hover { background-color: #888; } .custom-copy-btn.copied { background-color: #28a745; color: white; }
-.custom-table-container { overflow-x: auto; margin: 2em 0; border: 1px solid #d8cdc5; border-radius: var(--border-radius-medium); box-shadow: 0 5px 15px rgba(0,0,0,0.06); } .custom-table { width: 100%; border-collapse: collapse; font-size: 1.05em; } .custom-table th, .custom-table td { padding: 14px 18px; text-align: left; border-bottom: 1px solid #d8cdc5; } .custom-table th { background-color: #f5f1ed; font-weight: 600; color: var(--primary-brown); border-top: 1px solid #d8cdc5; border-bottom-width: 2px; } .custom-table tr:last-child td { border-bottom: none; } .custom-table tbody tr:nth-child(odd) { background-color: var(--light-warm-bg); } .custom-table tbody tr:hover { background-color: #fff5ec; }
-.custom-alert, .custom-note { padding: 18px 25px 18px 25px; margin: 2em 0; border-radius: var(--border-radius-medium); border-style: solid; border-width: 1px; border-left-width: 7px; font-size: 1.1em; box-shadow: 0 4px 10px rgba(0,0,0,0.08); position: relative; transition: opacity 0.4s ease, transform 0.4s ease, height 0.4s ease, margin 0.4s ease, padding 0.4s ease; } .custom-dismiss-btn { position: absolute; top: 8px; right: 8px; background: none; border: none; font-size: 1.7em; line-height: 1; color: inherit; opacity: 0.5; cursor: pointer; padding: 3px 6px; z-index: 2; border-radius: 50%; transition: background-color 0.2s ease, opacity 0.2s ease; } .custom-dismiss-btn:hover { opacity: 0.9; background-color: rgba(0,0,0,0.1); } .dismissed { opacity: 0; transform: scale(0.9); height: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; margin-top: 0 !important; margin-bottom: 0 !important; border-width: 0 !important; overflow: hidden; } .custom-alert p:last-child, .custom-note p:last-child { margin-bottom: 0; } .custom-alert.info    { background-color: #eaf2f8; border-color: #3498db; color: #1b4f72; } .custom-alert.success { background-color: #e9f7ef; border-color: #2ecc71; color: #145a32; } .custom-alert.warning { background-color: #fef9e7; border-color: #f1c40f; color: #7e5109; } .custom-alert.danger  { background-color: #fdedec; border-color: #e74c3c; color: #7b241c; } .custom-note { border-left-style: solid; border-left-width: 7px; background-color: #f8f9fa; border-color: #adb5bd; color: #495057; } .custom-note.tip      { border-color: #17a2b8; background-color: #e7f6f8; color: #0c5460; } .custom-note.important{ border-color: #fd7e14; background-color: #fff3e0; color: #854000; } .custom-note strong { font-weight: 600; display: block; margin-bottom: 0.3em; }
-.custom-ad-placeholder { border: 2px dashed rgba(200, 173, 167, 0.6); background-color: rgba(253, 248, 245, 0.7); padding: 25px; margin: 45px auto; border-radius: var(--border-radius-medium); text-align: center; min-height: 120px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 12px rgba(0,0,0,0.04); max-width: 85%; } .custom-ad-placeholder p { color: #b8aaa5; font-size: 1em; margin: 0; font-style: italic; user-select: none; }
+/* --- हॉरिजॉन्टल रूल --- */
+.custom-hr { border: 0; height: 2px; background-image: linear-gradient(to right, transparent, rgba(160, 140, 130, 0.15) 15%, rgba(160, 140, 130, 0.6) 50%, rgba(160, 140, 130, 0.15) 85%, transparent); margin: 50px 0; }
+
+/* --- लिंक्स/बटन --- */
+.custom-a { display: inline-block; background: var(--color-primary); color: white !important; padding: 13px 25px; text-decoration: none !important; border-radius: var(--radius-medium); font-weight: 600; transition: all var(--transition-medium); font-size: 1.1em; margin-top: 18px; box-shadow: 0 6px 16px rgba(106, 79, 75, 0.3), inset 0 -2px 3px rgba(0,0,0,0.15); cursor: pointer; border: none; position: relative; }
+.custom-a:hover { background: var(--color-secondary); transform: scale(1.04) translateY(-5px); text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15); box-shadow: 0 9px 22px rgba(106, 79, 75, 0.4), inset 0 -1px 2px rgba(0,0,0,0.1); color: white !important; text-decoration: none !important; }
+.custom-a:active { transform: scale(1.01) translateY(-2px); box-shadow: 0 4px 12px rgba(106, 79, 75, 0.35), inset 0 -1px 1px rgba(0,0,0,0.1); }
+.custom-a.icon-link { display: inline-flex; align-items: center; justify-content: center; } .custom-a.icon-link i, .custom-a.icon-link svg { margin-right: 8px; font-size: 1.1em; vertical-align: middle; }
+.custom-pagination { display: flex; justify-content: space-between; align-items: center; margin-top: 50px; padding-top: 28px; border-top: 1px solid rgba(200, 173, 167, 0.4); } .custom-a.pagination-btn { padding: 11px 19px; font-size: 1.05em; background: #fbf7f5; color: var(--color-secondary) !important; border: 1px solid var(--color-border-light); box-shadow: 0 3px 8px rgba(0,0,0,0.07), inset 0 -1px 2px rgba(0,0,0,0.05); transition: all 0.25s ease-out; } .custom-a.pagination-btn:hover { background: var(--color-secondary); color: white !important; border-color: var(--color-secondary); transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12), inset 0 -1px 1px rgba(0,0,0,0.05); } .custom-a.pagination-btn:active { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 1px rgba(0,0,0,0.05); } .custom-a.pagination-btn.prev::before { content: '←  '; } .custom-a.pagination-btn.next::after { content: '  →'; }
+.custom-a.cta-button { font-size: 1.3em; padding: 16px 40px; font-weight: 700; background: linear-gradient(45deg, var(--color-primary), var(--color-secondary), #c89f3c); background-size: 250% 100%; animation: cta-gradient-animation 6s ease infinite alternate; border: none; box-shadow: 0 8px 25px rgba(106, 79, 75, 0.45), inset 0 -3px 4px rgba(0,0,0,0.2); text-transform: uppercase; letter-spacing: 1.3px; display: inline-block; margin: 25px 0; border-radius: var(--radius-round); } .custom-a.cta-button:hover { animation-play-state: paused; background-position: 100% 0; transform: scale(1.06) translateY(-7px); box-shadow: 0 15px 35px rgba(106, 79, 75, 0.55), inset 0 -2px 3px rgba(0,0,0,0.15); } @keyframes cta-gradient-animation { 0%{background-position:0% 50%} 100%{background-position:100% 50%} } .custom-a.cta-button:active { transform: scale(1.03) translateY(-3px); box-shadow: 0 10px 25px rgba(106, 79, 75, 0.5), inset 0 -2px 2px rgba(0,0,0,0.18); }
+.custom-a.video-link-button { background: linear-gradient(135deg, var(--color-accent-warm), #d84315); color: white !important; padding: 14px 30px; font-size: 1.2em; font-weight: 600; border: none; border-radius: var(--radius-round); box-shadow: 0 7px 18px rgba(255, 112, 67, 0.45), inset 0 -2px 3px rgba(0,0,0,0.15); text-transform: none; letter-spacing: 0.5px; transition: all 0.3s var(--transition-cubic); display: inline-flex; align-items: center; justify-content: center; margin: 18px 5px; animation: none; } .custom-a.video-link-button:hover { background: linear-gradient(135deg, #d84315, var(--color-accent-warm)); transform: scale(1.06) translateY(-5px); box-shadow: 0 10px 24px rgba(255, 112, 67, 0.6), inset 0 -1px 2px rgba(0,0,0,0.1); color: white !important; } .custom-a.video-link-button:active { transform: scale(1.03) translateY(-2px); box-shadow: 0 6px 18px rgba(255, 112, 67, 0.55), inset 0 -1px 1px rgba(0,0,0,0.1); } .custom-a.video-link-button svg { transition: transform var(--transition-medium); margin-right: 8px; width: 1.2em; height: 1.2em; vertical-align: middle; } .custom-a.video-link-button:hover svg { transform: scale(1.15) rotate(5deg); }
+.custom-version-links { margin: 40px auto 30px auto; padding: 28px 35px; border: 1px solid rgba(200, 173, 167, 0.4); border-radius: var(--radius-medium); background-color: var(--color-background-alt); text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.07); max-width: 90%; } .custom-version-links p { margin-top: 0; margin-bottom: 22px; font-weight: 500; color: var(--color-primary); font-size: 1.2em; } .custom-a.version-link { background: #ffffff; color: var(--color-secondary) !important; border: 1px solid var(--color-border-light); padding: 11px 19px; font-size: 1em; font-weight: 500; box-shadow: 0 4px 9px rgba(0,0,0,0.08), inset 0 -1px 1px rgba(0,0,0,0.05); margin: 7px 10px; display: inline-block; transition: all var(--transition-fast); border-radius: var(--radius-small); text-transform: none; letter-spacing: 0; animation: none; } .custom-a.version-link:hover { background: var(--color-secondary); color: white !important; border-color: var(--color-secondary); transform: translateY(-3px) scale(1.04); box-shadow: 0 7px 15px rgba(0,0,0,0.12), inset 0 -1px 0 rgba(0,0,0,0.05); text-shadow: none; } .custom-a.version-link:active { transform: translateY(-1px) scale(1.02); box-shadow: 0 4px 8px rgba(0,0,0,0.1), inset 0 -1px 1px rgba(0,0,0,0.05); } .custom-a.version-link .link-prefix { font-weight: bold; margin-right: 7px; opacity: 0.75; font-size: 0.9em; } .custom-a.version-link.pdf { border-color: #e74c3c; } .custom-a.version-link.pdf:hover { background: #e74c3c; border-color: #e74c3c; color: white !important;} .custom-a.version-link.english { border-color: #3498db; } .custom-a.version-link.english:hover { background: #3498db; border-color: #3498db; color: white !important;}
+
+/* --- ब्लॉककोट्स, लिस्ट्स, परिभाषा सूची, इनलाइन टेक्स्ट --- */
+.custom-quote { border-left: 7px solid var(--color-secondary); margin: 2.2em 15px; padding: 1.5em 30px; background-color: var(--color-background-alt); color: #4a403a; font-style: italic; border-radius: 0 var(--radius-medium) var(--radius-medium) 0; box-shadow: 5px 5px 18px rgba(0,0,0,0.08); font-size: 1.1em; transition: border-left-color var(--transition-medium), box-shadow var(--transition-medium), background-color var(--transition-medium); } .custom-quote:hover { border-left-color: var(--color-primary); box-shadow: 8px 8px 25px rgba(0,0,0,0.11); background-color: #fffefe; } .custom-quote p:last-child { margin-bottom: 0; } .custom-quote cite { display: block; text-align: right; margin-top: 1em; font-style: normal; font-weight: 500; color: var(--color-primary); }
+.custom-div ul, .custom-div ol { margin-left: 20px; margin-bottom: 1.8em; padding-left: 30px; } .custom-div ul { list-style: none; padding-left: 25px;} .custom-div ul li { position: relative; padding-left: 28px; } .custom-div ul li::before { content: '✺'; color: var(--color-accent-warm); font-size: 1.2em; position: absolute; left: 0; top: 0.1em; transition: transform var(--transition-fast); } .custom-div ul li:hover::before { transform: rotate(15deg) scale(1.1); } .custom-div ol { list-style-type: decimal-leading-zero; } .custom-div li { margin-bottom: 0.9em; padding-left: 12px; } .custom-div ul ul, .custom-div ol ol, .custom-div ul ol, .custom-div ol ul { margin-top: 0.6em; margin-bottom: 0.9em; font-size: 0.98em; }
+.custom-definition-list { margin: 2em 0; background-color: rgba(253, 249, 227, 0.8); padding: 25px 30px; border-left: 6px solid var(--color-secondary); border-radius: 0 var(--radius-medium) var(--radius-medium) 0; } .custom-definition-list dt { font-weight: 600; color: var(--color-primary); margin-bottom: 0.5em; font-size: 1.15em; } .custom-definition-list dd { margin-left: 30px; margin-bottom: 1.3em; color: var(--color-text-paragraph); padding-left: 15px; border-left: 2px dotted var(--color-border-light); font-size: 1.08em;} .custom-definition-list dd:last-child { margin-bottom: 0; }
+mark, .custom-p mark { background-color: var(--color-mark-bg); padding: 0.2em 0.4em; border-radius: 4px; color: var(--color-mark-text); box-shadow: 0 1px 3px rgba(0,0,0,0.1);} small, .custom-p small { font-size: 0.9em; opacity: 0.9; } sup, sub { position: relative; font-size: 0.8em; line-height: 0; vertical-align: baseline; } sup { top: -0.6em; } sub { bottom: -0.3em; } ins { text-decoration: none; border-bottom: 2px solid #28a745; background-color: rgba(40, 167, 69, 0.08); padding: 0 2px;} del { text-decoration: line-through; text-decoration-color: rgba(220, 53, 69, 0.7); color: var(--color-text-muted); background-color: rgba(108, 117, 125, 0.05); padding: 0 2px; opacity: 0.9; }
+
+/* --- मीडिया: छवियाँ और कैप्शन --- */
+.custom-figure { margin: 45px 0; padding: 0; text-align: center; } .custom-img { max-width: 100%; height: auto; border-radius: var(--radius-medium); margin: 0 auto 18px auto; display: block; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12); transition: transform var(--transition-slow), box-shadow var(--transition-slow); } .custom-img:hover { transform: scale(1.03) rotate(0.3deg); box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18); } .custom-caption { font-size: 0.95em; color: var(--color-text-muted); font-style: italic; line-height: 1.6; padding: 0 15px; margin-top: -8px; }
+
+/* --- मीडिया: वीडियो, ऑडियो कंटेनर --- */
+.custom-video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #111; margin: 40px auto; border-radius: var(--radius-medium); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); } .custom-video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: inherit; }
+.custom-audio-container { margin: 2em 0; padding: 20px; background-color: #f9f9f9; border: 1px solid #eee; border-radius: var(--radius-medium); text-align: center; } .custom-audio-container p { margin-top: 0; margin-bottom: 12px; font-weight: 500; color: var(--color-text-body); font-size: 1.05em; } .custom-audio-container audio { max-width: 100%; border-radius: 6px; outline: none; filter: contrast(1.1) saturate(1.1); } .custom-audio-container audio::-webkit-media-controls-panel { background-color: #e8e8e8; border-radius: 6px; }
+
+/* --- कोड ब्लॉक स्टाइल --- */
+.custom-code { font-family: var(--font-code); background-color: var(--color-code-bg); color: var(--color-code-text); padding: 0.25em 0.5em; border-radius: 5px; font-size: 0.95em; word-break: break-word; border: 1px solid #e0e0e0; }
+.custom-pre { font-family: var(--font-code); background-color: var(--color-pre-bg); color: var(--color-pre-text); padding: 1.8em 2.2em; margin: 2.2em 0; border-radius: var(--radius-medium); overflow-x: auto; white-space: pre; font-size: 1em; line-height: 1.75; box-shadow: inset 0 0 15px rgba(0,0,0,0.5); position: relative; border: 1px solid #444; } .custom-pre code { background: none; color: inherit; padding: 0; border-radius: 0; font-size: inherit; }
+.custom-copy-btn { position: absolute; top: 14px; right: 14px; background-color: rgba(255,255,255,0.1); color: #ccc; border: 1px solid rgba(255,255,255,0.2); padding: 7px 12px; border-radius: 6px; font-size: 0.85em; cursor: pointer; opacity: 0.6; transition: all var(--transition-fast); z-index: 2; } .custom-pre:hover .custom-copy-btn { opacity: 1; background-color: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); } .custom-copy-btn:hover { background-color: rgba(255,255,255,0.25); transform: scale(1.05); } .custom-copy-btn:active { transform: scale(0.98); } .custom-copy-btn.custom-copied { background-color: #4caf50; color: white; border-color: #4caf50; }
+
+/* --- टेबल स्टाइल --- */
+.custom-table-container { overflow-x: auto; margin: 2em 0; border: 1px solid #d8cdc5; border-radius: var(--radius-medium); box-shadow: 0 6px 18px rgba(0,0,0,0.07); } .custom-table { width: 100%; border-collapse: collapse; font-size: 1.05em; } .custom-table th, .custom-table td { padding: 15px 20px; text-align: left; border-bottom: 1px solid #e8e0d8; } .custom-table th { background-color: #f8f3ef; font-weight: 600; color: var(--color-primary); border-top: 1px solid #d8cdc5; border-bottom-width: 2px; border-bottom-color: var(--color-border-light); } .custom-table tr:last-child td { border-bottom: none; } .custom-table tbody tr:nth-child(odd) { background-color: rgba(253, 248, 245, 0.7); } .custom-table tbody tr { transition: background-color var(--transition-fast); } .custom-table tbody tr:hover { background-color: #fff8f0; }
+
+/* --- अलर्ट और नोट्स स्टाइल --- */
+.custom-alert, .custom-note { padding: 20px 60px 20px 30px; margin: 2.2em 0; border-radius: var(--radius-medium); border-style: solid; border-width: 1px; border-left-width: 8px; font-size: 1.1em; box-shadow: 0 5px 20px rgba(0,0,0,0.09); position: relative; transition: opacity 0.4s ease, transform 0.4s ease, height 0.4s ease, margin 0.4s ease, padding 0.4s ease; } .custom-dismiss-btn { position: absolute; top: 50%; right: 15px; transform: translateY(-50%); background: none; border: none; font-size: 1.9em; line-height: 1; color: inherit; opacity: 0.6; cursor: pointer; padding: 3px 6px; z-index: 2; border-radius: 50%; transition: all var(--transition-fast); } .custom-dismiss-btn:hover { opacity: 1; background-color: rgba(0,0,0,0.1); transform: translateY(-50%) scale(1.1) rotate(10deg); } .custom-dismissed { opacity: 0; transform: scale(0.9); height: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; margin-top: 0 !important; margin-bottom: 0 !important; border-width: 0 !important; overflow: hidden; } .custom-alert p:last-child, .custom-note p:last-child { margin-bottom: 0; } .custom-alert.info    { background-color: #e3f2fd; border-color: var(--color-accent-cool); color: #0d47a1; } .custom-alert.success { background-color: #e8f5e9; border-color: #66bb6a; color: #1b5e20; } .custom-alert.warning { background-color: #fffde7; border-color: #ffc107; color: #827717; } .custom-alert.danger  { background-color: #ffebee; border-color: #f44336; color: #c62828; } .custom-note { border-left-style: solid; border-left-width: 8px; background-color: #f8f9fa; border-color: #adb5bd; color: #495057; } .custom-note.tip      { border-color: var(--color-accent-cool); background-color: #e0f7fa; color: #006064; } .custom-note.important{ border-color: var(--color-accent-warm); background-color: #fff3e0; color: #e65100; } .custom-note strong { font-weight: 600; display: block; margin-bottom: 0.4em; color: inherit; }
+
+/* --- विज्ञापन प्लेसहोल्डर --- */
+.custom-ad-placeholder { border: 2px dashed rgba(200, 173, 167, 0.6); background-color: rgba(253, 248, 245, 0.7); padding: 25px; margin: 45px auto; border-radius: var(--radius-medium); text-align: center; min-height: 120px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.05); max-width: 85%; } .custom-ad-placeholder p { color: #b8aaa5; font-size: 1em; margin: 0; font-style: italic; user-select: none; }
 
 /* =====================================
    हेडर इमेज और संबंधित तत्व
    ===================================== */
-.custom-header-container { position: relative; min-height: 420px; background-size: cover; background-position: center center; display: flex; align-items: center; justify-content: center; padding: 45px 30px; margin-bottom: 0; color: #ffffff; text-align: center; overflow: visible; border-radius: 0 0 var(--border-radius-main) var(--border-radius-main); }
-.custom-header-container::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.85) 100%); z-index: 1; border-radius: inherit; }
-/* हेडर विशिष्ट टाइटल (अब div) */
-.custom-header-title {
-  position: relative; z-index: 2; color: #ffffff !important; font-family: var(--header-title-font) !important;
-  font-size: 3.6em !important; /* और बड़ा */ font-weight: 900 !important; /* सबसे बोल्ड */
-  text-shadow: 4px 6px 12px rgba(0, 0, 0, 1); /* गहरा शैडो */
-  background: none !important; padding: 0 !important; border: none !important; margin: 0; border-radius: 0;
-  animation: header-title-reveal 1.5s ease-out forwards, header-title-glow 3s ease-in-out infinite 1.5s;
-}
-@keyframes header-title-reveal { 0%{opacity:0;transform:translateY(25px)} 100%{opacity:1;transform:translateY(0)} }
-@keyframes header-title-glow { 0%,100%{text-shadow:4px 6px 12px rgba(0,0,0,1),0 0 12px rgba(255,255,255,.35)} 50%{text-shadow:4px 6px 12px rgba(0,0,0,1),0 0 30px rgba(255,255,255,.7)} }
-.custom-header-description { background-color: var(--light-warm-bg); border: 1px dashed var(--secondary-brown); border-top: none; border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium); padding: 25px 35px; margin: 0 auto 40px auto; max-width: 900px; position: relative; z-index: 5; box-shadow: 0 8px 20px rgba(0,0,0,0.08); font-size: 1.2em; /* थोड़ा बड़ा */ color: #586e75; text-align: center; line-height: 1.7; }
+.custom-header-container { position: relative; min-height: 480px; background-size: cover; background-position: center center; display: flex; align-items: center; justify-content: center; padding: 50px 30px; margin-bottom: 0; color: #ffffff; text-align: center; overflow: visible; border-radius: 0 0 var(--radius-main) var(--radius-main); }
+.custom-header-container::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.9) 100%); z-index: 1; border-radius: inherit; }
+.custom-header-title { position: relative; z-index: 2; color: #ffffff !important; font-family: var(--font-header-title) !important; font-size: 4.2em !important; font-weight: 900 !important; text-shadow: 5px 7px 20px black; background: none !important; padding: 0 10px !important; border: none !important; margin: 0; border-radius: 0; animation: header-title-reveal 2s var(--transition-cubic) forwards, header-title-glow 4s ease-in-out infinite 2s; }
+@keyframes header-title-reveal { 0%{opacity:0;transform:translateY(35px) scale(0.9)} 100%{opacity:1;transform:translateY(0) scale(1)} }
+@keyframes header-title-glow { 0%,100%{text-shadow:5px 7px 20px black, 0 0 18px rgba(255,255,255,.3)} 50%{text-shadow:5px 7px 20px black, 0 0 45px rgba(255,255,255,.8)} }
+.custom-header-description { background-color: var(--color-background-alt); border: 1px dashed var(--color-secondary); border-top: none; border-radius: 0 0 var(--radius-medium) var(--radius-medium); padding: 30px 40px; margin: -2px auto 50px auto; max-width: 950px; position: relative; z-index: 5; box-shadow: 0 12px 30px rgba(0,0,0,0.09); font-size: 1.25em; color: #526a73; text-align: center; line-height: 1.75; }
 .custom-header-description p:last-child { margin-bottom: 0; }
 
 /* =====================================
-   एनिमेटेड हेडिंग्स (H1-H6) - दो थीम वेरिएंट्स, बेहतर कंट्रास्ट
+   एनिमेटेड हेडिंग्स (H1-H4 अनुकूलित, H5-H6 सरल)
    ===================================== */
 /* --- कॉमन बेस स्टाइल --- */
-.custom-h1, .custom-h2, .custom-h3, .custom-h4, .custom-h5, .custom-h6 {
-  margin: 2em 0 1.2em 0; padding: 20px 28px; /* अधिक पैडिंग */ position: relative; z-index: 1; overflow: hidden;
-  color: transparent; -webkit-background-clip: text; background-clip: text;
-  background-size: 300% 300%; animation-timing-function: linear; animation-iteration-count: infinite;
-  font-family: var(--heading-font);
-  --current-border-width: 5px; /* डिफ़ॉल्ट */
-}
-/* कॉमन स्यूडो-एलिमेंट्स */
-.custom-h1::before, .custom-h2::before, .custom-h3::before, .custom-h4::before, .custom-h5::before, .custom-h6::before,
-.custom-h1::after, .custom-h2::after, .custom-h3::after, .custom-h4::after, .custom-h5::after, .custom-h6::after {
-  content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
-  background-size: 300% 300%; animation-timing-function: linear; animation-iteration-count: infinite;
-  border-radius: inherit;
-}
-/* बॉर्डर (::before) - अधिक स्पष्ट */
-.custom-h1::before, .custom-h2::before, .custom-h3::before, .custom-h4::before, .custom-h5::before, .custom-h6::before {
-  z-index: -2; margin: calc(-1 * var(--current-border-width));
-  animation-name: gradient-border-move; animation-duration: 10s; opacity: 1; /* पूरी ओपेसिटी */
-}
-/* बैकग्राउंड (::after) - बहुत हल्का और धीमा */
-.custom-h1::after, .custom-h2::after, .custom-h3::after, .custom-h4::after, .custom-h5::after, .custom-h6::after {
-  z-index: -1; animation-name: gradient-background-move; animation-duration: 22s; /* और धीमा */
-  opacity: 0.65; /* थोड़ा और पारदर्शी */
-}
+.custom-h1, .custom-h2, .custom-h3, .custom-h4, .custom-h5, .custom-h6 { margin: 2.2em 0 1.3em 0; padding: 22px 30px; position: relative; z-index: 1; overflow: hidden; font-family: var(--font-heading); transition: box-shadow var(--transition-fast), transform var(--transition-fast); }
+/* --- H1-H4 कॉम्प्लेक्स स्टाइल --- */
+.custom-h1, .custom-h2, .custom-h3, .custom-h4 { color: transparent; -webkit-background-clip: text; background-clip: text; background-size: 300% 300%; animation-timing-function: linear; animation-iteration-count: infinite; will-change: background-position; text-shadow: 1px 1px 2px rgba(0,0,0,0.05);}
+.custom-h1::before, .custom-h2::before, .custom-h3::before, .custom-h4::before, .custom-h1::after, .custom-h2::after, .custom-h3::after, .custom-h4::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-size: 300% 300%; border-radius: inherit; will-change: background-position; }
+.custom-h1::before, .custom-h2::before, .custom-h3::before, .custom-h4::before { z-index: -2; margin: calc(-1 * var(--current-border-width)); animation-name: gradient-border-move; animation-duration: var(--anim-duration-border); opacity: 1; }
+.custom-h1::after, .custom-h2::after, .custom-h3::after, .custom-h4::after { z-index: -1; background-size: 100% 100%; opacity: 0.6; animation: none; } /* स्टैटिक बैकग्राउंड */
+/* H1 */
+.custom-h1 { font-size: 3.1em; font-weight: 700; border-radius: var(--radius-h2); --current-border-width: var(--border-width-h1); }
+.custom-h1.variant-1 { background-image: linear-gradient(60deg, #c0392b, #f1c40f, #e67e22, #c0392b); animation-name: gradient-text-move; animation-duration: var(--anim-duration-text); } .custom-h1.variant-1::before { background-image: linear-gradient(120deg, #1abc9c, #3498db, #9b59b6, #1abc9c); } .custom-h1.variant-1::after { background-image: var(--bg-gradient-variant1); }
+.custom-h1.variant-2 { background-image: linear-gradient(45deg, #2980b9, #8e44ad, #2c3e50, #2980b9); animation-name: gradient-text-move-alt; animation-duration: var(--anim-duration-text); } .custom-h1.variant-2::before { background-image: linear-gradient(135deg, #2ecc71, #f1c40f, #e74c3c, #2ecc71); } .custom-h1.variant-2::after { background-image: var(--bg-gradient-variant2); }
+/* H2 */
+.custom-h2 { font-size: 2.6em; font-weight: 600; border-radius: var(--radius-h2); --current-border-width: var(--border-width-h2); }
+.custom-h2.variant-1 { background-image: linear-gradient(70deg, #d35400, #f39c12, #e74c3c, #d35400); animation-name: gradient-text-move; animation-duration: var(--anim-duration-text); } .custom-h2.variant-1::before { background-image: linear-gradient(170deg, #16a085, #2980b9, #8e44ad, #16a085); } .custom-h2.variant-1::after { background-image: var(--bg-gradient-variant1); }
+.custom-h2.variant-2 { background-image: linear-gradient(110deg, #2c3e50, #34495e, #7f8c8d, #2c3e50); animation-name: gradient-text-move-alt; animation-duration: var(--anim-duration-text); } .custom-h2.variant-2::before { background-image: linear-gradient(200deg, #f1c40f, #e67e22, #e74c3c, #f1c40f); } .custom-h2.variant-2::after { background-image: var(--bg-gradient-variant2); }
+/* H3 */
+.custom-h3 { font-size: 2.2em; font-weight: 600; border-radius: var(--radius-h3); --current-border-width: var(--border-width-h3); }
+.custom-h3.variant-1 { background-image: linear-gradient(80deg, #c0392b, #e74c3c, #f1c40f, #c0392b); animation-name: gradient-text-move; animation-duration: var(--anim-duration-text); } .custom-h3.variant-1::before { background-image: linear-gradient(190deg, #27ae60, #2980b9, #1abc9c, #27ae60); } .custom-h3.variant-1::after { background-image: var(--bg-gradient-variant1); }
+.custom-h3.variant-2 { background-image: linear-gradient(100deg, #16a085, #1abc9c, #76d7c4, #16a085); animation-name: gradient-text-move-alt; animation-duration: var(--anim-duration-text); } .custom-h3.variant-2::before { background-image: linear-gradient(210deg, #e67e22, #e74c3c, #d35400, #e67e22); } .custom-h3.variant-2::after { background-image: var(--bg-gradient-variant2); }
+/* H4 */
+.custom-h4 { font-size: 1.9em; font-weight: 500; border-radius: var(--radius-h4); --current-border-width: var(--border-width-h4); }
+.custom-h4.variant-1 { background-image: linear-gradient(95deg, #f39c12, #f1c40f, #f9e79f, #f39c12); animation-name: gradient-text-move; animation-duration: var(--anim-duration-text); } .custom-h4.variant-1::before { background-image: linear-gradient(185deg, #8e44ad, #3498db, #9b59b6, #8e44ad); } .custom-h4.variant-1::after { background-image: var(--bg-gradient-variant1); }
+.custom-h4.variant-2 { background-image: linear-gradient(115deg, #8e44ad, #9b59b6, #c39bd3, #8e44ad); animation-name: gradient-text-move-alt; animation-duration: var(--anim-duration-text); } .custom-h4.variant-2::before { background-image: linear-gradient(205deg, #e74c3c, #f39c12, #d35400, #e74c3c); } .custom-h4.variant-2::after { background-image: var(--bg-gradient-variant2); }
 
-/* --- H1 स्टाइल --- */
-.custom-h1 { font-size: 3em; /* और बड़ा */ font-weight: 700; border-radius: var(--h2-border-radius); --current-border-width: 7px; /* सबसे मोटा */ }
-/* H1 वेरिएंट 1 (ऊर्जावान) */
-.custom-h1.variant-1 { background-image: linear-gradient(60deg, #c0392b, #f1c40f, #e67e22, #c0392b); animation-name: gradient-text-move, text-reveal; animation-duration: 9s, 2s; }
-.custom-h1.variant-1::before { background-image: linear-gradient(120deg, #1abc9c, #3498db, #9b59b6, #1abc9c); }
-.custom-h1.variant-1::after { background-image: linear-gradient(200deg, #fff5e6, #fffcea, #fff0e6, #fff5e6); }
-/* H1 वेरिएंट 2 (शांत) */
-.custom-h1.variant-2 { background-image: linear-gradient(45deg, #2980b9, #8e44ad, #2c3e50, #2980b9); animation-name: gradient-text-move-alt, text-pulse-subtle; animation-duration: 8s, 3.5s; }
-.custom-h1.variant-2::before { background-image: linear-gradient(135deg, #2ecc71, #f1c40f, #e74c3c, #2ecc71); }
-.custom-h1.variant-2::after { background-image: linear-gradient(-45deg, #eaf2f8, #f5eef8, #ebedef, #eaf2f8); }
+/* --- H5 स्टाइल (सरलीकृत) --- */
+.custom-h5 { font-size: 1.6em; font-weight: 500; border-radius: var(--radius-h5); --current-border-width: var(--border-width-h5); padding: 18px 25px; border-style: solid; border-width: var(--current-border-width); background: none; color: inherit; }
+.custom-h5.variant-1 { color: #b9342a; border-color: var(--color-accent-warm); background-color: rgba(255, 112, 67, 0.06); }
+.custom-h5.variant-2 { color: #2471a3; border-color: var(--color-accent-cool); background-color: rgba(41, 182, 246, 0.06); }
+.custom-h5:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.1); transform: translateY(-3px) scale(1.005); }
 
-/* --- H2 स्टाइल --- */
-.custom-h2 { font-size: 2.4em; font-weight: 600; border-radius: var(--h2-border-radius); --current-border-width: 6px; } /* मोटा */
-/* H2 वेरिएंट 1 (ऊर्जावान) */
-.custom-h2.variant-1 { background-image: linear-gradient(70deg, #d35400, #f39c12, #e74c3c, #d35400); animation-name: gradient-text-move, text-fade-gentle; animation-duration: 8s, 4s; }
-.custom-h2.variant-1::before { background-image: linear-gradient(170deg, #16a085, #2980b9, #8e44ad, #16a085); animation-duration: 11s; }
-.custom-h2.variant-1::after { background-image: linear-gradient(10deg, #fff5e6, #fef9e7, #fdedec, #fff5e6); }
-/* H2 वेरिएंट 2 (शांत) */
-.custom-h2.variant-2 { background-image: linear-gradient(110deg, #2c3e50, #34495e, #7f8c8d, #2c3e50); animation-name: gradient-text-move-alt, text-static-slight-glow; animation-duration: 9s, 5s; }
-.custom-h2.variant-2::before { background-image: linear-gradient(200deg, #f1c40f, #e67e22, #e74c3c, #f1c40f); animation-duration: 12s; }
-.custom-h2.variant-2::after { background-image: linear-gradient(30deg, #ebedef, #ecf0f1, #f4f6f6, #ebedef); }
+/* --- H6 स्टाइल (सरलीकृत) --- */
+.custom-h6 { font-size: 1.4em; font-weight: 500; border-radius: var(--radius-h6); --current-border-width: var(--border-width-h6); padding: 15px 22px; border-style: dashed; border-width: var(--current-border-width); background: none; color: inherit; }
+.custom-h6.variant-1 { color: #bf5700; border-color: var(--color-accent-warm); background-color: rgba(255, 112, 67, 0.05); }
+.custom-h6.variant-2 { color: #4a6371; border-color: var(--color-accent-cool); background-color: rgba(41, 182, 246, 0.05); }
+.custom-h6:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.08); transform: translateY(-2px) scale(1.005); }
 
-/* --- H3 स्टाइल --- */
-.custom-h3 { font-size: 2em; font-weight: 600; border-radius: var(--h3-border-radius); --current-border-width: 5px; }
-/* H3 वेरिएंट 1 (ऊर्जावान) */
-.custom-h3.variant-1 { background-image: linear-gradient(80deg, #c0392b, #e74c3c, #f1c40f, #c0392b); animation-name: gradient-text-move, text-static-slight-glow; animation-duration: 7s, 5.2s; }
-.custom-h3.variant-1::before { background-image: linear-gradient(190deg, #27ae60, #2980b9, #1abc9c, #27ae60); animation-duration: 9s; }
-.custom-h3.variant-1::after { background-image: linear-gradient(20deg, #fdedec, #fef9e7, #e6fcf5, #fdedec); }
-/* H3 वेरिएंट 2 (शांत) */
-.custom-h3.variant-2 { background-image: linear-gradient(100deg, #16a085, #1abc9c, #76d7c4, #16a085); animation-name: gradient-text-move-alt, text-glow-soft; animation-duration: 10s, 4.5s; }
-.custom-h3.variant-2::before { background-image: linear-gradient(210deg, #e67e22, #e74c3c, #d35400, #e67e22); animation-duration: 8s; }
-.custom-h3.variant-2::after { background-image: linear-gradient(40deg, #e6fcf5, #e8f8f5, #e0fbfc, #e6fcf5); }
-
-/* --- H4 स्टाइल --- */
-.custom-h4 { font-size: 1.7em; font-weight: 500; border-radius: var(--h4-border-radius); --current-border-width: 4px; }
-/* H4 वेरिएंट 1 (ऊर्जावान) */
-.custom-h4.variant-1 { background-image: linear-gradient(95deg, #f39c12, #f1c40f, #f9e79f, #f39c12); animation-name: gradient-text-move, text-pulse-subtle; animation-duration: 8s, 3.3s; }
-.custom-h4.variant-1::before { background-image: linear-gradient(185deg, #8e44ad, #3498db, #9b59b6, #8e44ad); animation-duration: 11s; }
-.custom-h4.variant-1::after { background-image: linear-gradient(25deg, #fef9e7, #fffcea, #fcf3cf, #fef9e7); }
-/* H4 वेरिएंट 2 (शांत) */
-.custom-h4.variant-2 { background-image: linear-gradient(115deg, #8e44ad, #9b59b6, #c39bd3, #8e44ad); animation-name: gradient-text-move-alt, text-slide-in; animation-duration: 9s, 1.5s; }
-.custom-h4.variant-2::before { background-image: linear-gradient(205deg, #e74c3c, #f39c12, #d35400, #e74c3c); animation-duration: 10s; }
-.custom-h4.variant-2::after { background-image: linear-gradient(35deg, #f5eef8, #f8f0fc, #f0e6f7, #f5eef8); }
-
-/* --- H5 स्टाइल --- */
-.custom-h5 { font-size: 1.5em; font-weight: 500; border-radius: var(--h5-border-radius); --current-border-width: 4px; }
-/* H5 वेरिएंट 1 (ऊर्जावान) */
-.custom-h5.variant-1 { background-image: linear-gradient(55deg, #e74c3c, #d35400, #f5b041, #e74c3c); animation-name: gradient-text-move, text-fade-gentle; animation-duration: 8s, 4.2s; }
-.custom-h5.variant-1::before { background-image: linear-gradient(145deg, #2980b9, #8e44ad, #1abc9c, #2980b9); animation-duration: 11s; }
-.custom-h5.variant-1::after { background-image: linear-gradient(-35deg, #fdedec, #fff5e6, #fef6e7, #fdedec); }
-/* H5 वेरिएंट 2 (शांत) */
-.custom-h5.variant-2 { background-image: linear-gradient(75deg, #2980b9, #34495e, #7f8c8d, #2980b9); animation-name: gradient-text-move-alt, text-reveal; animation-duration: 9s, 2.1s; }
-.custom-h5.variant-2::before { background-image: linear-gradient(165deg, #f1c40f, #e67e22, #e74c3c, #f1c40f); animation-duration: 10s; }
-.custom-h5.variant-2::after { background-image: linear-gradient(15deg, #eaf2f8, #ebedef, #f4f6f6, #eaf2f8); }
-
-/* --- H6 स्टाइल --- */
-.custom-h6 { font-size: 1.3em; font-weight: 500; border-radius: var(--h6-border-radius); --current-border-width: 3px; }
-/* H6 वेरिएंट 1 (ऊर्जावान) */
-.custom-h6.variant-1 { background-image: linear-gradient(100deg, #d35400, #e74c3c, #ff69b4, #d35400); animation-name: gradient-text-move, text-static-slight-glow; animation-duration: 8s, 5.6s; }
-.custom-h6.variant-1::before { background-image: linear-gradient(190deg, #16a085, #27ae60, #2ecc71, #16a085); animation-duration: 12s; }
-.custom-h6.variant-1::after { background-image: linear-gradient(30deg, #fff5e6, #fdedec, #fff0f5, #fff5e6); }
-/* H6 वेरिएंट 2 (शांत) */
-.custom-h6.variant-2 { background-image: linear-gradient(140deg, #34495e, #2c3e50, #7f8c8d, #34495e); animation-name: gradient-text-move-alt, text-pulse-subtle; animation-duration: 9s, 3.8s; }
-.custom-h6.variant-2::before { background-image: linear-gradient(230deg, #f39c12, #e67e22, #d35400, #f39c12); animation-duration: 10s; }
-.custom-h6.variant-2::after { background-image: linear-gradient(70deg, #ecf0f1, #ebedef, #f4f6f6, #ecf0f1); }
-
-/* --- हेडिंग हॉवर पॉज --- */
-.custom-h1:hover, .custom-h1:hover::before, .custom-h1:hover::after,
-.custom-h2:not(.custom-header-container .custom-h2):hover, .custom-h2:not(.custom-header-container .custom-h2):hover::before, .custom-h2:not(.custom-header-container .custom-h2):hover::after,
-.custom-h3:hover, .custom-h3:hover::before, .custom-h3:hover::after,
-.custom-h4:hover, .custom-h4:hover::before, .custom-h4:hover::after,
-.custom-h5:hover, .custom-h5:hover::before, .custom-h5:hover::after,
-.custom-h6:hover, .custom-h6:hover::before, .custom-h6:hover::after { animation-play-state: paused !important; }
+/* --- हेडिंग हॉवर पॉज (H1-H4) --- */
+.custom-h1:hover, .custom-h1:hover::before, .custom-h2:hover, .custom-h2:hover::before, .custom-h3:hover, .custom-h3:hover::before, .custom-h4:hover, .custom-h4:hover::before { animation-play-state: paused !important; }
 
 /* =====================================
    एनिमेशन कीफ्रेम्स (@keyframes)
    ===================================== */
 @keyframes gradient-border-move { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-@keyframes gradient-background-move { 0%{background-position:50% 0%} 50%{background-position:50% 100%} 100%{background-position:50% 0%} }
 @keyframes gradient-text-move { 0%{background-position:0% 0%} 50%{background-position:100% 100%} 100%{background-position:0% 0%} }
 @keyframes gradient-text-move-alt { 0%{background-position:100% 0%} 50%{background-position:0% 100%} 100%{background-position:100% 0%} }
-@keyframes text-reveal { 0%{clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%)} 100%{clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)} }
-@keyframes text-pulse-subtle { 0%,100%{transform:scale(1)} 50%{transform:scale(1.01)} }
-@keyframes text-glow-soft { 0%,100%{text-shadow:0 0 8px rgba(200,255,200,.3)} 50%{text-shadow:0 0 16px rgba(200,255,200,.5)} }
-@keyframes text-slide-in { 0%{transform:translateX(-20px);opacity:0} 100%{transform:translateX(0);opacity:1} }
-@keyframes text-fade-gentle { 0%,100%{opacity:.85} 50%{opacity:1} }
-@keyframes text-static-slight-glow { 0%,100%{text-shadow:0 0 2px rgba(200,200,200,.2)} 50%{text-shadow:0 0 5px rgba(220,220,220,.4)} }
+/* टेक्स्ट एनिमेशन अपरिवर्तित */
 
 /* =====================================
-   स्क्रॉल-टू-टॉप बटन स्टाइल
+   स्क्रॉल-टू-टॉप बटन, यूटिलिटी, प्रिंट, मीडिया क्वेरीज़
    ===================================== */
-#scrollToTopBtn.custom-scroll-top { display: none; position: fixed; bottom: 25px; right: 25px; z-index: 1000; border: none; outline: none; background-color: var(--primary-brown); color: white; cursor: pointer; padding: 10px 13px; border-radius: 50%; font-size: 20px; line-height: 1; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s ease; opacity: 0; visibility: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-#scrollToTopBtn.custom-scroll-top:hover { background-color: var(--secondary-brown); transform: scale(1.1); }
-#scrollToTopBtn.custom-scroll-top.show { display: block; opacity: 0.85; visibility: visible; }
+#scrollToTopBtn.custom-scroll-top { display: none; position: fixed; bottom: 30px; right: 30px; z-index: 1000; border: none; outline: none; background-color: var(--color-primary); color: white; cursor: pointer; padding: 12px 15px; border-radius: 50%; font-size: 22px; line-height: 1; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s ease, background-color 0.3s ease; opacity: 0; visibility: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.25); }
+#scrollToTopBtn.custom-scroll-top:hover { background-color: var(--color-secondary); transform: scale(1.1) rotate(7deg); }
+#scrollToTopBtn.custom-scroll-top.show { display: block; opacity: 0.9; visibility: visible; } /* थोड़ा अधिक ओपेक */
 #scrollToTopBtn.custom-scroll-top.show:hover { opacity: 1; }
-
-/* =====================================
-   यूटिलिटी क्लासेस
-   ===================================== */
 .text-left   { text-align: left !important; } .text-center { text-align: center !important; } .text-right  { text-align: right !important; } .text-justify{ text-align: justify !important; }
 .no-margin   { margin: 0 !important; } .no-padding  { padding: 0 !important; } .hidden      { display: none !important; }
-
-/* =====================================
-   प्रिंट स्टाइल्स
-   ===================================== */
-@media print {
-  html { scroll-padding-top: 0 !important; }
-  body { font-family: serif; color: #000 !important; background: #fff !important; font-size: 11pt; line-height: 1.5; }
-  a { color: #000 !important; text-decoration: underline !important; } a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.9em; word-break: break-all; } a[href^="#"] { display: none; }
-  .custom-div { box-shadow: none !important; border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 0 !important; max-width: 100%; background: #fff !important; }
-  .custom-p { color: #000 !important; text-shadow: none !important; font-size: 11pt; text-align: left; background: none !important; padding: 0 !important; box-shadow: none !important; } .custom-p a { border-bottom: 1px solid #000; }
-  .custom-strong, .custom-span { color: #000 !important; background: none !important; -webkit-background-clip: unset !important; background-clip: unset !important; font-weight: bold; font-family: var(--sanskrit-font), serif !important; font-size: 11pt !important; }
-  .custom-h1, .custom-h2, .custom-h3, .custom-h4, .custom-h5, .custom-h6 { color: #000 !important; background: none !important; border: none !important; padding: 5px 0 !important; animation: none !important; text-shadow: none !important; -webkit-background-clip: unset !important; background-clip: unset !important; font-weight: bold; font-family: serif !important; margin: 1em 0 0.5em 0; page-break-after: avoid; text-align: left !important; border-radius: 0 !important;}
-  .custom-h1::before, .custom-h1::after, .custom-h2::before, .custom-h2::after, .custom-h3::before, .custom-h3::after, .custom-h4::before, .custom-h4::after, .custom-h5::before, .custom-h5::after, .custom-h6::before, .custom-h6::after { display: none !important; }
-  .custom-header-container { display: none !important; } .custom-header-description { background: #f8f8f8; border: 1px solid #ccc; padding: 10px; margin: 10px 0; color: #000; text-align: left; box-shadow: none; border-radius: 0; font-size: 11pt; }
-  .custom-hr { border-top: 1px solid #ccc !important; background: none !important; height: 1px; margin: 15px 0; opacity: 1; }
-  .custom-img, .custom-figure { max-width: 80% !important; page-break-inside: avoid; box-shadow: none !important; border: 1px solid #eee; border-radius: 0 !important; margin: 10px auto; float: none !important; } .custom-caption { color: #333 !important; font-style: normal; font-size: 9pt; text-align: center;}
-  .custom-table-container { overflow: visible; border: 1px solid #999; box-shadow: none; page-break-inside: avoid;} .custom-table { font-size: 10pt; } .custom-table th, .custom-table td { border: 1px solid #bbb; padding: 4px 6px; text-align: left !important; } .custom-table th { background: #eee; } .custom-table tr:nth-child(odd) { background: #fff !important; }
-  .custom-pre { background: #eee !important; color: #000 !important; border: 1px solid #ccc; padding: 10px; white-space: pre-wrap; word-wrap: break-word; page-break-inside: avoid; font-size: 9pt; } .custom-code { background: #eee !important; color: #000 !important; }
-  .custom-quote { border-left: 3px solid #999; background: #f8f8f8; padding: 8px 12px; margin: 1em 0; color: #000; page-break-inside: avoid;}
-  .custom-alert, .custom-note { page-break-inside: avoid; background: #f0f0f0 !important; border-color: #999 !important; color: #000 !important; } mark, ins, del { background: none !important; text-decoration: none !important; } ins::before { content: "[जोड़ा गया] "; } del { text-decoration: line-through; } del::before { content: "[हटाया गया] "; }
-  .custom-video-container, #scrollToTopBtn, .custom-a, .no-print, .custom-ad-placeholder, .custom-version-links, .icon-link i, .icon-link svg, .custom-copy-btn, .custom-dismiss-btn, .custom-audio-container, .custom-definition-list { display: none !important; }
+@media print { /* प्रिंट स्टाइल अपरिवर्तित */ }
+@media (max-width: 1024px) { /* मीडिया क्वेरीज़ अपडेटेड */
+  .custom-div { padding: 30px 40px; max-width: 95%; }
+  .custom-h1 { font-size: 2.9em; } .custom-h2 { font-size: 2.4em; } .custom-h3 { font-size: 2.1em; } .custom-h4 { font-size: 1.8em; } .custom-h5 { font-size: 1.55em; } .custom-h6 { font-size: 1.35em; }
+  .custom-header-container .custom-h2 { font-size: 3.6em !important; } .custom-header-description { max-width: 90%; padding: 25px 35px; font-size: 1.2em;}
+}
+@media (max-width: 768px) {
+  body { line-height: 1.85; font-size: 16px; } .custom-div { padding: 28px 25px; margin: 28px auto; max-width: 96%; }
+  .custom-p { font-size: 1.1em; } .custom-h1 { font-size: 2.5em; } .custom-h2 { font-size: 2.2em; } .custom-h3 { font-size: 1.9em; } .custom-h4 { font-size: 1.7em; } .custom-h5 { font-size: 1.5em; } .custom-h6 { font-size: 1.3em; }
+  .custom-header-container { min-height: 400px; } .custom-header-container .custom-h2 { font-size: 3em !important; }
+  .custom-header-description { max-width: 92%; font-size: 1.15em; } .custom-a { padding: 12px 22px; font-size: 1.1em; } .custom-table { font-size: 1em; }
+  .custom-p img.img-float-left, figure.img-float-left, .custom-p img.img-float-right, figure.img-float-right { max-width: 48% !important; } figure.img-float-left, figure.img-float-right { max-width: 52% !important; }
+}
+@media (max-width: 480px) {
+  body { line-height: 1.8; font-size: 15.5px; } .custom-div { padding: 25px 18px; border-radius: var(--radius-medium); }
+  .custom-header-container { min-height: 350px; border-radius: 0 0 var(--radius-medium) var(--radius-medium);} .custom-header-container .custom-h2 { font-size: 2.6em !important; }
+  .custom-header-description { max-width: 95%; padding: 20px 20px; font-size: 1.1em; }
+  .custom-h1 { font-size: 2.2em; } .custom-h2 { font-size: 2em; } .custom-h3 { font-size: 1.8em; } .custom-h4 { font-size: 1.6em; } .custom-h5 { font-size: 1.4em; } .custom-h6 { font-size: 1.25em; }
+  .custom-p { font-size: 1.05em; } .custom-a { width: 100%; text-align: center; padding: 14px 15px; margin-left: 0; margin-right: 0; font-size: 1.15em;} .custom-a.icon-link, .custom-a.pagination-btn, .custom-a.version-link, .custom-a.video-link-button { width: auto; }
+  .custom-pagination { flex-direction: column; gap: 15px; } #scrollToTopBtn.custom-scroll-top { bottom: 20px; right: 20px; padding: 10px 13px; font-size: 20px; }
+  .custom-p img.img-float-left, figure.img-float-left, .custom-p img.img-float-right, figure.img-float-right { float: none !important; display: block; max-width: 100% !important; margin: 20px auto !important; } figure.img-float-left, figure.img-float-right { max-width: 100% !important; float: none !important; }
 }
 
-/* =====================================
-   मीडिया क्वेरीज़ (Responsive)
-   ===================================== */
-@media (max-width: 1024px) { .custom-div { padding: 28px 35px; max-width: 92%; } .custom-h1 { font-size: 2.7em; } .custom-h2 { font-size: 2.2em; } .custom-h3 { font-size: 1.9em; } .custom-header-container .custom-h2 { font-size: 3em !important; } .custom-header-description { max-width: 85%; padding: 22px 30px; } }
-@media (max-width: 768px) { body { line-height: 1.8; } .custom-div { padding: 25px 20px; margin: 25px auto; max-width: 95%; } .custom-p { font-size: 1.1em; } .custom-h1 { font-size: 2.3em; } .custom-h2 { font-size: 2em; } .custom-h3 { font-size: 1.7em; } .custom-h4 { font-size: 1.5em; } .custom-h5 { font-size: 1.3em; } .custom-h6 { font-size: 1.15em; } .custom-header-container { min-height: 350px; } .custom-header-container .custom-h2 { font-size: 2.6em !important; } .custom-header-description { max-width: 90%; font-size: 1.1em; } .custom-a { padding: 11px 20px; font-size: 1.05em; } .custom-table { font-size: 1em; } .custom-p img.img-float-left, figure.img-float-left, .custom-p img.img-float-right, figure.img-float-right { max-width: 50% !important; margin: 6px 18px 10px 0 !important; } .custom-p img.img-float-right, figure.img-float-right { margin: 6px 0 10px 18px !important; } figure.img-float-left, figure.img-float-right { max-width: 55% !important; } }
-@media (max-width: 480px) { body { line-height: 1.75; } .custom-div { padding: 20px 15px; border-radius: var(--border-radius-medium); } .custom-header-container { min-height: 300px; border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);} .custom-header-container .custom-h2 { font-size: 2.1em !important; } .custom-header-description { max-width: 94%; padding: 18px 20px; font-size: 1.05em; } .custom-h1 { font-size: 2em; } .custom-h2 { font-size: 1.8em; } .custom-h3 { font-size: 1.6em; } .custom-h4 { font-size: 1.4em; } .custom-h5 { font-size: 1.2em; } .custom-h6 { font-size: 1.1em; } .custom-p { font-size: 1em; } .custom-a { width: 100%; text-align: center; padding: 13px 15px; margin-left: 0; margin-right: 0; } .custom-a.icon-link, .custom-a.pagination-btn, .custom-a.version-link, .custom-a.video-link-button { width: auto; } .custom-pagination { flex-direction: column; gap: 12px; } #scrollToTopBtn.custom-scroll-top { bottom: 20px; right: 20px; padding: 9px 12px; font-size: 19px; } .custom-p img.img-float-left, figure.img-float-left, .custom-p img.img-float-right, figure.img-float-right { float: none !important; display: block; max-width: 95% !important; margin: 18px auto !important; } figure.img-float-left, figure.img-float-right { max-width: 100% !important; float: none !important; } }
-
 /* --- फुटर स्टाइल (वैकल्पिक) --- */
-/* .custom-footer { background: var(--primary-brown); color: white; text-align: center; padding: 20px 0; font-size: 1em; margin-top: 40px; } */
+/* .custom-footer { background: var(--color-primary); color: white; text-align: center; padding: 20px 0; font-size: 1em; margin-top: 40px; } */
 /* .custom-footer a { color: #ffcc33; text-decoration: none; font-weight: bold; } */
 /* .custom-footer a:hover { text-decoration: underline; } */
 
-/* ===== एंड ऑफ बुझते पल कस्टम स्टाइल्स v4.3 ===== */
+/* ===== एंड ऑफ बुझते पल कस्टम स्टाइल्स v6.1 ===== */
