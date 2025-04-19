@@ -1,100 +1,134 @@
-// Wait for the DOM content to load before executing the code
-document.addEventListener("DOMContentLoaded", function() {
+/* =====================================
+   बुझते पल - कस्टम स्क्रिप्ट्स v2.2 (एकीकृत)
+   लेखक: आशेष (AI द्वारा सहायता प्राप्त)
+   विशेषताएं: स्मूथ स्क्रॉलिंग, स्क्रॉल-टू-टॉप बटन, बाहरी लिंक हैंडलिंग
+   ===================================== */
 
-    // Handle the "Next Part" button animation (scale effect)
-    const nextPartButtons = document.querySelectorAll(".custom-a");
-    nextPartButtons.forEach(button => {
-        button.addEventListener("mouseenter", () => {
-            button.style.transform = "scale(1.1)";
-            button.style.transition = "all 0.3s ease";
-        });
+document.addEventListener('DOMContentLoaded', function() {
 
-        button.addEventListener("mouseleave", () => {
-            button.style.transform = "scale(1)";
-        });
-    });
+  console.log('बुझते पल कस्टम स्क्रिप्ट्स v2.2 लोड हो रही हैं...');
 
-    // Shimmer Effect for Header
-    const shimmerEffect = () => {
-        const shimmerElements = document.querySelectorAll(".custom-h2");
-        shimmerElements.forEach(element => {
-            element.style.animation = "custom-shimmer 2s infinite";
-        });
-    }
-    shimmerEffect();
+  // --- 1. स्मूथ स्क्रॉल फंक्शनलिटी ---
+  try {
+    const scrollLinks = document.querySelectorAll('.custom-a[href^="#"]');
 
-    // Text Hover Effect for Paragraph
-    const paragraphElements = document.querySelectorAll(".custom-p");
-    paragraphElements.forEach(paragraph => {
-        paragraph.addEventListener("mouseover", () => {
-            paragraph.style.color = "#7b3f00";
-            paragraph.style.textShadow = "2px 2px 5px rgba(0, 0, 0, 0.3)";
-        });
+    scrollLinks.forEach(link => {
+      link.addEventListener('click', function(event) {
+        const targetId = this.getAttribute('href');
 
-        paragraph.addEventListener("mouseout", () => {
-            paragraph.style.color = "#5a3c20";
-            paragraph.style.textShadow = "none";
-        });
-    });
+        // सुनिश्चित करें कि यह केवल # वाले लिंक हैं, न कि सिर्फ #
+        if (targetId && targetId.length > 1 && targetId.startsWith('#')) {
+          event.preventDefault(); // डिफ़ॉल्ट जंप रोकें
 
-    // SlideUp Animation for Post Containers
-    const postContainers = document.querySelectorAll(".custom-div");
-    postContainers.forEach(container => {
-        container.style.animation = "custom-slideUp 1.5s ease-in-out";
-    });
+          try {
+            const targetElement = document.querySelector(targetId); // ID द्वारा तत्व ढूंढें
 
-    // Hover Effects for Images
-    const images = document.querySelectorAll(".custom-image");
-    images.forEach(image => {
-        image.addEventListener("mouseenter", () => {
-            image.style.transform = "scale(1.05)";
-            image.style.transition = "all 0.3s ease";
-        });
+            if (targetElement) {
+              // हेडर की ऊंचाई का ध्यान रखें (यदि आवश्यक हो - मान बदलें)
+              // const headerOffset = 0; // अपने फिक्स्ड हेडर की ऊंचाई डालें
+              // const elementPosition = targetElement.getBoundingClientRect().top;
+              // const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+              // window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
 
-        image.addEventListener("mouseleave", () => {
-            image.style.transform = "scale(1)";
-        });
-    });
-
-    // Smooth Scroll to Next Part
-    const nextPartLink = document.querySelectorAll(".custom-a");
-    nextPartLink.forEach(link => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            const nextSection = document.querySelector(link.getAttribute("href"));
-            if (nextSection) {
-                window.scrollTo({
-                    top: nextSection.offsetTop - 50, // Adjust the scroll position
-                    behavior: 'smooth'
-                });
+              // सरल संस्करण: सीधे तत्व तक स्क्रॉल करें
+              targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start' // या 'center'
+              });
+            } else {
+              console.warn('Smooth scroll target तत्व नहीं मिला:', targetId);
             }
-        });
+          } catch (e) {
+             // यदि targetId एक मान्य CSS सेलेक्टर नहीं है तो त्रुटि को संभालें
+             console.error('Smooth scroll के लिए अमान्य सेलेक्टर:', targetId, e);
+          }
+        } else if (targetId === '#') {
+            // # वाले लिंक को डिफ़ॉल्ट व्यवहार करने दें (पेज टॉप पर जाएं)
+            // या उसे भी रोकें यदि आवश्यक हो: event.preventDefault();
+        }
+      });
     });
+    console.log('Smooth scroll तैयार है।');
+  } catch (error) {
+    console.error('Smooth scroll सेटअप में त्रुटि:', error);
+  }
 
-    // Automatic Scroll for Shlokas (If any)
-    const shlokaSections = document.querySelectorAll(".custom-strong");
-    shlokaSections.forEach(shloka => {
-        shloka.addEventListener("mouseover", () => {
-            window.scrollBy(0, 50); // Scroll a little on hover
-        });
-    });
 
-    // TTS (Text-to-Speech) Functionality for Shlokas
-    const ttsButtons = document.querySelectorAll(".custom-strong");
-    ttsButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const speech = new SpeechSynthesisUtterance(button.textContent);
-            speech.lang = "hi-IN"; // Set the language to Hindi
-            window.speechSynthesis.speak(speech);
-        });
-    });
+  // --- 2. स्क्रॉल-टू-टॉप बटन फंक्शनलिटी ---
+  try {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    const scrollThreshold = 300; // पिक्सेल में स्क्रॉल दूरी जब बटन दिखेगा
 
-    // Mobile View Adjustments
-    if (window.innerWidth <= 768) {
-        const mobileButtons = document.querySelectorAll(".custom-a");
-        mobileButtons.forEach(button => {
-            button.style.fontSize = "16px";
+    // सुनिश्चित करें कि बटन HTML में मौजूद है
+    if (scrollToTopBtn) {
+        // स्क्रॉल इवेंट सुनें
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > scrollThreshold) {
+                // अगर पर्याप्त स्क्रॉल किया गया है, तो बटन दिखाएं (CSS क्लास जोड़कर)
+                if (!scrollToTopBtn.classList.contains('show')) {
+                   scrollToTopBtn.classList.add('show');
+                }
+            } else {
+                // अन्यथा बटन छिपाएं (CSS क्लास हटाकर)
+                 if (scrollToTopBtn.classList.contains('show')) {
+                   scrollToTopBtn.classList.remove('show');
+                 }
+            }
+        }, { passive: true }); // परफॉरमेंस के लिए पैसिव लिस्नर
+
+        // बटन क्लिक इवेंट सुनें
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0, // बिल्कुल ऊपर
+                behavior: 'smooth' // स्मूथ एनिमेशन के साथ
+             });
         });
+        console.log('Scroll-to-top बटन तैयार है।');
+    } else {
+      // console.log('Scroll-to-top बटन HTML में नहीं मिला (ID: scrollToTopBtn)');
     }
+  } catch (error) {
+    console.error('Scroll-to-top सेटअप में त्रुटि:', error);
+  }
 
-});
+
+  // --- 3. बाहरी लिंक्स को नई टैब में खोलना ---
+  try {
+    const contentDivs = document.querySelectorAll('.custom-div'); // सभी पोस्ट कंटेंट एरिया चुनें
+    const currentHostname = window.location.hostname; // आपकी साइट का होस्टनेम
+
+    contentDivs.forEach(div => {
+      const links = div.querySelectorAll('a'); // उस div के अंदर के सभी लिंक
+
+      links.forEach(link => {
+        const href = link.getAttribute('href');
+
+        // जांचें कि href मौजूद है और http/https से शुरू होता है
+        if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+          try {
+            const linkUrl = new URL(href); // URL को पार्स करें
+
+            // जांचें कि क्या लिंक का होस्टनेम वर्तमान साइट के होस्टनेम से अलग है
+            if (linkUrl.hostname !== currentHostname) {
+              link.setAttribute('target', '_blank'); // नई टैब में खोलें
+              link.setAttribute('rel', 'noopener noreferrer'); // सुरक्षा और SEO के लिए
+
+              // वैकल्पिक: बाहरी लिंक को इंगित करने के लिए क्लास या आइकन जोड़ें
+              // link.classList.add('external-link');
+              // link.title = (link.title ? link.title + ' ' : '') + '(नई टैब में खुलेगा)';
+            }
+          } catch (e) {
+            // अमान्य URL को अनदेखा करें या लॉग करें
+            // console.warn('बाहरी लिंक जांच के लिए URL पार्स नहीं किया जा सका:', href, e);
+          }
+        }
+      });
+    });
+    console.log('बाहरी लिंक हैंडलिंग तैयार है।');
+  } catch (error) {
+    console.error('बाहरी लिंक सेटअप में त्रुटि:', error);
+  }
+
+  console.log('बुझते पल कस्टम स्क्रिप्ट्स v2.2 सफलतापूर्वक लोड हो गईं।');
+
+}); // --- DOMContentLoaded का अंत ---
