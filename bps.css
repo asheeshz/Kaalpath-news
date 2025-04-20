@@ -1,0 +1,232 @@
+/* Global Styles - Custom Prefix for Avoiding Theme Conflict */
+.custom-h2, .custom-h3 {
+    font-family: 'Noto Serif', serif;
+    font-weight: bold;
+    color: #7b3f00;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 36px;
+    letter-spacing: 1px;
+    animation: custom-fadeIn 2s ease-in-out;
+}
+
+/* Text Animation */
+@keyframes custom-fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Post Container Styling - Custom Prefix */
+.custom-div {
+    background: linear-gradient(135deg, #fff5e1, #ffe4c4);
+    border: 2px solid #d1a15c;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    animation: custom-slideUp 1.5s ease-in-out;
+}
+
+@keyframes custom-slideUp {
+    0% { transform: translateY(50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Paragraph and Text Styling - Custom Prefix */
+.custom-p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #5a3c20;
+    transition: all 0.3s ease;
+}
+
+.custom-p:hover {
+    color: #7b3f00;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Shlok Section - Custom Prefix */
+.custom-strong {
+    font-size: 20px;
+    color: #b22222;
+}
+
+.custom-span {
+    font-weight: bold;
+    color: #006400;
+}
+
+/* Custom Borders for sections - Custom Prefix */
+.custom-hr {
+    border: 1px solid #d4a373;
+    margin: 20px 0;
+    opacity: 0.5;
+}
+
+/* Buttons (Next Part) - Custom Prefix */
+.custom-a {
+    background: #7b3f00;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.custom-a:hover {
+    background: #b48c54;
+    transform: scale(1.1);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Shimmering Effect on the Header - Custom Prefix */
+.custom-h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 10px;
+    height: 3px;
+    background: linear-gradient(90deg, #ffcc33, #ff66cc, #ffcc33);
+    background-size: 200% 100%;
+    animation: custom-shimmer 2s infinite;
+}
+
+@keyframes custom-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Gradients and Background Effects - Custom Prefix */
+.custom-div {
+    background: linear-gradient(45deg, rgba(255, 239, 194, 1), rgba(255, 215, 174, 0.8));
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.custom-div:hover {
+    background: linear-gradient(45deg, rgba(255, 239, 194, 0.8), rgba(255, 215, 174, 1));
+    transform: scale(1.02);
+}
+
+/* Mobile View Adjustments - Custom Prefix */
+@media only screen and (max-width: 768px) {
+    .custom-h2, .custom-h3 {
+        font-size: 28px;
+    }
+
+    .custom-div {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .custom-a {
+        font-size: 16px;
+    }
+}
+
+/* Hover Effects for Images - Custom Prefix */
+.custom-image:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+/* Footer Styling */
+.custom-footer {
+    background: #7b3f00;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 16px;
+}
+
+.custom-footer a {
+    color: #ffcc33;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.custom-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Additional Enhancements */
+.custom-h2, .custom-h3 {
+    font-family: 'Noto Serif', serif;
+    font-weight: bold;
+    color: #7b3f00;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 36px;
+    letter-spacing: 1px;
+    animation: custom-fadeIn 2s ease-in-out;
+}
+
+/* Gradient Backgrounds and Hover Effects */
+.custom-div {
+    background: linear-gradient(135deg, #fff5e1, #ffe4c4);
+    border: 2px solid #d1a15c;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    animation: custom-slideUp 1.5s ease-in-out;
+}
+
+@keyframes custom-slideUp {
+    0% { transform: translateY(50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Text Styling - Custom Prefix */
+.custom-p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #5a3c20;
+    transition: all 0.3s ease;
+}
+
+.custom-p:hover {
+    color: #7b3f00;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons (Next Part) - Custom Prefix */
+.custom-a {
+    background: #7b3f00;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.custom-a:hover {
+    background: #b48c54;
+    transform: scale(1.1);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile View Adjustments */
+@media only screen and (max-width: 768px) {
+    .custom-h2, .custom-h3 {
+        font-size: 28px;
+    }
+
+    .custom-div {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .custom-a {
+        font-size: 16px;
+    }
+}
