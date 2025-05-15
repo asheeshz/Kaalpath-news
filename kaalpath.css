@@ -1,0 +1,746 @@
+/*
+ कालपथ
+  */
+
+/* सामान्य लिंक स्टाइल */
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* आइकॉन मार्जिन - विभिन्न अनुभागों के लिए */
+.cnl-main-content .fas, .cnl-main-content .far, .cnl-main-content .fab { margin-right: 8px; }
+.cnl-article-headline-section .cnl-custom-headline-p .fas,
+.cnl-article-headline-section .cnl-custom-headline-p .far,
+.cnl-article-headline-section .cnl-custom-headline-p .fab { margin-right: 12px; }
+.cnl-article-container .cnl-suvichar-content .fas, .cnl-article-container .cnl-suvichar-content .far,
+.cnl-article-container .cnl-suvichar-content .fab { margin-right: 8px; }
+.cnl-accessibility-buttons button .fas, .cnl-accessibility-buttons button .far, .cnl-accessibility-buttons button .fab { margin-right: 5px; }
+.cnl-manual-box h2 .fas, .cnl-manual-box h2 .far, .cnl-manual-box h2 .fab { margin-right: 8px;}
+.cnl-comments-prompt-box h3 .fas, .cnl-comments-prompt-box h3 .far, .cnl-comments-prompt-box h3 .fab { margin-right: 8px;}
+.cnl-author-info .fas, .cnl-author-info .far, .cnl-author-info .fab { margin-right: 5px; }
+.cnl-main-content h2 .fas, .cnl-main-content h2 .far, .cnl-main-content h4 .fas,
+.cnl-main-content h4 .far,
+.cnl-main-content .cnl-multimedia-gallery + p a .fas,
+.cnl-main-content iframe + h3 .fas,
+.cnl-main-content table + h3 .fas
+{ margin-right: 8px; }
+.cnl-main-content blockquote::before, .cnl-main-content blockquote::after { content: ''; display: none; }
+
+
+/* आर्टिकल कंटेनर - मुख्य सामग्री को केंद्रित करता है */
+.cnl-article-container {
+    max-width: 1000px; /* चौड़ाई बढ़ाई गई */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+/* शीर्षक अनुभाग - बैनर स्टाइल */
+.cnl-article-headline-section {
+    background: linear-gradient(to bottom right, #004a99, #002f66);
+    padding: 40px 30px;
+    margin-bottom: 25px;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    display: block !important;
+}
+.cnl-article-headline-section .cnl-custom-headline-p {
+    font-size: 2.4em;
+    font-weight: 800;
+    margin: 0; padding: 0;
+    line-height: 1.2;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+}
+
+/* जानकारी/मेटा अनुभाग */
+.cnl-article-info-section {
+    background-color: #eef2f7;
+    padding: 18px 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #cdd4da;
+    border-top: 1px solid #cdd4da;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    display: flex !important;
+}
+.cnl-article-meta-reading-block {
+    margin: 0; padding: 0;
+    font-size: 1em;
+    color: #4f616f;
+    line-height: 1.5;
+}
+.cnl-article-meta-reading-block.cnl-pattern-bg-1 { background: linear-gradient(to right, #f4f7fb, #e9edf2); padding: 12px 18px; border-radius: 5px; }
+.cnl-article-meta-reading-block.cnl-pattern-bg-2 { background: linear-gradient(to right, #fffaf0, #fff5e0); padding: 12px 18px; border-radius: 5px; }
+.cnl-article-meta-reading-block.cnl-pattern-bg-3 { background: linear-gradient(to right, #f0fff0, #e0ffe0); padding: 12px 18px; border-radius: 5px; }
+.cnl-article-meta-reading-block #cnl-read-time {
+   color: inherit !important;
+   font-size: 0.95em !important;
+   margin: 0 !important; padding: 0 !important;
+   display: block !important;
+}
+.cnl-article-meta-reading-block #cnl-read-time .fas { margin-right: 6px; }
+
+/* एक्सेसिबिलिटी बटन */
+.cnl-article-info-section .cnl-accessibility-buttons {
+   margin: 0; padding: 0;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px;
+   align-items: center;
+}
+.cnl-accessibility-buttons button {
+   flex-shrink: 0;
+   padding: 8px 15px;
+   border: none;
+   color: #fff;
+   cursor: pointer;
+   border-radius: 4px;
+   font-size: 0.9em;
+   transition: opacity 0.3s ease, transform 0.1s ease, box-shadow 0.1s ease;
+   font-weight: 600;
+   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+   outline: none;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+.cnl-accessibility-buttons button:hover { opacity: 0.9; box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+.cnl-accessibility-buttons button:active { transform: translateY(0.5px); box-shadow: 0 0.5px 1px rgba(0,0,0,0.1); }
+.cnl-font-plus-btn { background: linear-gradient(to right, #007bff, #0056b3); }
+.cnl-font-minus-btn { background: linear-gradient(to right, #6c757d, #545b62); }
+.cnl-accessibility-buttons .cnl-print-btn-new { background: linear-gradient(90deg, #3f2b96, #a8c0ff); }
+.cnl-share-btn { background: linear-gradient(to right, #28a745, #218838); }
+.cnl-report-error-btn { background: linear-gradient(to right, #dc3545, #c82333); }
+.cnl-fact-check-btn { background: linear-gradient(to right, #ffc107, #d39e00); }
+.cnl-copy-link-btn { background: linear-gradient(to right, #343a40, #23272b); }
+
+
+/* मुख्य कंटेंट स्टाइल */
+.cnl-main-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #333;
+    margin-top: 0;
+    padding: 0;
+    cursor: text; /* TTS clickable indicator */
+}
+
+/* TTS हाईलाइट स्टाइल */
+.cnl-main-content .cnl-speaking-highlight {
+   background-color: #a04060 !important;
+   color: #fffbe6 !important;
+   padding: 5px 8px !important;
+   border-radius: 4px;
+   transition: background-color 0.3s ease, color 0.3s ease;
+   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* चित्र और कैप्शन */
+.cnl-main-content figure { margin: 0 0 25px 0; text-align: center; padding: 0; }
+.cnl-main-content figure img {
+   max-width: 100%;
+   height: auto;
+   display: block;
+   margin: 0 auto;
+   border-radius: 8px;
+   box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+.cnl-main-content figcaption { font-size: 0.95em; color: #555; margin-top: 10px; text-align: center; }
+
+/* हेडिंग्स (H2, H4) */
+.cnl-main-content h2, .cnl-main-content h4 {
+   font-weight: 700;
+   text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+   margin-top: 35px;
+   margin-bottom: 15px;
+   color: #333;
+}
+.cnl-main-content h2 { font-size: 1.8em; border-bottom: 2px solid #eee; padding-bottom: 8px; }
+.cnl-main-content h4 { font-size: 1.3em; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+.cnl-main-content h2.cnl-pattern1 { color: #0056b3 !important; }
+.cnl-main-content h2.cnl-pattern2 { color: #c82333 !important; }
+.cnl-main-content h2.cnl-pattern3 { color: #d39e00 !important; }
+.cnl-main-content h4.cnl-pattern1 { color: #218838 !important; }
+.cnl-main-content h4.cnl-pattern2 { color: #138496 !important; }
+.cnl-main-content h4.cnl-pattern3 { color: #563d7c !important; }
+
+/* पैराग्राफ और ड्रॉप कैप */
+.cnl-main-content p { margin-bottom: 1.2em; }
+.cnl-main-content .cnl-drop-cap-paragraph .cnl-drop-cap {
+   font-size: 3.5em !important;
+   line-height: 0.75 !important;
+   margin-right: 12px !important;
+   font-weight: bold !important;
+   color: #007bff;
+   float: left;
+}
+.cnl-main-content .cnl-drop-cap-paragraph { overflow: hidden; }
+
+/* ब्लॉककोट */
+.cnl-main-content blockquote {
+   border-left: 6px solid #007bff !important;
+   padding: 20px 25px !important;
+   margin: 30px 0 !important;
+   background-color: #f8f9fa !important;
+   font-style: italic !important;
+   color: #555 !important;
+   border-radius: 0 8px 8px 0;
+   box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+   position: relative;
+}
+.cnl-main-content blockquote p {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0 !important;
+    font-size: 1.1em !important;
+    line-height: 1.7 !important;
+}
+.cnl-main-content blockquote footer {
+   display: block;
+   margin-top: 15px;
+   font-size: 0.9em;
+   color: #666;
+   font-style: normal;
+}
+
+/* विभिन्न प्रकार के बॉक्स */
+.cnl-main-content .cnl-fact-box {
+   background: linear-gradient(to bottom right,#e8f5e9,#c8e6c9);
+   border-left:6px solid #4CAF50!important;
+   padding:20px!important;margin:30px 0!important;border-radius:5px;
+   box-shadow:0 3px 10px rgba(0,0,0,.15);color:#1b5e20;
+}
+.cnl-main-content .cnl-fact-box strong { color: #2E7D32; font-size: 1.1em; }
+.cnl-main-content .cnl-fact-box ul { list-style: none; padding: 0; margin-top: 12px; }
+.cnl-main-content .cnl-fact-box li { margin-bottom: 10px; line-height: 1.6; }
+.cnl-main-content .cnl-fact-box li:last-child { margin-bottom: 0; }
+
+.cnl-main-content .cnl-highlight-box {
+   background: linear-gradient(to bottom right,#fffde7,#fff9c4);
+   border:1px solid #FFD600;border-left:6px solid #FFD600!important;
+   padding:20px!important;margin:30px 0!important;border-radius:5px;
+   box-shadow:0 3px 10px rgba(0,0,0,.15);color:#5d4037;
+}
+.cnl-main-content .cnl-highlight-box strong { color: #F9A825; }
+.cnl-main-content .cnl-highlight-box ul { list-style: none; padding: 0; margin-top: 12px; }
+.cnl-main-content .cnl-highlight-box li { margin-bottom: 10px; line-height: 1.6;}
+
+.cnl-main-content .cnl-journalistic-box {
+   padding: 25px !important; margin: 30px 0 !important; border-radius: 8px;
+   box-shadow: 0 3px 12px rgba(0,0,0,0.1); line-height: 1.7; border: 1px solid;
+}
+.cnl-main-content .cnl-journalistic-box h4 {
+    font-size: 1.3em !important; margin-top: 0 !important; margin-bottom: 15px !important;
+    border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 8px; font-weight: 700;
+}
+
+.cnl-main-content .cnl-key-takeaways-box { background: linear-gradient(to bottom right, #e3f2fd, #bbdefb); border-color: #2196F3; color: #0D47A1; }
+.cnl-main-content .cnl-key-takeaways-box h4 { color: #1976D2 !important; }
+.cnl-main-content .cnl-key-takeaways-box ul { list-style: none; padding: 0; margin-top: 10px;}
+.cnl-main-content .cnl-key-takeaways-box li { margin-bottom: 8px; line-height: 1.6; }
+
+.cnl-main-content .cnl-expert-opinion-box { background: linear-gradient(to bottom left, #f3e5f5, #e1bee7); border-color: #9C27B0; color: #4A148C; }
+.cnl-main-content .cnl-expert-opinion-box h4 { color: #7B1FA2 !important;}
+.cnl-main-content .cnl-expert-opinion-box p { font-style: italic; margin: 0 0 0.5em 0 !important; }
+.cnl-main-content .cnl-expert-opinion-box blockquote {
+    border-left: 4px solid #AB47BC !important; padding: 10px 15px !important; margin: 15px 0 !important;
+    background-color: rgba(255, 255, 255, 0.5) !important; font-style: italic !important;
+    color: inherit !important; border-radius: 0 5px 5px 0; box-shadow: none !important;
+}
+.cnl-main-content .cnl-expert-opinion-box blockquote::before, .cnl-main-content .cnl-expert-opinion-box blockquote::after { content: ''; display: none; }
+
+.cnl-main-content .cnl-science-box { background: linear-gradient(to right, #e0f7fa, #b2ebf2) !important; border-left-color: #00BCD4 !important; color: #006064; }
+.cnl-main-content .cnl-science-box strong { color: #00838F; }
+
+.cnl-main-content .cnl-court-box { background: linear-gradient(to right, #efebe9, #d7ccc8) !important; border-left-color: #795548 !important; color: #3E2723; }
+.cnl-main-content .cnl-court-box strong { color: #5D4037; }
+
+.cnl-main-content .cnl-obituary-box { background: linear-gradient(to right, #f5f5f5, #e0e0e0) !important; border-left-color: #616161 !important; color: #212121; }
+.cnl-main-content .cnl-obituary-box strong { color: #424242; }
+
+.cnl-main-content .cnl-investigative-box { background: linear-gradient(to right, #ffebee, #ffcdd2) !important; border-left-color: #EF5350 !important; color: #B71C1C; }
+.cnl-main-content .cnl-investigative-box strong { color: #D32F2F; }
+
+
+/* 5W1H विश्लेषण बॉक्स */
+.cnl-main-content .cnl-fivew1h-full {
+    background: linear-gradient(90deg, #8e24aa, #f39c12, #e64a19, #0277bd);
+    border-left: 6px solid #ecf0f1;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    font-family: 'Noto Sans Hindi', sans-serif;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    /* नेगेटिव मार्जिन कंटेनर पैडिंग की भरपाई के लिए */
+    margin-left: -10px; /* 30px (box padding) - 20px (container padding) */
+    margin-right: -10px; /* 30px (box padding) - 20px (container padding) */
+    width: auto; /* चौड़ाई बढ़ाएं */
+    box-sizing: border-box;
+    color: #ecf0f1;
+}
+.cnl-main-content .cnl-fivew1h-full .cnl-section-heading {
+  font-size: 26px; color: #ecf0f1; text-align: center;
+  border-bottom: 2px solid rgba(236, 240, 241, 0.5); padding-bottom: 12px;
+  margin-bottom: 30px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  animation: slideDown 1.2s ease; /* एनिमेशन बना रहे */
+}
+.cnl-main-content .cnl-fivew1h-full .cnl-fivew1h-block {
+  margin-bottom: 25px; padding-left: 15px; border-left: 3px solid #bdc3c7;
+  animation: fadeInBlock 1.2s ease-in; /* एनिमेशन बना रहे */
+}
+.cnl-main-content .cnl-fivew1h-full .cnl-fivew1h-block h3 {
+  font-size: 20px; margin-bottom: 10px; color: #bdc3c7; text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+.cnl-main-content .cnl-fivew1h-full .cnl-fivew1h-block p {
+  font-size: 18px; color: inherit; line-height: 1.8;
+}
+.cnl-main-content .cnl-fivew1h-full .cnl-fivew1h-block p strong { color: #ecf0f1; }
+
+
+/* टाइमलाइन बॉक्स */
+.cnl-main-content .cnl-timeline {
+    background: linear-gradient(to bottom right, #4a235a, #7d3c98);
+    border-left: 3px solid #ecf0f1 !important;
+    margin: 30px 0; padding: 20px 30px; position: relative;
+    color: #ecf0f1; border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.cnl-main-content .cnl-timeline-entry { position: relative; margin-bottom: 30px; padding-bottom: 12px; border-bottom: 1px dashed #bdc3c7; }
+.cnl-main-content .cnl-timeline-entry:last-child { border-bottom: none; padding-bottom: 0; }
+.cnl-main-content .cnl-timeline-entry h4 {
+    margin: 0 !important; font-size: 1.2em !important; color: #ecf0f1 !important;
+    font-weight: 700; margin-bottom: 5px !important;
+}
+.cnl-main-content .cnl-timeline-entry p {
+    margin: 0 !important; color: #e0e0e0 !important; font-size: 1em !important; line-height: 1.6;
+}
+.cnl-main-content .cnl-timeline-entry::before {
+    content: ''; position: absolute; left: -45px; top: 6px; width: 14px; height: 14px;
+    background-color: #ecf0f1; border-radius: 50%; border: 3px solid #4a235a; z-index: 1;
+}
+
+/* संपादकीय अभिमत बॉक्स */
+.cnl-main-content .cnl-editorial-opinion-box {
+    background: linear-gradient(to bottom right, #1a5276, #117864);
+    border-left: 6px solid #1abc9c; padding: 25px; margin: 30px 0; border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3); color: #ecf0f1;
+    transition: background 0.4s ease, box-shadow 0.4s ease; cursor: pointer;
+}
+/* क्लिक होने पर स्टाइल */
+.cnl-main-content .cnl-editorial-opinion-box.cnl-editorial-opinion-clicked {
+    background: linear-gradient(to bottom right, #c0392b, #e74c3c);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.cnl-main-content .cnl-editorial-opinion-box h2 {
+    margin-top: 0 !important; font-size: 1.6em !important;
+    background-image: linear-gradient(45deg, #3498db, #2980b9);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+    margin-bottom: 15px !important; border-bottom: 2px solid rgba(236, 240, 241, 0.3) !important;
+    padding-bottom: 10px !important; font-weight: 700; text-shadow: none;
+}
+.cnl-main-content .cnl-editorial-opinion-box p {
+   font-size: 1.1em !important; line-height: 1.8 !important; color: inherit !important;
+   background-image: linear-gradient(45deg, #ecf0f1, #bdc3c7);
+   -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+   margin-bottom: 1em !important;
+}
+
+/* प्रमाणन बॉक्स (विज्ञापन जैसा) */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 10px rgba(46, 204, 113, 0.4), 0 0 0 0 rgba(46, 204, 113, 0.4); }
+    50% { box-shadow: 0 0 25px rgba(46, 204, 113, 0.7), 0 0 0 10px rgba(46, 204, 113, 0.2); }
+    100% { box-shadow: 0 0 10px rgba(46, 204, 113, 0.4), 0 0 0 0 rgba(46, 204, 113, 0.4); }
+}
+.cnl-article-container .cnl-certification-box {
+   background: linear-gradient(45deg,#2ecc71,#27ae60); border:none; padding:30px;
+   margin-top:40px; margin-bottom:40px; border-radius:15px;
+   box-shadow:0 8px 20px rgba(0,0,0,.3); text-align:center; color:#fff;
+   position:relative; overflow:hidden; animation:pulseGlow 3s infinite ease-in-out;
+}
+.cnl-article-container .cnl-certification-box::before {
+   content:'\f005';font-family:'Font Awesome 5 Free';font-weight:900;position:absolute;
+   top:15px;right:15px;font-size:2.5em;color:rgba(255,255,255,.2);transform:rotate(15deg);
+}
+.cnl-article-container .cnl-certification-box::after {
+   content:'';position:absolute;bottom:-20px;left:-20px;width:100px;height:100px;
+   background:radial-gradient(circle,rgba(255,255,255,.2) 0%,rgba(255,255,255,0) 70%);
+   border-radius:50%;filter:blur(15px);
+}
+.cnl-article-container .cnl-certification-box h2 {
+   color:#fff!important;border-bottom:2px solid rgba(255,255,255,.4)!important;
+   padding-bottom:12px!important;margin-bottom:20px!important;font-size:1.8em!important;
+   text-shadow:2px 2px 5px rgba(0,0,0,.5);
+}
+.cnl-article-container .cnl-certification-content{font-size:1.2em;color:rgba(255,255,255,.95);line-height:1.8;margin-bottom:0;}
+
+/* सुविचार बॉक्स */
+.cnl-manual-box.cnl-suvichar-box {
+   background: linear-gradient(135deg,#ffecd2,#fcb69f); border:3px double #e74c3c;
+   padding:30px; margin-top:35px; margin-bottom:35px; border-radius:12px;
+   box-shadow:0 6px 15px rgba(0,0,0,.2); color:#333; position:relative; overflow:hidden;
+}
+.cnl-manual-box.cnl-suvichar-box::before {
+   content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+   background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9IiNmY2I2OWYiIGZpbGwtb3BhY2l0eT0iMC4xNyI+CiAgICAgICAgPHBhdGggZD0iTTAgNDhoNEwwIDM2eiBNNDAgMEgtNEw0MCA0eiBNNDAgNDBIMDYwTDRMCAwWk0wIDAaNDAgNDBWLTQwWjQwIDQwdjQwWzQwIDAiLz4KICAgIDwvZz4KPC9zdmc+');
+   opacity:.5;pointer-events:none;
+}
+.cnl-article-container .cnl-suvichar-box h2 {
+   color:#c0392b!important;border-bottom:2px solid #e74c3c!important;
+   padding-bottom:10px!important;margin-bottom:15px!important;font-size:1.6em!important;
+   text-shadow:1px 1px 2px rgba(0,0,0,.1);position:relative;
+}
+.cnl-article-container .cnl-suvichar-content {
+   font-size:1.25em;font-style:italic;color:#555;text-align:center;line-height:1.8;
+   margin-top:20px;position:relative;
+}
+.cnl-article-container .cnl-suvichar-content .fas,.cnl-article-container .cnl-suvichar-content .far,
+.cnl-article-container .cnl-suvichar-content .fab {
+   color:#e74c3c;margin-right:10px;font-size:1.5em;vertical-align:middle;
+}
+
+/* सुरक्षा उपाय बॉक्स */
+.cnl-security-points-box {
+    background: linear-gradient(to bottom, #e0f4f8, #d3eaf2);
+    border: 1px solid #b3dae2;
+    border-left: 6px solid #3498db;
+    padding: 20px; margin: 30px 0; border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: #2c3e50; line-height: 1.8;
+}
+.cnl-security-points-box h3 {
+    font-size: 1.4em !important; font-weight: 700; color: #2980b9 !important;
+    margin-top: 0 !important; margin-bottom: 15px !important;
+    border-bottom: 2px solid #add8e6; padding-bottom: 8px;
+}
+.cnl-security-points-box ul { list-style: none; padding: 0; margin: 0; }
+.cnl-security-points-box li {
+    position: relative; padding-left: 25px; margin-bottom: 10px; line-height: 1.6;
+}
+.cnl-security-points-box li::before {
+    content: '\f00c'; font-family: 'Font Awesome 5 Free'; font-weight: 900;
+    position: absolute; left: 0; top: 3px; color: #2ecc71; font-size: 1.1em;
+}
+.cnl-security-points-box li:last-child { margin-bottom: 0; }
+
+/* लेखक परिचय बॉक्स (फ़ुटबॉल से मिश्रित स्टाइल) */
+.cnl-article-container .cnl-author-bio-box {
+   background: linear-gradient(to top left,#1e3a5f,#0b2a4f); border:none; padding:30px;
+   margin-top:40px; margin-bottom:30px; border-radius:10px;
+   box-shadow:0 8px 20px rgba(0,0,0,.4),0 0 15px rgba(30,58,95,.3); display:flex;
+   align-items:center; color:#e0e8ff; position:relative; overflow:hidden;
+   transition:transform .3s ease,box-shadow .3s ease;
+}
+.cnl-article-container .cnl-author-bio-box:hover{transform:translateY(-5px);box-shadow:0 12px 25px rgba(0,0,0,.5),0 0 20px rgba(30,58,95,.5);}
+.cnl-article-container .cnl-author-bio-box img{
+   width:100px;height:100px;border-radius:50%;margin-right:25px;border:4px solid var(--sfcw-nebula-accent);
+   flex-shrink:0;object-fit:cover;box-shadow:0 0 10px rgba(0,160,160,.5);transition:border-color .3s ease,box-shadow .3s ease;
+}
+.cnl-article-container .cnl-author-bio-box:hover img{border-color:var(--sfcw-primary-glow);box-shadow:0 0 15px rgba(224,232,255,.7);}
+.cnl-article-container .cnl-author-info{flex-grow:1;font-size:1em;color:inherit;}
+.cnl-article-container .cnl-author-info strong{display:block;font-size:1.3em;margin-bottom:5px;color:var(--sfcw-highlight);text-shadow:0 0 8px rgba(255,255,255,.5);}
+.cnl-article-container .cnl-author-info small{display:block;color:var(--sfcw-secondary-glow);margin-bottom:12px;font-style:normal;}
+.cnl-article-container .cnl-author-info a{
+    margin-right:18px;color:var(--sfcw-link-hover);font-size:1em;text-decoration:none;
+    transition:color .3s ease,text-shadow .3s ease;
+}
+.cnl-article-container .cnl-author-info a:last-child{margin-right:0;}
+.cnl-article-container .cnl-author-info a:hover{color:var(--sfcw-highlight);text-shadow:0 0 8px var(--sfcw-link-hover);}
+.cnl-author-info a .fas,.cnl-author-info a .fab{margin-right:6px;}
+
+
+/* टिप्पणी प्रॉम्प्ट बॉक्स (फ़ुटबॉल से मिश्रित स्टाइल) */
+.cnl-article-container .cnl-comments-prompt-box {
+   background: linear-gradient(to bottom right,#0d3b30,#175c4e); border:none; padding:30px;
+   margin-top:30px; margin-bottom:30px; border-radius:10px;
+   box-shadow:0 8px 20px rgba(0,0,0,.4),0 0 15px rgba(13,59,48,.3); text-align:center;
+   font-size:1.1em; color:#e0f2f7; line-height:1.6; position:relative; overflow:hidden;
+   transition:transform .3s ease,box-shadow .3s ease;
+}
+.cnl-article-container .cnl-comments-prompt-box:hover{transform:translateY(-5px);box-shadow:0 12px 25px rgba(0,0,0,.5),0 0 20px rgba(13,59,48,.5);}
+.cnl-article-container .cnl-comments-prompt-box h3 {
+   margin-top:0!important;font-size:1.8em!important;color:var(--sfcw-nebula-accent)!important;
+   margin-bottom:18px!important;border-bottom:2px solid rgba(0,160,160,.4)!important;
+   padding-bottom:10px!important;font-weight:700;text-shadow:0 0 10px rgba(0,160,160,.5);
+}
+.cnl-article-container .cnl-comments-prompt-box p { margin-bottom:1em; color:inherit; }
+.cnl-article-container .cnl-comments-prompt-box a {
+   color:var(--sfcw-primary-glow);font-weight:bold;text-decoration:none;
+   transition:color .3s ease,text-shadow .3s ease;
+}
+.cnl-comments-prompt-box a:hover{color:var(--sfcw-highlight);text-shadow:0 0 8px var(--sfcw-primary-glow);}
+.cnl-comments-prompt-box h3 .fas{color:inherit!important;margin-right:12px;}
+
+
+/* ===== स्क्रीन फोकस कॉसमॉस विजेट CSS (v1.4) ===== */
+/* विजेट के लिए CSS वेरिएबल्स */
+:root {
+    --sfcw-primary-glow: #e0e8ff;
+    --sfcw-secondary-glow: #d0dfff;
+    --sfcw-highlight: #ffffff;
+    --sfcw-link-hover: #f0d0ff;
+    --sfcw-deep-space-1: #0b0f1a;
+    --sfcw-deep-space-2: #1a1d3d;
+    --sfcw-deep-space-3: #221e4a;
+    --sfcw-nebula-accent: #00a0a0;
+    --sfcw-star-color: rgba(240, 248, 255, 0.85);
+    --sfcw-particle-color: rgba(0, 160, 160, 0.5);
+    --sfcw-screen-bg: rgba(11, 15, 26, 0.4);
+    --sfcw-screen-border: rgba(0, 160, 160, 0.3);
+    --sfcw-screen-shadow: rgba(0, 160, 160, 0.15);
+}
+
+.sfcw-widget {
+   font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif; position:relative; width:100%;
+   padding:45px 0 35px 0;
+   background:radial-gradient(ellipse at bottom,var(--sfcw-deep-space-2) 0%,var(--sfcw-deep-space-1) 100%),
+              linear-gradient(315deg,var(--sfcw-deep-space-1) 0%,var(--sfcw-deep-space-3) 74%);
+   background-blend-mode:screen;overflow:hidden;
+   border-top:5px ridge rgba(255,255,255,.1);box-sizing:border-box;box-shadow:inset 0 10px 20px rgba(0,0,0,.4);
+   margin-top:40px;
+}
+.sfcw-background-depth {
+   position:absolute;top:0;left:0;right:0;bottom:0;
+   background:radial-gradient(circle,rgba(255,255,255,.03) 5%,transparent 40%),
+              radial-gradient(circle,rgba(0,160,160,.05) 10%,transparent 50%);
+   background-size:150px 150px,250px 250px;background-position:0 0,50px 50px;
+   opacity:.5;animation:sfcw-slow-pan 60s linear infinite;z-index:0;
+}
+@keyframes sfcw-slow-pan{100%{background-position:150px 150px,200px 200px;}}
+
+#sfcw-particle-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+
+.sfcw-container{max-width:1000px;margin:0 auto;padding:0 20px;position:relative;z-index:2;text-align:center;color:var(--sfcw-secondary-glow);}
+
+.sfcw-content-screen {
+   background:var(--sfcw-screen-bg);border:1px solid var(--sfcw-screen-border);border-radius:15px;
+   padding:25px 20px 20px 20px;margin:0 auto 25px auto;max-width:600px;
+   box-shadow:0 0 20px var(--sfcw-screen-shadow),inset 0 0 10px rgba(0,0,0,.3);
+   position:relative;opacity:0;filter:blur(3px);
+   animation:sfcw-reveal-glow 1.5s cubic-bezier(.23,1,.32,1) .5s forwards;
+   backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+}
+.sfcw-credits,.sfcw-organization{
+    animation:none;opacity:1;filter:none; /* Remove entrance animation for these inner blocks if parent has it */
+    margin-bottom:12px;line-height:1.8;
+    text-shadow:0 0 8px rgba(0,0,0,.8),0 0 15px var(--sfcw-nebula-accent);
+}
+.sfcw-organization{margin-bottom:0;}
+
+@keyframes sfcw-reveal-glow{from{opacity:0;transform:translateY(30px) scale(.95);filter:blur(3px);}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}}
+.sfcw-credits p,.sfcw-organization p{margin:6px 0;font-size:1.1em;}
+
+.sfcw-energized-text {
+   font-weight:700;font-family:'Orbitron',sans-serif;font-size:1.6em;
+   background-image:linear-gradient(110deg,var(--sfcw-highlight) 0%,var(--sfcw-secondary-glow) 20%,var(--sfcw-link-hover) 40%,var(--sfcw-nebula-accent) 60%,var(--sfcw-secondary-glow) 80%,var(--sfcw-highlight) 100%);
+   background-size:300% 100%;color:transparent;background-clip:text;-webkit-background-clip:text;
+   animation:sfcw-energize-flow 5s linear infinite;display:inline-block;transition:text-shadow .3s ease;cursor:default;
+}
+.sfcw-energized-text:hover{text-shadow:0 0 15px var(--sfcw-highlight);}
+@keyframes sfcw-energize-flow{0%{background-position:150% 50%;}100%{background-position:-150% 50%;}}
+
+.sfcw-credits .sfcw-author-title{
+    font-size:.95em;font-style:normal;color:var(--sfcw-primary-glow);opacity:.9;margin-top:2px;display:block;
+    letter-spacing:1px;word-spacing:3px;
+}
+.sfcw-author-title span.sfcw-separator-icon{opacity:.5;margin:0 5px;font-size:.8em;vertical-align:middle;}
+
+.sfcw-organization strong{font-weight:700;color:var(--sfcw-highlight);}
+.sfcw-organization a{color:inherit;text-decoration:none;}
+.sfcw-organization a:hover{text-decoration:underline;}
+
+.sfcw-links,.sfcw-copyright{
+    opacity:0;filter:blur(3px);
+    animation:sfcw-reveal-glow 1.5s cubic-bezier(.23,1,.32,1) forwards;
+    text-shadow:0 0 8px rgba(0,0,0,.8),0 0 15px var(--sfcw-nebula-accent);
+    margin-bottom:22px;line-height:1.8;
+}
+.sfcw-links{animation-delay:.9s;}
+.sfcw-copyright{animation-delay:1.1s;margin-bottom:0;}
+
+.sfcw-links nav{
+    margin-top:15px;padding:18px 0;background:rgba(11,15,26,.3);
+    border:1px solid rgba(0,160,160,.2);border-radius:8px;box-shadow:0 0 15px rgba(0,160,160,.1);
+}
+.sfcw-links span.sfcw-link-label{font-weight:500;color:var(--sfcw-primary-glow);margin-right:10px;font-size:1em;display:inline-block;margin-bottom:8px;}
+.sfcw-links a{
+    color:var(--sfcw-secondary-glow);text-decoration:none;margin:0 14px;font-size:1.05em;
+    transition:all .4s cubic-bezier(.175,.885,.32,1.275);display:inline-block;position:relative;padding-bottom:3px;
+}
+.sfcw-links a::after{
+    content:'';position:absolute;width:0;height:2px;bottom:0;left:50%;
+    background:linear-gradient(90deg,var(--sfcw-link-hover),var(--sfcw-nebula-accent));
+    transition:all .4s ease-out;transform:translateX(-50%);
+}
+.sfcw-links a:hover{
+    color:var(--sfcw-highlight);transform:translateY(-4px) scale(1.15);
+    text-shadow:0 0 12px var(--sfcw-link-hover);
+}
+.sfcw-links a:hover::after{width:100%;}
+
+.sfcw-links i.fas,.sfcw-links i.fab{margin-right:6px;transition:transform .3s ease;vertical-align:middle;}
+.sfcw-links a:hover i{transform:rotate(-15deg) scale(1.1);}
+
+.sfcw-links .sfcw-separator{color:rgba(0,160,160,.4);margin:0 8px;font-size:1em;opacity:.7;}
+
+.sfcw-copyright {
+   font-size:.9em;color:var(--sfcw-primary-glow);opacity:.75;margin-top:25px;
+   padding-top:18px;border-top:1px solid rgba(0,160,160,.2);
+}
+.sfcw-copyright i.fa-copyright{margin-right:5px;vertical-align:middle;}
+
+
+/* रेस्पोंसिवनेस */
+@media (max-width: 768px) {
+    /* आर्टिकल कंटेनर पैडिंग एडजस्ट करें */
+    .cnl-article-container { padding: 15px; }
+    .cnl-article-headline-section { padding: 30px 15px; }
+    .cnl-article-headline-section .cnl-custom-headline-p { font-size: 1.8em; }
+    .cnl-article-info-section { flex-direction: column; align-items: flex-start; padding: 15px; }
+    .cnl-article-info-section .cnl-article-meta-reading-block { width: 100%; margin-bottom: 12px; text-align: left !important; }
+    .cnl-article-info-section .cnl-article-meta-reading-block .post-meta,
+    .cnl-article-info-section .cnl-article-meta-reading-block #cnl-read-time { text-align: left !important; }
+    .cnl-article-info-section .cnl-accessibility-buttons {
+        width: 100%; margin-top: 8px !important; margin-bottom: 0 !important; justify-content: center; text-align: center;
+    }
+    .cnl-article-info-section .cnl-accessibility-buttons > button {
+        flex-basis: calc((100% - (2 * 8px)) / 3); flex-grow: 1; flex-shrink: 0; box-sizing: border-box; margin: 0;
+    }
+    .cnl-main-content figure { margin-bottom: 20px; }
+
+    /* 5W1H बॉक्स मोबाइल एडजस्टमेंट */
+    .cnl-main-content .cnl-fivew1h-full {
+         margin-left: -15px; /* 30px (box padding) - 15px (mobile container padding) */
+         margin-right: -15px; /* 30px (box padding) - 15px (mobile container padding) */
+    }
+    .cnl-main-content .cnl-fivew1h-full .cnl-section-heading { font-size: 22px; }
+    .cnl-main-content .cnl-fivew1h-full .cnl-fivew1h-block p { font-size: 16px; }
+
+    /* टाइमलाइन मोबाइल एडजस्टमेंट */
+    .cnl-main-content .cnl-timeline { padding: 20px 15px; }
+    .cnl-main-content .cnl-timeline-entry::before { left: -30px; }
+
+    /* लेखक परिचय बॉक्स मोबाइल */
+    .cnl-article-container .cnl-author-bio-box { flex-direction: column; text-align: center; }
+    .cnl-article-container .cnl-author-bio-box img { margin-right: 0; margin-bottom: 15px; }
+    .cnl-article-container .cnl-author-info { text-align: center; }
+    .cnl-article-container .cnl-author-info strong, .cnl-article-container .cnl-author-info small { display: block; }
+    .cnl-article-container .cnl-author-info a { margin: 5px 10px; display: inline-block; }
+    .cnl-article-container .cnl-author-info a:first-child { margin-left: 0; }
+    .cnl-article-container .cnl-author-info a:last-child { margin-right: 0; }
+
+    /* विजेट मोबाइल */
+    .sfcw-content-screen { max-width: 90%; padding: 20px 15px 15px 15px; }
+    .sfcw-widget { padding: 35px 0 25px 0; }
+    .sfcw-credits p, .sfcw-organization p { font-size: 1.05em; }
+    .sfcw-energized-text { font-size: 1.4em; }
+    .sfcw-links a { margin: 6px 10px; font-size: 1em; }
+    .cnl-comments-prompt-box { padding: 20px 15px; }
+}
+
+@media (max-width: 480px) {
+   .cnl-article-container .cnl-author-bio-box img { width: 80px; height: 80px; }
+   .cnl-article-container .cnl-author-info strong { font-size: 1.2em; }
+   .sfcw-content-screen { max-width: 95%; padding: 15px 10px 10px 10px; }
+   .sfcw-credits p, .sfcw-organization p { font-size: 1em; }
+   .sfcw-energized-text { font-size: 1.2em; }
+   .sfcw-author-title { letter-spacing: 0.5px; word-spacing: 2px; }
+   .sfcw-links nav { padding: 15px 5px; }
+   .sfcw-links a { margin: 8px 8px; font-size: 0.95em; }
+   .sfcw-links span.sfcw-link-label { display: block; margin-bottom: 8px; }
+   .sfcw-separator { display: none; }
+}
+
+
+/* प्रिंट स्टाइल */
+@media print {
+    .cnl-tts-info-overlay, .cnl-tts-info-popup, .cnl-speaking-highlight, .sfcw-widget { display: none !important; }
+    .myPrintablePost {
+         width: auto !important; float: none !important; position: static !important;
+         margin: 0 auto !important; padding: 0 !important; box-shadow: none !important;
+         border: none !important; background: none !important;
+    }
+    .myPrintablePost .cnl-main-content {
+        font-size: 12pt !important; line-height: 1.6 !important; color: #000 !important;
+        margin: 0 !important; padding: 0 !important; width: auto !important;
+        max-width: none !important; box-sizing: border-box !important;
+        animation: none !important;
+    }
+    .myPrintablePost .cnl-main-content .fas, .myPrintablePost .cnl-main-content .far,
+    .myPrintablePost .cnl-main-content .fab { display: none !important; }
+
+    /* प्रिंट के लिए बॉक्स स्टाइल */
+    .myPrintablePost .cnl-fivew1h-full, .myPrintablePost .cnl-journalistic-box, .myPrintablePost .cnl-fact-box,
+    .myPrintablePost .cnl-highlight-box, .myPrintablePost .cnl-science-box, .myPrintablePost .cnl-court-box,
+    .myPrintablePost .cnl-obituary-box, .myPrintablePost .cnl-investigative-box, .myPrintablePost .cnl-editorial-opinion-box,
+    .myPrintablePost .cnl-certification-box, .myPrintablePost .cnl-suvichar-box, .myPrintablePost .cnl-security-points-box,
+    .myPrintablePost .cnl-author-bio-box, .myPrintablePost .cnl-comments-prompt-box {
+         padding: 15px !important; margin: 15px 0 !important; border: 1px solid #ccc !important;
+         border-left: 4px solid #888 !important; background-color: #f9f9f9 !important;
+         box-shadow: none !important; border-radius: 0 !important; color: #000 !important;
+         animation: none !important; background-image: none !important;
+         -webkit-text-fill-color: initial !important; background-clip: initial !important;
+         -webkit-background-clip: initial !important; text-fill-color: initial !important;
+    }
+    .myPrintablePost .cnl-fivew1h-full h2, .myPrintablePost .cnl-journalistic-box h4,
+    .myPrintablePost .cnl-editorial-opinion-box h2, .myPrintablePost .cnl-certification-box h2,
+    .myPrintablePost .cnl-suvichar-box h2, .myPrintablePost .cnl-security-points-box h3,
+    .myPrintablePost .cnl-comments-prompt-box h3 {
+       border-bottom: 1px solid #ccc !important; padding-bottom: 5px !important; margin-bottom: 10px !important;
+       color: #333 !important; text-shadow: none !important;
+    }
+    .myPrintablePost .cnl-certification-box::before, .myPrintablePost .cnl-certification-box::after,
+    .myPrintablePost .cnl-suvichar-box::before, .myPrintablePost .cnl-security-points-box li::before { display: none !important; }
+
+    /* प्रिंट में बुलेट पॉइंट */
+    .myPrintablePost .cnl-security-points-box ul { list-style: disc !important; padding-left: 20px !important; }
+    .myPrintablePost .cnl-security-points-box li { padding-left: 0 !important; }
+
+    /* प्रिंट में लेखक जानकारी */
+    .myPrintablePost .cnl-author-bio-box img { border: none !important; box-shadow: none !important; margin-bottom: 10px !important; }
+    .myPrintablePost .cnl-author-info strong { color: #333 !important; }
+    .myPrintablePost .cnl-author-info small { color: #555 !important; }
+    .myPrintablePost .cnl-author-info a { color: #000 !important; text-decoration: underline !important; text-shadow: none !important; }
+
+    /* प्रिंट में टाइमलाइन स्टाइल */
+    .myPrintablePost .cnl-timeline {
+        border-left: 2px solid #888 !important; margin: 15px 0 15px 15px !important;
+        padding: 15px 15px 15px 15px !important; background: none !important;
+        color: #000 !important; box-shadow: none !important; border-radius: 0 !important;
+    }
+    .myPrintablePost .cnl-timeline-entry { margin-bottom: 15px !important; padding-bottom: 8px !important; border-bottom: 1px dashed #ccc !important; }
+    .myPrintablePost .cnl-timeline-entry h4 { color: #333 !important; }
+    .myPrintablePost .cnl-timeline-entry p { color: #000 !important; }
+    .myPrintablePost .cnl-timeline-entry::before {
+        content: ''; position: absolute; left: -21px; top: 6px; width: 8px; height: 8px;
+        background-color: #555; border-radius: 50%; border: 2px solid #fff; z-index: 1;
+    }
+
+    /* प्रिंट में गैर-जरूरी एलिमेंट छुपाएं */
+    .cnl-tts-info-overlay, .cnl-tts-info-popup, .cnl-speaking-highlight,
+    .cnl-article-headline-section, .cnl-article-info-section, .cnl-multimedia-gallery,
+    .cnl-video-container, iframe, .cnl-accessibility-buttons, .sfcw-widget { display: none !important; }
+
+    /* प्रिंट में मीडिया और टेबल दिखाएं */
+    img { display: block !important; }
+    figcaption { display: block !important; }
+    table { display: table !important; }
+}
+
+/* एनिमेशन कीफ्रेम्स */
+@keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInBlock { from { opacity: 0; } to { opacity: 1; } }
