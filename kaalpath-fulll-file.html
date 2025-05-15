@@ -1,0 +1,2133 @@
+
+<style>
+    /* Base styles */
+    body {
+        font-family: 'Noto Sans Hindi', 'Arial', sans-serif;
+        line-height: 1.7;
+        color: #333;
+        background-color: #fff;
+        margin: 0; /* Ensure no default body margin */
+        padding: 0;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+    /* Resetting Font Awesome margins for specific contexts where needed */
+    .cnl-main-content .fas, .cnl-main-content .far, .cnl-main-content .fab {
+         margin-right: 8px;
+    }
+
+     .cnl-article-headline-section .cnl-custom-headline-p .fas,
+     .cnl-article-headline-section .cnl-custom-headline-p .far,
+     .cnl-article-headline-section .cnl-custom-headline-p .fab { margin-right: 12px; }
+
+      .cnl-article-container .cnl-suvichar-content .fas, .cnl-article-container .cnl-suvichar-content .far,
+      .cnl-article-container .cnl-suvichar-content .fab { margin-right: 8px; }
+
+
+     .cnl-accessibility-buttons button .fas, .cnl-accessibility-buttons button .far, .cnl-accessibility-buttons button .fab { margin-right: 5px; }
+
+     .cnl-manual-box h2 .fas, .cnl-manual-box h2 .far, .cnl-manual-box h2 .fab { margin-right: 8px;}
+
+     .cnl-comments-prompt-box h3 .fas, .cnl-comments-prompt-box h3 .far, .cnl-comments-prompt-box h3 .fab { margin-right: 8px;}
+
+     .cnl-author-info .fas, .cnl-author-info .far, .cnl-author-info .fab { margin-right: 5px; }
+
+      .cnl-main-content h2 .fas, .cnl-main-content h2 .far, .cnl-main-content h4 .fas,
+      .cnl-main-content h4 .far,
+      .cnl-main-content .cnl-multimedia-gallery + p a .fas,
+      .cnl-main-content iframe + h3 .fas,
+      .cnl-main-content table + h3 .fas
+       { margin-right: 8px; }
+
+     .cnl-main-content blockquote::before, .cnl-main-content blockquote::after {
+         content: '';
+         display: none;
+     }
+
+     /* Updated: Increased max-width for wider article container */
+     .cnl-article-container {
+         max-width: 1000px; /* Updated: Limit article width for better readability */
+         margin: 20px auto; /* Center the article */
+         padding: 20px;
+         background-color: #fff; /* Article background */
+         box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Optional: Add shadow to article */
+         border-radius: 8px; /* Optional: Add border radius */
+     }
+
+     .cnl-article-headline-section {
+        background: linear-gradient(to bottom right, #004a99, #002f66);
+        padding: 40px 30px;
+        margin-bottom: 25px;
+        color: #fff;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        display: block !important;
+     }
+     .cnl-article-headline-section .cnl-custom-headline-p {
+         font-size: 2.4em;
+         font-weight: 800;
+         margin: 0; padding: 0;
+         line-height: 1.2;
+         text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+     }
+      @media (max-width: 768px) {
+          .cnl-article-container { padding: 15px; } /* Adjusted Article Container Padding for mobile */
+          .cnl-article-headline-section { padding: 30px 15px; }
+          .cnl-article-headline-section .cnl-custom-headline-p { font-size: 1.8em; }
+      }
+
+     .cnl-article-info-section {
+         background-color: #eef2f7;
+         padding: 18px 30px;
+         margin-bottom: 30px;
+         border-bottom: 1px solid #cdd4da;
+         border-top: 1px solid #cdd4da;
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: space-between;
+         align-items: center;
+         box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+         border-radius: 8px;
+         display: flex !important;
+     }
+      @media (max-width: 768px) {
+           .cnl-article-info-section { flex-direction: column; align-items: flex-start; padding: 15px;}
+           .cnl-article-info-section .cnl-article-meta-reading-block {
+               width: 100%;
+               margin-bottom: 12px;
+               text-align: left !important;
+           }
+           .cnl-article-info-section .cnl-article-meta-reading-block .post-meta,
+           .cnl-article-info-section .cnl-article-meta-reading-block #cnl-read-time {
+               text-align: left !important;
+           }
+
+           .cnl-article-info-section .cnl-accessibility-buttons {
+               width: 100%;
+               margin-top: 8px !important;
+               margin-bottom: 0 !important;
+               justify-content: center;
+               text-align: center;
+           }
+
+           .cnl-article-info-section .cnl-accessibility-buttons > button {
+               flex-basis: calc((100% - (2 * 8px)) / 3);
+               flex-grow: 1;
+               flex-shrink: 0;
+               box-sizing: border-box;
+               margin: 0;
+           }
+      }
+
+     .cnl-article-meta-reading-block {
+         margin: 0; padding: 0;
+         font-size: 1em;
+         color: #4f616f;
+         line-height: 1.5;
+     }
+
+     .cnl-article-meta-reading-block.cnl-pattern-bg-1 { background: linear-gradient(to right, #f4f7fb, #e9edf2); padding: 12px 18px; border-radius: 5px; }
+     .cnl-article-meta-reading-block.cnl-pattern-bg-2 { background: linear-gradient(to right, #fffaf0, #fff5e0); padding: 12px 18px; border-radius: 5px; }
+     .cnl-article-meta-reading-block.cnl-pattern-bg-3 { background: linear-gradient(to right, #f0fff0, #e0ffe0); padding: 12px 18px; border-radius: 5px; }
+
+     .cnl-article-meta-reading-block #cnl-read-time {
+        color: inherit !important;
+        font-size: 0.95em !important;
+        margin: 0 !important; padding: 0 !important;
+        display: block !important;
+    }
+     .cnl-article-meta-reading-block #cnl-read-time .fas { margin-right: 6px; }
+
+     .cnl-article-info-section .cnl-accessibility-buttons {
+        margin: 0; padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+     }
+
+     .cnl-accessibility-buttons button
+      {
+        flex-shrink: 0;
+        padding: 8px 15px;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 0.9em;
+        transition: opacity 0.3s ease, transform 0.1s ease, box-shadow 0.1s ease;
+        font-weight: 600;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+     }
+      .cnl-accessibility-buttons button:hover
+      {
+         opacity: 0.9;
+         box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+     }
+      .cnl-accessibility-buttons button:active
+      {
+          transform: translateY(0.5px);
+          box-shadow: 0 0.5px 1px rgba(0,0,0,0.1);
+     }
+
+     .cnl-font-plus-btn { background: linear-gradient(to right, #007bff, #0056b3); }
+     .cnl-font-minus-btn { background: linear-gradient(to right, #6c757d, #545b62); }
+     .cnl-accessibility-buttons .cnl-print-btn-new { background: linear-gradient(90deg, #3f2b96, #a8c0ff); }
+     .cnl-share-btn { background: linear-gradient(to right, #28a745, #218838); }
+     .cnl-report-error-btn { background: linear-gradient(to right, #dc3545, #c82333); }
+     .cnl-fact-check-btn { background: linear-gradient(to right, #ffc107, #d39e00); }
+     .cnl-copy-link-btn { background: linear-gradient(to right, #343a40, #23272b); }
+
+    .cnl-main-content {
+         font-size: 1.1em;
+         line-height: 1.8;
+         color: #333;
+         margin-top: 0;
+         padding: 0;
+         cursor: text;
+    }
+
+    .cnl-main-content .cnl-speaking-highlight {
+        background-color: #a04060 !important;
+        color: #fffbe6 !important;
+        padding: 5px 8px !important;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .cnl-main-content figure {
+        margin: 0 0 25px 0;
+        text-align: center;
+        padding: 0;
+    }
+     @media (max-width: 768px) { .cnl-main-content figure { margin-bottom: 20px;}}
+
+    .cnl-main-content figure img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        border-radius: 8px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    .cnl-main-content figcaption {
+        font-size: 0.95em;
+        color: #555;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+     .cnl-main-content h2, .cnl-main-content h4 {
+        font-weight: 700;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+        margin-top: 35px;
+        margin-bottom: 15px;
+        color: #333; /* Default h2/h4 color */
+     }
+
+     .cnl-main-content h2 {
+         font-size: 1.8em;
+         border-bottom: 2px solid #eee;
+         padding-bottom: 8px;
+     }
+
+     .cnl-main-content h4 {
+         font-size: 1.3em;
+         border-bottom: 1px solid #eee;
+         padding-bottom: 5px;
+     }
+
+     .cnl-main-content h2.cnl-pattern1 { color: #0056b3 !important; }
+     .cnl-main-content h2.cnl-pattern2 { color: #c82333 !important; }
+     .cnl-main-content h2.cnl-pattern3 { color: #d39e00 !important; }
+
+     .cnl-main-content h4.cnl-pattern1 { color: #218838 !important; }
+     .cnl-main-content h4.cnl-pattern2 { color: #138496 !important; }
+     .cnl-main-content h4.cnl-pattern3 { color: #563d7c !important; }
+
+    .cnl-main-content p { margin-bottom: 1.2em; }
+
+     .cnl-main-content .cnl-drop-cap-paragraph .cnl-drop-cap {
+        font-size: 3.5em !important;
+        line-height: 0.75 !important;
+        margin-right: 12px !important;
+        font-weight: bold !important;
+        color: #007bff;
+        float: left;
+     }
+      .cnl-main-content .cnl-drop-cap-paragraph { overflow: hidden; }
+
+    .cnl-main-content blockquote {
+        border-left: 6px solid #007bff !important;
+        padding: 20px 25px !important;
+        margin: 30px 0 !important;
+        background-color: #f8f9fa !important;
+        font-style: italic !important;
+        color: #555 !important;
+        border-radius: 0 8px 8px 0;
+        box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+        position: relative;
+    }
+
+       .cnl-main-content blockquote p {
+           position: relative;
+           z-index: 1;
+           margin-bottom: 0 !important;
+           font-size: 1.1em !important;
+           line-height: 1.7 !important;
+       }
+        .cnl-main-content blockquote footer {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+            font-style: normal;
+        }
+
+    .cnl-main-content .cnl-fact-box {
+        background: linear-gradient(to bottom right, #e8f5e9, #c8e6c9);
+        border-left: 6px solid #4CAF50 !important;
+        padding: 20px !important;
+        margin: 30px 0 !important;
+        border-radius: 5px;
+        box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+        color: #1b5e20;
+    }
+     .cnl-main-content .cnl-fact-box strong { color: #2E7D32; font-size: 1.1em; }
+     .cnl-main-content .cnl-fact-box ul { list-style: none; padding: 0; margin-top: 12px; }
+     .cnl-main-content .cnl-fact-box li { margin-bottom: 10px; line-height: 1.6;}
+     .cnl-main-content .cnl-fact-box li:last-child { margin-bottom: 0;}
+
+     .cnl-main-content .cnl-highlight-box {
+         background: linear-gradient(to bottom right, #fffde7, #fff9c4);
+         border: 1px solid #FFD600;
+         border-left: 6px solid #FFD600 !important;
+         padding: 20px !important;
+         margin: 30px 0 !important;
+         border-radius: 5px;
+         box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+         color: #5d4037;
+     }
+      .cnl-main-content .cnl-highlight-box strong { color: #F9A825; }
+      .cnl-main-content .cnl-highlight-box ul { list-style: none; padding: 0; margin-top: 12px; }
+      .cnl-main-content .cnl-highlight-box li { margin-bottom: 10px; line-height: 1.6;}
+
+     .cnl-main-content .cnl-journalistic-box {
+         padding: 25px !important;
+         margin: 30px 0 !important;
+         border-radius: 8px;
+         box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+         line-height: 1.7;
+         border: 1px solid;
+     }
+
+     .cnl-main-content .cnl-journalistic-box h4 {
+         font-size: 1.3em !important;
+         margin-top: 0 !important;
+         margin-bottom: 15px !important;
+         border-bottom: 1px solid rgba(0,0,0,0.1);
+         padding-bottom: 8px;
+         font-weight: 700;
+     }
+
+     .cnl-main-content .cnl-key-takeaways-box {
+         background: linear-gradient(to bottom right, #e3f2fd, #bbdefb);
+         border-color: #2196F3;
+         color: #0D47A1;
+     }
+     .cnl-main-content .cnl-key-takeaways-box h4 { color: #1976D2 !important;}
+     .cnl-main-content .cnl-key-takeaways-box ul { list-style: none; padding: 0; margin-top: 10px;}
+     .cnl-main-content .cnl-key-takeaways-box li { margin-bottom: 8px; line-height: 1.6;}
+
+     .cnl-main-content .cnl-expert-opinion-box {
+         background: linear-gradient(to bottom left, #f3e5f5, #e1bee7);
+         border-color: #9C27B0;
+         color: #4A148C;
+     }
+      .cnl-main-content .cnl-expert-opinion-box h4 { color: #7B1FA2 !important;}
+      .cnl-main-content .cnl-expert-opinion-box p { font-style: italic; margin: 0 0 0.5em 0 !important;}
+      .cnl-main-content .cnl-expert-opinion-box blockquote {
+          border-left: 4px solid #AB47BC !important;
+          padding: 10px 15px !important;
+          margin: 15px 0 !important;
+          background-color: rgba(255, 255, 255, 0.5) !important; /* Light background as per original CSS */
+          font-style: italic !important;
+          color: inherit !important; /* Inherits from parent .cnl-expert-opinion-box (dark purple) */
+          border-radius: 0 5px 5px 0;
+          box-shadow: none !important;
+      }
+       .cnl-main-content .cnl-expert-opinion-box blockquote::before, .cnl-main-content .cnl-expert-opinion-box blockquote::after {
+            content: '';
+            display: none;
+       }
+
+       .cnl-main-content .cnl-science-box, .cnl-main-content .cnl-court-box,
+       .cnl-main-content .cnl-obituary-box, .cnl-main-content .cnl-investigative-box {
+          padding: 20px !important;
+          margin: 30px 0 !important;
+          border-radius: 5px;
+          box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+          border-left: 6px solid;
+       }
+
+      .cnl-main-content .cnl-science-box { background: linear-gradient(to right, #e0f7fa, #b2ebf2) !important; border-left-color: #00BCD4 !important; color: #006064;}
+      .cnl-main-content .cnl-science-box strong { color: #00838F; }
+
+      .cnl-main-content .cnl-court-box { background: linear-gradient(to right, #efebe9, #d7ccc8) !important; border-left-color: #795548 !important; color: #3E2723;}
+      .cnl-main-content .cnl-court-box strong { color: #5D4037; }
+
+      .cnl-main-content .cnl-obituary-box { background: linear-gradient(to right, #f5f5f5, #e0e0e0) !important; border-left-color: #616161 !important; color: #212121;}
+      .cnl-main-content .cnl-obituary-box strong { color: #424242; }
+
+      .cnl-main-content .cnl-investigative-box { background: linear-gradient(to right, #ffebee, #ffcdd2) !important; border-left-color: #EF5350 !important; color: #B71C1C;}
+      .cnl-main-content .cnl-investigative-box strong { color: #D32F2F; }
+
+     /* --- START Specific Styling Requests --- */
+
+     /* Style for "घटना क्रम का विश्लेषण" (5W1H) section - Darker, Non-Animated Gradient */
+     /* Adjusted margin and width to match article content width minus container padding */
+     .cnl-main-content .cnl-fivew1h-full {
+         /* Changed #fbc02d (bright yellow) to #f39c12 (darker orange-yellow) */
+         background: linear-gradient(90deg, #8e24aa, #f39c12, #e64a19, #0277bd); /* Darker variants */
+         border-left: 6px solid #ecf0f1; /* Light border for contrast */
+         padding: 30px;
+         border-radius: 10px;
+         box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Stronger shadow */
+         font-family: 'Noto Sans Hindi', sans-serif;
+         /* Calculated negative margins based on box padding (30px) and container padding (20px) */
+         margin-top: 30px;
+         margin-bottom: 30px;
+         margin-left: -10px; /* 30px (box padding) - 20px (container padding) */
+         margin-right: -10px; /* 30px (box padding) - 20px (container padding) */
+         width: auto; /* Allow width to extend with negative margins */
+         /* Removed max-width: 95%; as it now stretches to the container's edges */
+         box-sizing: border-box; /* Ensure padding is included in element's total width/height */
+         color: #ecf0f1; /* Light text color for readability */
+     }
+
+     @media (max-width: 768px) {
+          .cnl-main-content .cnl-fivew1h-full {
+               /* Adjust negative margin for mobile container padding (15px) */
+               margin-left: -15px; /* 30px (box padding) - 15px (mobile container padding) */
+               margin-right: -15px; /* 30px (box padding) - 15px (mobile container padding) */
+               /* Keep padding: 30px; from above */
+          }
+          /* Existing mobile adjustments for headline within the box */
+          .cnl-main-content .cnl-fivew1h-full .cnl-section-heading { font-size: 22px; } /* Slightly smaller heading */
+           .cnl-main-content .cnl-fivew1h-full .cnl-fivew1h-block p { font-size: 16px; } /* Slightly smaller text */
+     }
+
+
+     .cnl-main-content .cnl-fivew1h-full .cnl-section-heading {
+       font-size: 26px;
+       color: #ecf0f1; /* Light color for heading */
+       text-align: center;
+       border-bottom: 2px solid rgba(236, 240, 241, 0.5); /* Semi-transparent light border */
+       padding-bottom: 12px;
+       margin-bottom: 30px;
+       text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Text shadow for contrast */
+       animation: slideDown 1.2s ease; /* Keep existing entrance animation */
+     }
+
+     .cnl-main-content .cnl-fivew1h-full .cnl-fivew1h-block {
+       margin-bottom: 25px;
+       padding-left: 15px;
+       border-left: 3px solid #bdc3c7; /* Light grey border */
+       animation: fadeInBlock 1.2s ease-in; /* Keep existing entrance animation */
+     }
+
+     .cnl-main-content .cnl-fivew1h-full .cnl-fivew1h-block h3 {
+       font-size: 20px;
+       margin-bottom: 10px;
+       color: #bdc3c7; /* Light color for sub-heading */
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+     }
+
+     .cnl-main-content .cnl-fivew1h-full .cnl-fivew1h-block p {
+       font-size: 18px;
+       color: inherit; /* Inherits #ecf0f1 from parent */
+       line-height: 1.8;
+     }
+     .cnl-main-content .cnl-fivew1h-full .cnl-fivew1h-block p strong {
+       color: #ecf0f1; /* Ensure strong text is light */
+     }
+
+     /* Style for "हमले के बाद का संपूर्ण घटनाक्रम" (Timeline) section - Different Gradient 2 (Dark Purple) */
+     .cnl-main-content .cnl-timeline {
+         background: linear-gradient(to bottom right, #4a235a, #7d3c98); /* Dark Purple Gradient - Keep as is */
+         border-left: 3px solid #ecf0f1 !important; /* Light border */
+         margin: 30px 0;
+         padding: 20px 30px; /* Add padding for background */
+         position: relative;
+         color: #ecf0f1; /* Light text color */
+         border-radius: 8px; /* Rounded corners */
+         box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Stronger shadow */
+     }
+     .cnl-main-content .cnl-timeline-entry {
+         position: relative;
+         margin-bottom: 30px;
+         padding-bottom: 12px;
+         border-bottom: 1px dashed #bdc3c7; /* Lighter dashed border */
+     }
+      .cnl-main-content .cnl-timeline-entry:last-child { border-bottom: none; padding-bottom: 0;}
+
+     .cnl-main-content .cnl-timeline-entry h4 {
+         margin: 0 !important;
+         font-size: 1.2em !important;
+         color: #ecf0f1 !important; /* Light color for date */
+         font-weight: 700;
+         margin-bottom: 5px !important;
+     }
+     .cnl-main-content .cnl-timeline-entry p {
+         margin: 0 !important;
+         color: #e0e0e0 !important; /* Slightly darker light color for text */
+         font-size: 1em !important;
+         line-height: 1.6;
+     }
+      .cnl-main-content .cnl-timeline-entry::before {
+          content: '';
+          position: absolute;
+          left: -45px; /* Adjust position due to padding */
+          top: 6px;
+          width: 14px;
+          height: 14px;
+          background-color: #ecf0f1; /* Light marker */
+          border-radius: 50%;
+          border: 3px solid #4a235a; /* Border matching background */
+          z-index: 1;
+      }
+       @media (max-width: 768px) {
+           .cnl-main-content .cnl-timeline {
+                padding: 20px 15px; /* Adjust padding for mobile */
+           }
+           .cnl-main-content .cnl-timeline-entry::before {
+                left: -30px; /* Adjust marker position for mobile padding */
+           }
+       }
+
+
+     /* Style for "संपादकीय अभिमत" (Editorial Opinion) section - Different Gradient 3 (Dark Green-Teal) */
+     .cnl-main-content .cnl-editorial-opinion-box {
+         background: linear-gradient(to bottom right, #1a5276, #117864); /* Dark Green-Teal Gradient - Keep as is */
+         border-left: 6px solid #1abc9c; /* Keep a distinct border color */
+         padding: 25px;
+         margin: 30px 0;
+         border-radius: 8px;
+         box-shadow: 0 2px 8px rgba(0,0,0,0.3); /* Stronger shadow */
+         color: #ecf0f1; /* Default light text color */
+          /* Add transition for click effect */
+         transition: background 0.4s ease, box-shadow 0.4s ease;
+          cursor: pointer; /* Indicate it's clickable */
+     }
+
+      /* Style when clicked (JavaScript toggles this class) */
+      .cnl-main-content .cnl-editorial-opinion-box.cnl-editorial-opinion-clicked {
+          background: linear-gradient(to bottom right, #c0392b, #e74c3c); /* Change to a different (Dark Red) gradient on click - Keep as is */
+           box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* Change shadow on click */
+      }
+
+     .cnl-main-content .cnl-editorial-opinion-box h2 {
+         margin-top: 0 !important;
+         font-size: 1.6em !important;
+         /* Apply gradient text color */
+         background-image: linear-gradient(45deg, #3498db, #2980b9); /* Blue gradient for headline - Keep as is */
+         -webkit-background-clip: text;
+         -webkit-text-fill-color: transparent;
+         color: transparent; /* Fallback for non-webkit browsers */
+
+         margin-bottom: 15px !important;
+         border-bottom: 2px solid rgba(236, 240, 241, 0.3) !important; /* Lighter border - Keep as is */
+         padding-bottom: 10px !important;
+         font-weight: 700;
+         text-shadow: none; /* Remove default text shadow - Keep as is */
+     }
+      .cnl-main-content .cnl-editorial-opinion-box p {
+         font-size: 1.1em !important;
+         line-height: 1.8 !important;
+         color: inherit !important; /* Inherits #ecf0f1, gradient below will override */
+
+         /* Apply gradient text color */
+         background-image: linear-gradient(45deg, #ecf0f1, #bdc3c7); /* Light gradient for body text - Keep as is */
+         -webkit-background-clip: text;
+         -webkit-text-fill-color: transparent;
+         color: transparent; /* Fallback */
+
+          margin-bottom: 1em !important; /* Keep margin */
+      }
+
+
+     /* Style for "प्रमाणन" (Certification) section - Advertisement Design */
+     @keyframes pulseGlow {
+         0% { box-shadow: 0 0 10px rgba(46, 204, 113, 0.4), 0 0 0 0 rgba(46, 204, 113, 0.4); }
+         50% { box-shadow: 0 0 25px rgba(46, 204, 113, 0.7), 0 0 0 10px rgba(46, 204, 113, 0.2); }
+         100% { box-shadow: 0 0 10px rgba(46, 204, 113, 0.4), 0 0 0 0 rgba(46, 204, 113, 0.4); }
+     }
+
+    .cnl-article-container .cnl-certification-box {
+        background: linear-gradient(45deg, #2ecc71, #27ae60); /* Fantastic Green Gradient */
+        border: none; /* Remove default border */
+        padding: 30px; /* Increased padding */
+        margin-top: 40px; /* Increased margin */
+        margin-bottom: 40px;
+        border-radius: 15px; /* More rounded corners */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Stronger, more advert-like shadow */
+        text-align: center; /* Center content */
+        color: #fff; /* Light text color */
+        position: relative;
+        overflow: hidden; /* Clip pseudo-elements */
+        animation: pulseGlow 3s infinite ease-in-out; /* Animated glow */
+    }
+
+    .cnl-article-container .cnl-certification-box::before {
+        content: '\f005'; /* Example Font Awesome Star */
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 2.5em;
+        color: rgba(255, 255, 255, 0.2); /* Subtle watermark-like icon */
+        transform: rotate(15deg);
+    }
+     .cnl-article-container .cnl-certification-box::after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: -20px;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+        border-radius: 50%;
+         filter: blur(15px);
+     }
+
+
+    .cnl-article-container .cnl-certification-box h2 {
+        color: #fff !important; /* White text for heading */
+        border-bottom: 2px solid rgba(255,255,255,0.4) !important; /* Lighter, semi-transparent border */
+        padding-bottom: 12px !important;
+        margin-bottom: 20px !important; /* Increased space below heading */
+        font-size: 1.8em !important; /* Larger heading */
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Stronger text shadow */
+    }
+    .cnl-article-container .cnl-certification-content {
+        font-size: 1.2em; /* Larger text */
+        color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+        line-height: 1.8;
+        margin-bottom: 0; /* Remove bottom margin */
+    }
+
+
+     /* Style for "आज का सुविचार" (Suvichar) section - Attractive Design */
+     .cnl-manual-box.cnl-suvichar-box {
+         background: linear-gradient(135deg, #ffecd2, #fcb69f); /* Warm, attractive gradient */
+         border: 3px double #e74c3c; /* Double border */
+         padding: 30px; /* Increased padding */
+         margin-top: 35px;
+         margin-bottom: 35px;
+         border-radius: 12px; /* Rounded corners */
+         box-shadow: 0 6px 15px rgba(0,0,0,0.2); /* Stronger shadow */
+         color: #333; /* Dark text for readability */
+         position: relative;
+         overflow: hidden; /* Needed for background pattern */
+     }
+
+     .cnl-manual-box.cnl-suvichar-box::before {
+         content: '';
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9IiNmY2I2OWYiIGZpbGwtb3BhY2l0eT0iMC4xNyI+CiAgICAgICAgPHBhdGggZD0iTTAgNDBoNEwwIDM2eiBNNDAgMEgtNEw0MCA0eiBNNDAgNDBIMDYwTDRMCAwWk0wIDAaNDAgNDBWLTQwWjQwIDQwdjQwWzQwIDAiLz4KICAgIDwvZz4KPC9zdmc+'); /* Subtle pattern */
+          opacity: 0.5;
+         pointer-events: none;
+     }
+
+    .cnl-article-container .cnl-suvichar-box h2 {
+        color: #c0392b !important; /* Darker red/orange for heading */
+        border-bottom: 2px solid #e74c3c !important; /* Match border color */
+        padding-bottom: 10px !important;
+        margin-bottom: 15px !important;
+        font-size: 1.6em !important; /* Slightly larger heading */
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Subtle shadow for heading */
+        position: relative; /* Ensure h2 is above pattern */
+    }
+     .cnl-article-container .cnl-suvichar-content {
+         font-size: 1.25em; /* Larger, prominent text */
+         font-style: italic;
+         color: #555;
+         text-align: center;
+         line-height: 1.8;
+         margin-top: 20px; /* More space below heading */
+         position: relative; /* Ensure content is above pattern */
+     }
+      .cnl-article-container .cnl-suvichar-content .fas, .cnl-article-container .cnl-suvichar-content .far,
+      .cnl-article-container .cnl-suvichar-content .fab {
+          color: #e74c3c; /* Match icon color to theme */
+          margin-right: 10px;
+          font-size: 1.5em; /* Larger icon */
+          vertical-align: middle;
+      }
+
+     /* Style for "सुरक्षा उपायों के मुख्य बिंदु" section */
+     .cnl-security-points-box {
+         background: linear-gradient(to bottom, #e0f4f8, #d3eaf2); /* Light Blue/Cyan Gradient */
+         border: 1px solid #b3dae2; /* Subtle border */
+         border-left: 6px solid #3498db; /* Strong Left Border */
+         padding: 20px;
+         margin: 30px 0;
+         border-radius: 8px;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+         color: #2c3e50; /* Dark text for readability */
+         line-height: 1.8;
+     }
+
+     .cnl-security-points-box h3 {
+         font-size: 1.4em !important;
+         font-weight: 700;
+         color: #2980b9 !important; /* Darker Blue for heading */
+         margin-top: 0 !important;
+         margin-bottom: 15px !important;
+         border-bottom: 2px solid #add8e6; /* Light blue border below heading */
+         padding-bottom: 8px;
+     }
+
+     .cnl-security-points-box ul {
+         list-style: none; /* Remove default bullets */
+         padding: 0;
+         margin: 0;
+     }
+
+     .cnl-security-points-box li {
+         position: relative;
+         padding-left: 25px; /* Space for custom bullet */
+         margin-bottom: 10px;
+         line-height: 1.6;
+     }
+
+     .cnl-security-points-box li::before {
+         content: '\f00c'; /* Font Awesome Check icon */
+         font-family: 'Font Awesome 5 Free';
+         font-weight: 900;
+         position: absolute;
+         left: 0;
+         top: 3px; /* Adjust vertically */
+         color: #2ecc71; /* Green color for the checkmark */
+         font-size: 1.1em;
+     }
+      .cnl-security-points-box li:last-child {
+          margin-bottom: 0;
+      }
+
+    /* ===== START: Author Bio and Comments Prompt Blending Styles ===== */
+
+    /* Blended style for Author Bio Box */
+    .cnl-article-container .cnl-author-bio-box {
+        /* Blending Background: Dark gradient similar to footer/other dark boxes */
+        background: linear-gradient(to top left, #1e3a5f, #0b2a4f); /* Dark blue shades */
+        border: none; /* Remove default border */
+        padding: 30px; /* Slightly increased padding */
+        margin-top: 40px; /* More space to connect to footer visually */
+        margin-bottom: 30px; /* Space before comments box */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4), 0 0 15px rgba(30, 58, 95, 0.3); /* Stronger shadow with subtle glow */
+        display: flex; /* Keep flex layout */
+        align-items: center; /* Keep alignment */
+        color: #e0e8ff; /* Light text color (using sfcw variable idea) */
+        position: relative; /* Needed for potential pseudo-elements or z-index */
+        overflow: hidden; /* Ensure contents are clipped */
+         transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover effect */
+    }
+     .cnl-article-container .cnl-author-bio-box:hover {
+         transform: translateY(-5px); /* Lift slightly on hover */
+         box-shadow: 0 12px 25px rgba(0,0,0,0.5), 0 0 20px rgba(30, 58, 95, 0.5); /* More pronounced shadow/glow on hover */
+     }
+
+    .cnl-article-container .cnl-author-bio-box img {
+       width: 100px; height: 100px;
+       border-radius: 50%;
+       margin-right: 25px;
+       border: 4px solid var(--sfcw-nebula-accent); /* Use a footer accent color for image border */
+       flex-shrink: 0;
+       object-fit: cover;
+       box-shadow: 0 0 10px rgba(0, 160, 160, 0.5); /* Add glow to image border */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+     .cnl-article-container .cnl-author-bio-box:hover img {
+         border-color: var(--sfcw-primary-glow); /* Change image border color on hover */
+         box-shadow: 0 0 15px rgba(224, 232, 255, 0.7); /* Change image glow on hover */
+     }
+
+
+    .cnl-article-container .cnl-author-info {
+        flex-grow: 1;
+        font-size: 1em;
+        color: inherit; /* Inherits light color from parent */
+    }
+    .cnl-article-container .cnl-author-info strong {
+        display: block;
+        font-size: 1.3em;
+        margin-bottom: 5px;
+        color: var(--sfcw-highlight); /* Highlight color from footer for name */
+        text-shadow: 0 0 8px rgba(255,255,255,0.5);
+    }
+    .cnl-article-container .cnl-author-info small {
+        display: block;
+        color: var(--sfcw-secondary-glow); /* Secondary glow color for title */
+        margin-bottom: 12px;
+        font-style: normal; /* Remove italic */
+    }
+    .cnl-article-container .cnl-author-info a {
+         margin-right: 18px;
+         color: var(--sfcw-link-hover); /* Link hover color from footer for links */
+         font-size: 1em;
+         text-decoration: none;
+         transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .cnl-article-container .cnl-author-info a:last-child { margin-right: 0;}
+     .cnl-article-container .cnl-author-info a:hover {
+         color: var(--sfcw-highlight); /* Highlight color on hover */
+         text-shadow: 0 0 8px var(--sfcw-link-hover);
+     }
+    .cnl-author-info a .fas, .cnl-author-info a .fab { margin-right: 6px; } /* Adjusted icon margin */
+
+
+    /* Blended style for Comments Prompt Box */
+    .cnl-article-container .cnl-comments-prompt-box {
+         /* Blending Background: Dark gradient, slightly different from author bio */
+         background: linear-gradient(to bottom right, #0d3b30, #175c4e); /* Dark teal shades */
+         border: none; /* Remove default border */
+         padding: 30px; /* Slightly increased padding */
+         margin-top: 30px; /* Space below author bio */
+         margin-bottom: 30px; /* Space above footer widget if no other elements intervene */
+         border-radius: 10px; /* Rounded corners */
+         box-shadow: 0 8px 20px rgba(0,0,0,0.4), 0 0 15px rgba(13, 59, 48, 0.3); /* Stronger shadow with subtle glow */
+         text-align: center; /* Keep centered */
+         font-size: 1.1em;
+         color: #e0f2f7; /* Light text color (light teal) */
+         line-height: 1.6;
+         position: relative; /* Needed for potential pseudo-elements */
+         overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover effect */
+    }
+     .cnl-article-container .cnl-comments-prompt-box:hover {
+         transform: translateY(-5px); /* Lift slightly on hover */
+         box-shadow: 0 12px 25px rgba(0,0,0,0.5), 0 0 20px rgba(13, 59, 48, 0.5); /* More pronounced shadow/glow on hover */
+     }
+
+
+    .cnl-article-container .cnl-comments-prompt-box h3 {
+         margin-top: 0 !important;
+         font-size: 1.8em !important;
+         color: var(--sfcw-nebula-accent) !important; /* Nebula accent color for heading */
+         margin-bottom: 18px !important;
+         border-bottom: 2px solid rgba(0, 160, 160, 0.4) !important; /* Border matching accent */
+         padding-bottom: 10px !important;
+         font-weight: 700;
+         text-shadow: 0 0 10px rgba(0, 160, 160, 0.5); /* Glow effect on heading */
+    }
+    .cnl-article-container .cnl-comments-prompt-box p {
+         margin-bottom: 1em;
+         color: inherit; /* Inherits light color from parent */
+    }
+     .cnl-comments-prompt-box a {
+         color: var(--sfcw-primary-glow); /* Primary glow color for links */
+         font-weight: bold;
+          text-decoration: none;
+         transition: color 0.3s ease, text-shadow 0.3s ease;
+      }
+      .cnl-comments-prompt-box a:hover {
+          color: var(--sfcw-highlight); /* Highlight color on hover */
+          text-shadow: 0 0 8px var(--sfcw-primary-glow);
+      }
+     .cnl-comments-prompt-box h3 .fas { color: inherit !important; margin-right: 12px; } /* Ensure icon color matches heading */
+
+
+    /* ===== START: Screen Focus Cosmos Widget CSS (v1.4 - Prefix: sfcw-) ===== */
+    /* निर्देश: इस CSS को ब्लॉगर थीम के मुख्य CSS (<b:skin> या CSS फ़ाइल) में डालें। */
+    /* <style> टैग्स का उपयोग न करें। (Already inside the main style tag here) */
+
+    :root {
+        --sfcw-primary-glow: #e0e8ff;
+        --sfcw-secondary-glow: #d0dfff;
+        --sfcw-highlight: #ffffff;
+        --sfcw-link-hover: #f0d0ff;
+        --sfcw-deep-space-1: #0b0f1a;
+        --sfcw-deep-space-2: #1a1d3d;
+        --sfcw-deep-space-3: #221e4a;
+        --sfcw-nebula-accent: #00a0a0;
+        --sfcw-star-color: rgba(240, 248, 255, 0.85);
+        --sfcw-particle-color: rgba(0, 160, 160, 0.5);
+        --sfcw-screen-bg: rgba(11, 15, 26, 0.4);
+        --sfcw-screen-border: rgba(0, 160, 160, 0.3);
+        --sfcw-screen-shadow: rgba(0, 160, 160, 0.15);
+    }
+
+    .sfcw-widget {
+        font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
+        position: relative;
+        width: 100%; /* Take full width below article container */
+        padding: 45px 0 35px 0;
+        background: radial-gradient(ellipse at bottom, var(--sfcw-deep-space-2) 0%, var(--sfcw-deep-space-1) 100%),
+                    linear-gradient(315deg, var(--sfcw-deep-space-1) 0%, var(--sfcw-deep-space-3) 74%);
+        background-blend-mode: screen;
+        overflow: hidden;
+        border-top: 5px ridge rgba(255, 255, 255, 0.1);
+        box-sizing: border-box;
+        box-shadow: inset 0 10px 20px rgba(0,0,0,0.4);
+         margin-top: 40px; /* Add margin above the footer */
+    }
+
+    .sfcw-background-depth { /* Should cover the whole widget */
+        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle, rgba(255,255,255,0.03) 5%, transparent 40%),
+                    radial-gradient(circle, rgba(0, 160, 160, 0.05) 10%, transparent 50%);
+        background-size: 150px 150px, 250px 250px; background-position: 0 0, 50px 50px;
+        opacity: 0.5; animation: sfcw-slow-pan 60s linear infinite; z-index: 0;
+    }
+    @keyframes sfcw-slow-pan { 100% { background-position: 150px 150px, 200px 200px; } }
+
+    #sfcw-particle-canvas { /* ID सेलेक्टर अपडेट किया */
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        z-index: 1; pointer-events: none;
+    }
+
+    .sfcw-container {
+        max-width: 1000px; margin: 0 auto; padding: 0 20px;
+        position: relative; z-index: 2; text-align: center;
+        color: var(--sfcw-secondary-glow);
+    }
+
+    .sfcw-content-screen { /* प्रीफिक्स्ड क्लास */
+        background: var(--sfcw-screen-bg);
+        border: 1px solid var(--sfcw-screen-border);
+        border-radius: 15px;
+        padding: 25px 20px 20px 20px;
+        margin: 0 auto 25px auto;
+        max-width: 600px;
+        box-shadow: 0 0 20px var(--sfcw-screen-shadow), inset 0 0 10px rgba(0,0,0,0.3);
+        position: relative;
+        opacity: 0;
+        filter: blur(3px);
+        animation: sfcw-reveal-glow 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards; /* प्रीफिक्स्ड एनिमेशन नाम */
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+    }
+
+    .sfcw-credits, .sfcw-organization { /* प्रीफिक्स्ड क्लास */
+        animation: none; opacity: 1; filter: none; /* Remove entrance animation for these inner blocks if parent has it */
+        margin-bottom: 12px; line-height: 1.8;
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.8), 0 0 15px var(--sfcw-nebula-accent);
+    }
+    .sfcw-organization { margin-bottom: 0; }
+
+    @keyframes sfcw-reveal-glow { /* प्रीफिक्स्ड एनिमेशन नाम */
+        from { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(3px); }
+        to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    .sfcw-credits p, .sfcw-organization p { margin: 6px 0; font-size: 1.1em; }
+
+    .sfcw-energized-text { /* प्रीफिक्स्ड क्लास */
+        font-weight: 700; font-family: 'Orbitron', sans-serif; font-size: 1.6em;
+        background-image: linear-gradient( 110deg, var(--sfcw-highlight) 0%, var(--sfcw-secondary-glow) 20%, var(--sfcw-link-hover) 40%, var(--sfcw-nebula-accent) 60%, var(--sfcw-secondary-glow) 80%, var(--sfcw-highlight) 100% );
+        background-size: 300% 100%; color: transparent; background-clip: text; -webkit-background-clip: text;
+        animation: sfcw-energize-flow 5s linear infinite; /* प्रीफिक्स्ड एनिमेशन नाम */
+        display: inline-block; transition: text-shadow 0.3s ease; cursor: default;
+    }
+    .sfcw-energized-text:hover { text-shadow: 0 0 15px var(--sfcw-highlight); }
+
+    @keyframes sfcw-energize-flow { /* प्रीफिक्स्ड एनिमेशन नाम */
+        0% { background-position: 150% 50%; } 100% { background-position: -150% 50%; }
+    }
+
+    .sfcw-credits .sfcw-author-title { /* प्रीफिक्स्ड क्लास */
+         font-size: 0.95em; font-style: normal;
+         color: var(--sfcw-primary-glow); opacity: 0.9;
+         margin-top: 2px; display: block;
+         letter-spacing: 1px; word-spacing: 3px;
+     }
+     .sfcw-author-title span.sfcw-separator-icon { /* प्रीफिक्स्ड क्लास */
+          opacity: 0.5; margin: 0 5px; font-size: 0.8em; vertical-align: middle;
+     }
+
+    .sfcw-organization strong { font-weight: 700; color: var(--sfcw-highlight); }
+    .sfcw-organization a { color: inherit; text-decoration: none;} /* संगठन लिंक स्टाइल */
+    .sfcw-organization a:hover { text-decoration: underline; }
+
+
+    .sfcw-links, .sfcw-copyright { /* प्रीफिक्स्ड क्लास */
+        opacity: 0; filter: blur(3px);
+        animation: sfcw-reveal-glow 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards; /* प्रीफिक्स्ड एनिमेशन नाम */
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.8), 0 0 15px var(--sfcw-nebula-accent);
+        margin-bottom: 22px; line-height: 1.8;
+    }
+    .sfcw-links { animation-delay: 0.9s; }
+    .sfcw-copyright { animation-delay: 1.1s; margin-bottom: 0; }
+
+    .sfcw-links nav { /* प्रीफिक्स्ड क्लास */
+        margin-top: 15px; padding: 18px 0; background: rgba(11, 15, 26, 0.3);
+        border: 1px solid rgba(0, 160, 160, 0.2); border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 160, 160, 0.1);
+    }
+    .sfcw-links span.sfcw-link-label { /* प्रीफिक्स्ड क्लास */
+        font-weight: 500; color: var(--sfcw-primary-glow); margin-right: 10px;
+        font-size: 1em; display: inline-block; margin-bottom: 8px;
+    }
+    .sfcw-links a { /* प्रीफिक्स्ड क्लास */
+        color: var(--sfcw-secondary-glow); text-decoration: none; margin: 0 14px; font-size: 1.05em;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; position: relative; padding-bottom: 3px;
+    }
+    .sfcw-links a::after { /* प्रीफिक्स्ड क्लास */
+        content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%;
+        background: linear-gradient(90deg, var(--sfcw-link-hover), var(--sfcw-nebula-accent));
+        transition: all 0.4s ease-out; transform: translateX(-50%);
+    }
+    .sfcw-links a:hover { /* प्रीफिक्स्ड क्लास */
+        color: var(--sfcw-highlight); transform: translateY(-4px) scale(1.15);
+        text-shadow: 0 0 12px var(--sfcw-link-hover);
+    }
+    .sfcw-links a:hover::after { width: 100%; } /* प्रीफिक्स्ड क्लास */
+
+    .sfcw-links i.fas, .sfcw-links i.fab { margin-right: 6px; transition: transform 0.3s ease; vertical-align: middle; } /* प्रीफिक्स्ड क्लास */
+    .sfcw-links a:hover i { transform: rotate(-15deg) scale(1.1); } /* प्रीफिक्स्ड क्लास */
+
+    .sfcw-links .sfcw-separator { /* प्रीफिक्स्ड क्लास */
+        color: rgba(0, 160, 160, 0.4); margin: 0 8px; font-size: 1em; opacity: 0.7;
+    }
+
+    .sfcw-copyright { /* प्रीफिक्स्ड क्लास */
+        font-size: 0.9em; color: var(--sfcw-primary-glow); opacity: 0.75;
+        margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(0, 160, 160, 0.2);
+    }
+    .sfcw-copyright i.fa-copyright { margin-right: 5px; vertical-align: middle; } /* प्रीफिक्स्ड क्लास */
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+         /* Already Adjusted .cnl-article-container padding for mobile */
+
+         .cnl-article-container .cnl-author-bio-box { flex-direction: column; text-align: center;}
+         .cnl-article-container .cnl-author-bio-box img { margin-right: 0; margin-bottom: 15px;}
+         .cnl-article-container .cnl-author-info { text-align: center;}
+          .cnl-article-container .cnl-author-info strong, .cnl-article-container .cnl-author-info small { display: block; }
+          .cnl-article-container .cnl-author-info a { margin: 5px 10px; display: inline-block;}
+          .cnl-article-container .cnl-author-info a:first-child { margin-left: 0;}
+          .cnl-article-container .cnl-author-info a:last-child { margin-right: 0;}
+
+         .sfcw-content-screen { max-width: 90%; padding: 20px 15px 15px 15px;}
+         .sfcw-widget { padding: 35px 0 25px 0; }
+         .sfcw-credits p, .sfcw-organization p { font-size: 1.05em; }
+         .sfcw-energized-text { font-size: 1.4em; }
+         .sfcw-links a { margin: 6px 10px; font-size: 1em; }
+         .cnl-comments-prompt-box { padding: 20px 15px; } /* Adjust comments box padding */
+    }
+    @media (max-width: 480px) {
+        .cnl-article-container .cnl-author-bio-box img { width: 80px; height: 80px;}
+         .cnl-article-container .cnl-author-info strong { font-size: 1.2em; }
+
+        .sfcw-content-screen { max-width: 95%; padding: 15px 10px 10px 10px;}
+         .sfcw-credits p, .sfcw-organization p { font-size: 1em; }
+         .sfcw-energized-text { font-size: 1.2em; }
+         .sfcw-author-title { letter-spacing: 0.5px; word-spacing: 2px; }
+         .sfcw-links nav { padding: 15px 5px; }
+         .sfcw-links a { margin: 8px 8px; font-size: 0.95em; }
+         .sfcw-links span.sfcw-link-label { display: block; margin-bottom: 8px; }
+         .sfcw-separator { display: none; }
+    }
+    /* ===== END: Screen Focus Cosmos Widget CSS ===== */
+
+
+    /* General overrides or print styles - keep these */
+    @media print {
+        .cnl-tts-info-overlay,
+        .cnl-tts-info-popup,
+        .cnl-speaking-highlight,
+         .sfcw-widget /* Hide the entire widget in print */
+        {
+            display: none !important;
+        }
+        .myPrintablePost {
+             width: auto !important;
+             float: none !important;
+             position: static !important;
+             margin: 0 auto !important;
+             padding: 0 !important;
+             box-shadow: none !important;
+             border: none !important;
+             background: none !important;
+        }
+         .myPrintablePost .cnl-main-content {
+            font-size: 12pt !important;
+            line-height: 1.6 !important;
+            color: #000 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: auto !important;
+            max-width: none !important;
+            box-sizing: border-box !important;
+             animation: none !important;
+         }
+          .myPrintablePost .cnl-main-content .fas,
+         .myPrintablePost .cnl-main-content .far,
+         .myPrintablePost .cnl-main-content .fab {
+             display: none !important;
+         }
+           /* Print styles for themed boxes */
+          .myPrintablePost .cnl-fivew1h-full,
+          .myPrintablePost .cnl-journalistic-box,
+          .myPrintablePost .cnl-fact-box,
+          .myPrintablePost .cnl-highlight-box,
+          .myPrintablePost .cnl-science-box,
+          .myPrintablePost .cnl-court-box,
+          .myPrintablePost .cnl-obituary-box,
+          .myPrintablePost .cnl-investigative-box,
+          .myPrintablePost .cnl-editorial-opinion-box, /* Added editorial for print */
+          .myPrintablePost .cnl-certification-box, /* Added certification for print */
+          .myPrintablePost .cnl-suvichar-box, /* Added suvichar for print */
+          .myPrintablePost .cnl-security-points-box, /* Added security points for print */
+          .myPrintablePost .cnl-author-bio-box, /* Added author bio for print */
+          .myPrintablePost .cnl-comments-prompt-box /* Added comments prompt for print */
+          {
+               padding: 15px !important;
+               margin: 15px 0 !important;
+               border: 1px solid #ccc !important;
+               border-left: 4px solid #888 !important;
+               background-color: #f9f9f9 !important; /* Light background for print */
+               box-shadow: none !important;
+               border-radius: 0 !important;
+               color: #000 !important; /* Dark text for print */
+               animation: none !important; /* Disable animations for print */
+               background-image: none !important; /* Remove gradients for print */
+                -webkit-text-fill-color: initial !important; /* Remove gradient text for print */
+                background-clip: initial !important;
+                -webkit-background-clip: initial !important;
+                text-fill-color: initial !important;
+          }
+           .myPrintablePost .cnl-fivew1h-full h2,
+           .myPrintablePost .cnl-journalistic-box h4,
+            .myPrintablePost .cnl-editorial-opinion-box h2, /* Print h2 */
+            .myPrintablePost .cnl-certification-box h2, /* Print h2 */
+            .myPrintablePost .cnl-suvichar-box h2, /* Print h2 */
+            .myPrintablePost .cnl-security-points-box h3, /* Print h3 */
+            .myPrintablePost .cnl-comments-prompt-box h3 /* Print h3 */
+            {
+               border-bottom: 1px solid #ccc !important;
+               padding-bottom: 5px !important;
+               margin-bottom: 10px !important;
+                color: #333 !important; /* Dark color for heading in print */
+                 text-shadow: none !important; /* Remove text shadow */
+            }
+            .cnl-certification-box::before,
+            .cnl-certification-box::after,
+            .cnl-suvichar-box::before,
+            .cnl-security-points-box li::before /* Remove custom bullet for print */
+            {
+                 display: none !important; /* Remove pseudo-elements for print */
+            }
+             .cnl-security-points-box ul {
+                list-style: disc !important; /* Use standard bullets for print */
+                padding-left: 20px !important;
+             }
+             .cnl-security-points-box li {
+                 padding-left: 0 !important; /* Remove padding */
+             }
+
+             .myPrintablePost .cnl-author-bio-box img {
+                  border: none !important;
+                  box-shadow: none !important;
+                  margin-bottom: 10px !important;
+             }
+              .myPrintablePost .cnl-author-info strong {
+                  color: #333 !important;
+              }
+               .myPrintablePost .cnl-author-info small {
+                  color: #555 !important;
+               }
+                .myPrintablePost .cnl-author-info a {
+                     color: #000 !important;
+                     text-decoration: underline !important;
+                     text-shadow: none !important;
+                }
+
+
+          .myPrintablePost .cnl-timeline {
+              border-left: 2px solid #888 !important;
+              margin: 15px 0 15px 15px !important;
+               padding: 15px 15px 15px 15px !important;
+              background: none !important;
+              color: #000 !important;
+              box-shadow: none !important;
+              border-radius: 0 !important;
+          }
+           .myPrintablePost .cnl-timeline-entry {
+               margin-bottom: 15px !important;
+               padding-bottom: 8px !important;
+               border-bottom: 1px dashed #ccc !important;
+           }
+            .myPrintablePost .cnl-timeline-entry h4 { color: #333 !important; } /* Dark color for date in print */
+            .myPrintablePost .cnl-timeline-entry p { color: #000 !important; } /* Dark color for text in print */
+            .myPrintablePost .cnl-timeline-entry::before {
+                content: '';
+                position: absolute;
+                left: -21px;
+                top: 6px;
+                width: 8px;
+                height: 8px;
+                background-color: #555;
+                border-radius: 50%;
+                border: 2px solid #fff;
+                z-index: 1;
+            }
+
+        /* Hide elements not for print */
+        .cnl-tts-info-overlay, .cnl-tts-info-popup, .cnl-speaking-highlight,
+        .cnl-article-headline-section, .cnl-article-info-section,
+        .cnl-multimedia-gallery, .cnl-video-container, iframe, .cnl-accessibility-buttons,
+         .sfcw-widget /* Also hide widget in print */
+          {
+              display: none !important;
+          }
+         /* Ensure images, tables, etc show */
+         img { display: block !important; }
+         figcaption { display: block !important; }
+         table { display: table !important; } /* Ensure tables are printed */
+
+
+    }
+
+</style>
+
+<div class="cnl-article-container">
+    <div class="cnl-article-headline-section">
+         <p class="cnl-custom-headline-p">
+             <i class="fas fa-newspaper"></i> पहलगाम आतंकी हमला: वारदात से लेकर आज तक का पूरा घटनाक्रम और सुरक्षा के नए आयाम
+         </p>
+    </div>
+
+     <div class="cnl-article-info-section">
+         <div class="cnl-article-meta-reading-block cnl-pattern-bg-1">
+             <div class="post-meta">
+                 <span class="post-date published"><i class="fas fa-calendar-alt"></i> प्रकाशित: 18 जून 2024</span>
+                 <span class="post-author vcard"><i class="fas fa-pen-alt"></i> लेखक: आशीष मिश्रा</span>
+                 <span class="post-location"><i class="fas fa-map-marker-alt"></i> स्थान: अनंतनाग/जम्मू</span>
+                 <span class="post-category"><i class="fas fa-tag"></i> <b>श्रेणी:</b> राष्ट्रीय सुरक्षा</span>
+             </div>
+             <div id="cnl-read-time"></div>
+         </div>
+
+          <div class="cnl-accessibility-buttons">
+           <button onclick="changeFontSize(1)" class="cnl-font-plus-btn"><i class="fas fa-plus-circle"></i> फ़ॉन्ट बढ़ाएं</button>
+           <button onclick="changeFontSize(-1)" class="cnl-font-minus-btn"><i class="fas fa-minus-circle"></i> फ़ॉन्ट घटाएं</button>
+           <button onclick="printMyPost()" class="cnl-print-btn-new">🖨️ प्रिंट / PDF करें</button>
+            <button onclick="shareArticle()" class="cnl-share-btn"><i class="fas fa-share-alt"></i> साझा करें</button>
+            <button onclick="reportError()" class="cnl-report-error-btn"><i class="fas fa-bug"></i> त्रुटि बताएं</button>
+             <button onclick="showFactCheckInfo()" class="cnl-fact-check-btn"><i class="fas fa-clipboard-check"></i> फैक्ट चेक नीति</button>
+             <button onclick="copyArticleLink()" class="cnl-copy-link-btn"><i class="fas fa-link"></i> लिंक कॉपी करें</button>
+         </div>
+     </div>
+
+      <div class="myPrintablePost">
+        <div class="cnl-main-content">
+             <p class="cnl-drop-cap-paragraph">
+                <span class="cnl-drop-cap">9</span> जून 2024 की शाम जम्मू-कश्मीर के रियासी जिले के पहलगाम इलाके के पास तीर्थयात्रियों को ले जा रही एक बस पर हुए भीषण आतंकी हमले ने शांतिपूर्ण माहौल को भंग कर दिया। इस हमले में 9 लोगों की मौत हो गई और 41 अन्य घायल हो गए। यह हमला अमरनाथ यात्रा शुरू होने से पहले हुआ था और इसने सुरक्षा एजेंसियों के लिए एक बड़ी चुनौती पेश की है। घटना के बाद से सुरक्षा बलों ने बड़े पैमाने पर तलाशी अभियान चलाया है और मामले की जांच जारी है।
+            </p>
+
+            <div class="cnl-fivew1h-full">
+              <h2 class="cnl-section-heading">📝 घटनाक्रम का विश्लेषण : 5W1H संरचना</h2>
+
+              <div class="cnl-fivew1h-block">
+                <h3>❓ क्या हुआ? (What)</h3>
+                <p><strong>जम्मू-कश्मीर के रियासी जिले में तीर्थयात्रियों की बस पर आतंकी हमला हुआ।</strong></p>
+              </div>
+
+              <div class="cnl-fivew1h-block">
+                <h3>⏰ कब हुआ? (When)</h3>
+                <p><strong>यह हमला 9 जून 2024 की शाम को हुआ।</strong></p>
+              </div>
+
+              <div class="cnl-fivew1h-block">
+                <h3>📍 कहां हुआ? (Where)</h3>
+                <p><strong>यह घटना रियासी जिले के पहलगाम इलाके के पास हुई।</strong></p>
+              </div>
+
+              <div class="cnl-fivew1h-block">
+                <h3>❓ क्यों हुआ? (Why)</h3>
+                <p><strong>यह हमला क्षेत्र में अशांति फैलाने और अमरनाथ यात्रा को बाधित करने के उद्देश्य से किया गया।</strong></p>
+              </div>
+
+              <div class="cnl-fivew1h-block">
+                <h3>🔧 कैसे हुआ? (How)</h3>
+                <p><strong>आतंकियों ने बस पर घात लगाकर फायरिंग की, जिससे बस खाई में गिर गई।</strong></p>
+              </div>
+
+              <div class="cnl-fivew1h-block">
+                <h3>👤 कौन शामिल था? (Who)</h3>
+                <p><strong>इस हमले में तीर्थयात्री, बस ड्राइवर और स्थानीय लोग प्रभावित हुए। सुरक्षा बलों ने जवाबी कार्रवाई की।</strong></p>
+              </div>
+            </div>
+
+            <h2 class="cnl-pattern1">ℹ️ हमले का विवरण और प्रारंभिक प्रतिक्रिया</h2>
+
+            <p>
+                यह नृशंस हमला उस समय हुआ जब शिव खोड़ी मंदिर से तीर्थयात्रियों को लेकर जा रही बस पहलगाम के रास्ते कटरा की ओर बढ़ रही थी। आतंकियों ने घात लगाकर बस पर फायरिंग की, जिससे ड्राइवर का संतुलन बिगड़ गया और बस गहरी खाई में गिर गई। इस अचानक हुए हमले से तीर्थयात्री संभल नहीं पाए और कई लोग गोली लगने या खाई में गिरने से हताहत हो गए।
+            </p>
+            <p>
+                स्थानीय लोगों और सुरक्षा बलों ने तुरंत राहत और बचाव कार्य शुरू किया। घायलों को नजदीकी अस्पतालों में पहुंचाया गया। हमले की खबर फैलते ही पूरे देश में शोक की लहर दौड़ गई और कड़ी निंदा की गई।
+            </p>
+
+            <h4 class="cnl-pattern1">🗣️ प्रमुख लोगों के बयान</h4>
+            <blockquote>
+              <p>केंद्रीय गृह मंत्री अमित शाह ने घटना पर दुख जताते हुए कहा, 'यह कायराना हमला है और इसके दोषियों को बख्शा नहीं जाएगा। हम लगातार जम्मू-कश्मीर प्रशासन के संपर्क में हैं।'</p>
+              <footer>– अमित शाह, केंद्रीय गृह मंत्री</footer>
+            </blockquote>
+            <blockquote>
+                 <p>जम्मू-कश्मीर के उपराज्यपाल मनोज सिन्हा ने पीड़ितों के प्रति संवेदना व्यक्त करते हुए कहा, 'इस आतंकी कृत्य का जवाब दिया जाएगा। सुरक्षा बल आतंकियों को पकड़ने के लिए दृढ़ हैं.'<i class="fas fa-microphone"></i></p>
+                 <footer>– मनोज सिन्हा, उपराज्यपाल, जम्मू-कश्मीर</footer>
+            </blockquote>
+
+            <h2 class="cnl-pattern2">📜 पृष्ठभूमि और संदर्भ</h2>
+            <p>
+                जम्मू-कश्मीर में तीर्थयात्रियों को निशाना बनाना एक पुरानी आतंकी रणनीति रही है, जिसका उद्देश्य क्षेत्र में अस्थिरता फैलाना और शांति प्रक्रिया को बाधित करना है। शिव खोड़ी मंदिर, अमरनाथ यात्रा से अलग एक प्रमुख तीर्थ स्थल है, लेकिन इस क्षेत्र में भी पहली बार इस तरह का बड़ा हमला देखा गया है, जिसने चिंताएं बढ़ा दी हैं। यह हमला जम्मू क्षेत्र में बढ़ते आतंकी खतरे का संकेत माना जा रहा है।
+            </p>
+
+            <h2 class="cnl-pattern3">⏳ हमले के बाद का संपूर्ण घटनाक्रम (आज तक)</h2>
+            <div class="cnl-timeline">
+                <div class="cnl-timeline-entry">
+                    <h4>📅 9 जून 2024</h4>
+                    <p>शाम को तीर्थयात्रियों की बस पर हमला। 9 की मौत, 41 घायल। सुरक्षा बलों का घटना स्थल पर पहुंचना।</p>
+                </div>
+                <div class="cnl-timeline-entry">
+                    <h4>📅 10 जून 2024</h4>
+                    <p>बड़े पैमाने पर तलाशी अभियान शुरू। ड्रोन, स्nifer डॉग्स और हेलीकॉप्तरों का उपयोग। राष्ट्रीय जांच एजेंसी (NIA) ने जांच संभाली। विभिन्न राजनीतिक दलों द्वारा हमले की निंदा।</p>
+                </div>
+                 <div class="cnl-timeline-entry">
+                    <h4>📅 11-15 जून 2024</h4>
+                    <p> रियासी, राजौरी और पुंछ के जंगल क्षेत्रों में सघन तलाशी जारी। कई संदिग्धों को हिरासत में लिया गया। आतंकियों के मददगारों की पहचान का प्रयास।</p>
+                </div>
+                 <div class="cnl-timeline-entry">
+                    <h4>📅 16 जून 2024</h4>
+                    <p>सुरक्षा समीक्षा बैठकें आयोजित। अमरnath यात्रा की सुरक्षा बढ़ाने पर जोर। यात्रा के मार्गों पर अतिरिक्त सुरक्षा बल तैनात करने का निर्णय।</p>
+                </div>
+                 <div class="cnl-timeline-entry">
+                    <h4>📅 17 जून 2024</h4>
+                    <p>सुरक्षा बलों और आतंकियों के बीच कुछ इलाकों में छुटपुट मुठभेड़ें। कुछ आतंकियों के मारे जाने या घायल होने की खबरें, हालांकि आधिकारिक पुष्टि कम.</p>
+                </div>
+                 <div class="cnl-timeline-entry">
+                    <h4>📅 18 जून 2024 - आज तक</h4>
+                    <p>तलाशी अभियान जारी। NIA और स्थानीय पुलिस द्वारा पूछताछ और जांच का दायरा बढ़ा। आतंकी मॉड्यूल को ध्वस्त करने के प्रयास। अमरnath यात्रा के लिए श्रद्धालुओं के पहले जत्थे की रवानगी की तैयारी शुरू, सुरक्षा व्यवस्था चाक-चौबंद। यात्रा मार्गों पर Three-layer सुरक्षा। संवेदनशील स्थानों पर ड्रोन निगरानी।</p>
+                </div>
+            </div>
+
+            <h2 class="cnl-pattern1">👥 जनता और राजनीतिक प्रतिक्रियाएँ</h2>
+            <p>
+              इस हमले की देशभर में कड़ी निंदा हुई। विपक्षी नेताओं ने सरकार से सुरक्षा व्यवस्था को और मजबूत करने की मांग की, जबकि स्थानीय लोगों ने आतंकियों के खिलाफ सख्त कार्रवाई की अपील की। कई जगहों पर हमले के विरोध में प्रदर्शन भी हुए।
+            </p>
+
+            <div class="cnl-highlight-box">
+              <p>📈 <strong>विश्लेषण:</strong> </p>
+              <p>यह हमला दिखाता है कि आतंकियों की रणनीति बदल रही है। वे अब जम्मू क्षेत्र में ध्यान केंद्रित कर रहे हैं और सॉफ्ट टारगेट चुन रहे हैं। अमरnath यात्रा की सुरक्षा के लिए पुरानी नीतियों की समीक्षा करनी होगी।</p>
+               <p>यह हमला अमरनाथ यात्रा की सुरक्षा के लिए एक बड़ी चुनौती है। सरकार और सुरक्षा एजेंसियों को अपनी रणनीति पर पुनर्विचार करना होगा, खासकर जम्मू क्षेत्र के पीर पंजाल के दक्षिण में। विशेषज्ञों का मानना ​​है कि यह हमला सीमा पार से प्रायोजित है और इसका उद्देश्य अमरnath यात्रा को बाधित करना और कश्मीर घाटी के बाहर भी अशांति फैलाना है। इस घटना ने स्थानीय लोगों में भी भय और गुस्सा पैदा किया है।</p>
+            </div>
+
+            <div class="cnl-journalistic-box cnl-key-takeaways-box">
+                <h4>✅ मुख्य बातें</h4>
+                <ul>
+                    <li>✅ रियासी हमला जम्मू में आतंकी रणनीति में बदलाव का संकेत देता है।</li>
+                    <li>✅ अमरनाथ यात्रा की सुरक्षा अब पहले से कहीं अधिक संवेदनशील हो गई है।</li>
+                    <li>✅ स्थानीय लोगों का समर्थन आतंकियों के नेटवर्क को तोड़ने में महत्वपूर्ण है।</li>
+                    <li>✅ जांच एजेंसियां सीमा पार कनेक्शन पर ध्यान केंद्रित कर रही हैं।</li>
+                </ul>
+            </div>
+
+            <h2 class="cnl-pattern2">📊 आँकड़े और ग्राफिक्स</h2>
+            <img src="https://via.placeholder.com/700x300?text=Infographic+Placeholder" alt="पहलगाम हमले के हताहतों का इन्फोग्राफिक" style="width:100%; max-width:700px; margin:20px auto; display:block; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <p style="margin-top:15px; text-align: center;"><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> यहां देखें संबंधित ग्राफिकल रिपोर्ट (उदाहरण)</a></p>
+
+            <div class="cnl-fact-box">
+              <p>✔️ <strong>मुख्य तथ्य:</strong> </p>
+              <ul>
+                <li>✅ हमला 9 जून 2024 को रियासी, जम्मू-कश्मीर में हुआ।</li>
+                <li>✅ आतंकी हमले में 9 तीर्थयात्रियों की मौत हुई।</li>
+                <li>✅ 41 लोग घायल हुए, जिन्हें अस्पताल में भर्ती कराया गया।</li>
+                <li>✅ बस शिव खोड़ी मंदिर से कटरा जा रही थी।</li>
+                <li>✅ NIA ने मामले की जांच अपने हाथ में ली है।</li>
+                <li>✅ अमरnath यात्रा की सुरक्षा बढ़ाई गई है।</li>
+              </ul>
+            </div>
+
+            <div class="cnl-science-box">
+              <p>🔬 <strong>वैज्ञानिक निष्कर्ष ( उदाहरण):</strong> </p>
+              <p>इस रिसर्च से यह स्पष्ट होता है कि जलवायु परिवर्तन का प्रभाव अब तटीय क्षेत्रों में भी दिखने लगा है।</p>
+            </div>
+            <div class="cnl-court-box">
+               <p>⚖️ <strong>फैसला ( उदाहरण):</strong> </p>
+              <p>अदालत ने आदेश दिया कि याचिकाकर्ता को अंतरिम राहत दी जाए।</p>
+            </div>
+
+            <div class="cnl-journalistic-box cnl-expert-opinion-box">
+                <h4>👤 विशेषज्ञ राय</h4>
+                <p>सुरक्षा विशेषज्ञ [विशेषज्ञ का नाम] का कहना है:</p>
+                <blockquote>
+                    यह हमला दिखाता है कि आतंकियों की रणनीति बदल रही है। वे अब जम्मू क्षेत्र में ध्यान केंद्रित कर रहे हैं और सॉफ्ट टारगेट चुन रहे हैं। अमरnath यात्रा की सुरक्षा के लिए पुरानी नीतियों की समीक्षा करनी होगी।
+                </blockquote>
+                <p>– [विशेषज्ञ का नाम], सुरक्षा विश्लेषक</p>
+            </div>
+
+            <div class="cnl-obituary-box">
+              <p>🕊️ <strong>शोक संदेश ( उदाहरण):</strong> </p>
+              <p>प्रसिद्ध कवि श्री रामशंकर 'विद्रोही' का निधन, साहित्य जगत में शोक की लहर।</p>
+            </div>
+            <div class="cnl-investigative-box">
+               <p>🔎 <strong>विश्लेषण ( उदाहरण):</strong> </p>
+              <p>500 से अधिक दस्तावेज़ों की पड़ताल में यह सामने आया कि फंड का उपयोग अनियमित रहा।</p>
+            </div>
+
+            <figure>
+              <img src="https://via.placeholder.com/600x400?text=Image+Placeholder" alt="सुरक्षा समीक्षा बैठक" >
+              <figcaption>छवि स्रोत: (उदाहरण)</figcaption>
+            </figure>
+
+            <h3>📊 महत्वपूर्ण तिथियाँ (उदाहरण)</h3>
+            <table>
+              <tr>
+                <th>घटना</th><th>तारीख</th><th>विवरण</th>
+              </tr>
+              <tr>
+                <td>हमला</td><td>9 जून 2024</td><td>रियासी में बस पर आतंकी हमला</td>
+              </tr>
+              <tr>
+                <td>NIA जाँच शुरू</td><td>10 जून 2024</td><td>मामले की जांच राष्ट्रीय जांच एजेंसी को सौंपी गई</td>
+              </tr>
+               <tr>
+                <td>सुरक्षा समीक्षा बैठक</td><td>16 जून 2024</td><td>अमरnath यात्रा की सुरक्षा पर चर्चा</td>
+              </tr>
+            </table>
+
+            <!-- Wrapped the list in a new div for specific styling -->
+            <div class="cnl-security-points-box">
+                <h3>📋 सुरक्षा उपायों के मुख्य बिंदु ( उदाहरण)</h3>
+                <ul>
+                  <li>अमरnath यात्रा मार्गों पर Three-layer सुरक्षा घेरा।</li>
+                  <li>संवेदनशील इलाकों में ड्रोन से निगरानी।</li>
+                  <li>आतंकियों की तलाश में सघन कॉम्बिंग ऑपरेशन।</li>
+                  <li>यात्री वाहनों की कड़ी जांच।</li>
+                </ul>
+            </div>
+
+
+            <h3>🖼️ मल्टीमीडिया गैलरी</h3>
+            <div class="cnl-multimedia-gallery">
+                <img src="https://via.placeholder.com/150x180?text=Image+1" alt="गैलरी इमेज 1">
+                <img src="https://via.placeholder.com/150x180?text=Image+2" alt="गैलरी इमेज 2">
+                <img src="https://via.placeholder.com/150x180?text=Image+3" alt="Image+3">
+                <img src="https://via.placeholder.com/150x180?text=Image+4" alt="Image+4">
+            </div>
+            <p style="margin-top:15px; text-align: center;"><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> पूरी फोटो गैलरी देखें (वैकल्पिक लिंक)</a></p>
+
+            <h3>📹 संबंधित वीडियो</h3>
+            <div class="cnl-video-container">
+                  <iframe src="https://www.youtube.com/embed/watch?v=EXAMPLE_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+            <h3>🌤️ क्षेत्रीय मौसम (जम्मू)</h3>
+            <iframe src="https://forecast7.com/en/32d7374d86/jammu/" frameborder="0" width="100%" height="150" style="border-radius: 8px;"></iframe>
+
+             <div class="cnl-editorial-opinion-box" id="cnl-editorial-opinion-box">
+                <h2>✍️ संपादकीय अभिमत</h2>
+                <p>
+                    रियासी हमले ने एक बार फिर जम्मू-कश्मीर में आतंकी खतरे की गंभीरता को उजागर किया है, विशेषकर पीर पंजाल के दक्षिण में। यह घटना सुरक्षा एजेंसियों के लिए एक वेक-up कॉल है और अमरnath यात्रा जैसे बड़े आयोजनों की सुरक्षा रणनीति की तत्काल समीक्षा की आवश्यकता है। स्थानीय आबादी का समर्थन जुटाना और इंटेलिजेंस नेटवर्क को मजबूत करना आतंकियों के मंसूबों को नाकाम करने के लिए महत्वपूर्ण होगा। यह सिर्फ एक हमला नहीं, बल्कि शांति और सामान्य स्थिति बहाल करने के प्रयासों को अस्थिर करने का एक दुर्भावनापूर्ण प्रयास है, जिसका जवाब दृढ़ता और समन्वित कार्रवाई से दिया जाना चाहिए।
+                </p>
+                <p>
+                     यह हमारी टीम का विश्लेषण है और ज़रूरी नहीं कि यह सभी पाठकों की राय से मेल खाता हो। हम तथ्यों पर आधारित निष्पक्ष रिपोर्टिंग के लिए प्रतिबद्ध हैं।
+                </p>
+             </div>
+
+            <h2 class="cnl-pattern3">✅ निष्कर्ष</h2>
+            <p>
+                पहलगाम हमला एक दुखद घटना थी जिसने सुरक्षा व्यवस्था पर गंभीर सवाल खड़े किए हैं। हालांकि, सुरक्षा बल आतंकियों को पकड़ने और भविष्य में ऐसी घटनाओं को रोकने के लिए पूरी तरह से जुटे हुए हैं। अमरnath यात्रा की सुरक्षा सर्वोच्च प्राथमिकता बन गई है और इसके लिए अभूतपूर्व कदम उठाए जा रहे हैं। फिलहाल जांच जारी है और यह देखना होगा कि सुरक्षा एजेंसियां इस हमले के पीछे के पूरे नेटवर्क का कितनी जल्दी खुलासा कर पाती है। हमारी टीम इस मामले पर नज़र रखेगी और आपको हर अपडेट देती रहेगी।
+            </p>
+        </div>
+      </div>
+
+     <div class="cnl-manual-box cnl-certification-box">
+         <h2><i class="fas fa-award"></i> प्रमाणन</h2>
+         <div class="cnl-certification-content">
+             यह खबर हमारी टीम द्वारा सभी उपलब्ध स्रोतों और तथ्यों की जाँच के बाद प्रकाशित की गई है। हम निष्पक्ष और सटीक रिपोर्टिंग के लिए प्रतिबद्ध हैं।
+         </div>
+     </div>
+
+     <div class="cnl-manual-box cnl-suvichar-box">
+         <h2><i class="fas fa-lightbulb"></i> आज का सुविचार</h2>
+         <div class="cnl-suvichar-content">
+            <i class="fas fa-lightbulb"></i> साहस अंधेरे में रोशनी की तरह होता है।
+             <!-- आप यहाँ श्लोक या अर्थ जोड़ सकते हैं यदि आवश्यक हो -->
+         </div>
+     </div>
+
+    <!-- Updated Author Bio Box -->
+     <div class="cnl-author-bio-box">
+       <img src="https://via.placeholder.com/100" alt="आशीष मिश्रा">
+       <div class="cnl-author-info">
+           <strong><i class="fas fa-user-circle"></i> लेखक: आशीष मिश्रा</strong>
+           <small><i class="fas fa-graduation-cap"></i> वरिष्ठ पत्रकार | न्यूज़ एनालिस्ट</small>
+           <a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+           <a href="#" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+           <a href="mailto:author@email.com"><i class="fas fa-envelope"></i> Email</a>
+       </div>
+     </div>
+
+    <!-- Updated Comments Prompt Box -->
+     <div class="cnl-comments-prompt-box">
+         <h3><i class="fas fa-comments"></i> अपनी प्रतिक्रिया दें</h3>
+         <p>
+             इस महत्वपूर्ण खबर पर आपके विचार हमारे लिए मूल्यवान हैं। हम आपको इस समाचार से संबंधित अपनी राय, प्रश्न या अतिरिक्त जानकारी नीचे Blogspot के टिप्पणी अनुभाग में साझा करने के लिए आमंत्रित करते हैं। आपकी प्रतिक्रिया से चर्चा को बढ़ावा मिलता है और हमें बेहतर कवरेज प्रदान करने में मदद मिलती है।
+         </p>
+     </div>
+
+</div> <!-- .cnl-article-container का अंत -->
+
+<!-- ===== START: Screen Focus Cosmos Widget HTML (v1.4 - Prefix: sfcw-) ===== -->
+<!-- निर्देश: इस HTML को ब्लॉगर पोस्ट टेम्प्लेट में डालें (</body> से पहले बेहतर है) -->
+<!-- !!! आवश्यक: '[इस ब्लॉग का नाम]' और '[इस-ब्लॉग-का-होमपेज-लिंक]' को प्रत्येक ब्लॉग के लिए बदलें !!! -->
+
+<footer class="sfcw-widget">
+  <!-- पृष्ठभूमि तत्व -->
+  <div class="sfcw-background-depth"></div>
+  <canvas id="sfcw-particle-canvas"></canvas>
+
+  <div class="sfcw-container">
+
+    <!-- कंटेंट स्क्रीन रैपर -->
+    <div class="sfcw-content-screen">
+        <!-- Main Credits -->
+        <div class="sfcw-credits">
+           <p><span class="sfcw-energized-text">आचार्य आशीष मिश्र</span></p>
+           <p class="sfcw-author-title">
+               वेब प्रोग्रामर<span class="sfcw-separator-icon">❖</span>साहित्य सर्जक<span class="sfcw-separator-icon">❖</span>विचारक
+           </p>
+        </div>
+
+        <!-- Organization -->
+        <div class="sfcw-organization">
+           <!-- !!! आवश्यक: इस साइट का सही नाम और लिंक यहाँ डालें !!! -->
+           <p><a href="[इस-ब्लॉग-का-होमपेज-लिंक]" target="_blank" rel="noopener noreferrer"><strong class="sfcw-energized-text">[इस ब्लॉग का नाम]</strong></a> की एक प्रस्तुति</p>
+            <!-- संगठन की जानकारी -->
+            <p style="font-size:0.9em; opacity: 0.8;">(एक <a href="https://abpiyush.blogspot.com" target="_blank" rel="noopener noreferrer" style="color: var(--sfcw-primary-glow);">Abhijit Piyush Organisation</a> पहल)</p>
+        </div>
+    </div> <!-- .sfcw-content-screen का अंत -->
+
+    <!-- Collaborators & Links -->
+    <div class="sfcw-links">
+      <nav aria-label="सहयोगी और महत्वपूर्ण लिंक्स">
+        <span class="sfcw-link-label"><i class="fas fa-atom"></i> सहयोगी:</span>
+        <a href="https://qbuk.blogspot.com" target="_blank" rel="noopener noreferrer" title="Qbuk">Qbuk</a>
+        <span class="sfcw-separator">✧</span>
+        <a href="https://www.apgo.tech" target="_blank" rel="noopener noreferrer" title="Apgo Tech">Apgo Tech</a>
+        <br style="display: block; margin-bottom: 12px;">
+        <span class="sfcw-link-label"><i class="fas fa-meteor"></i> डिजिटल पदचिह्न:</span>
+        <a href="https://github.com/asheeshz" target="_blank" rel="noopener noreferrer" title="GitHub प्रोफाइल"><i class="fab fa-github"></i> GitHub</a>
+        <span class="sfcw-separator">✧</span>
+        <a href="https://www.blogger.com/profile/00546898432461025219" target="_blank" rel="noopener noreferrer" title="ब्लॉगर प्रोफाइल"><i class="fab fa-blogger-b"></i> Blogger</a>
+        <span class="sfcw-separator">✧</span>
+        <a href="https://kaalpath.blogspot.com" target="_blank" rel="noopener noreferrer" title="कालपथ न्यूज"><i class="fas fa-newspaper"></i> कालपथ</a>
+         <!-- आप यहाँ और लिंक्स जोड़ सकते हैं -->
+      </nav>
+    </div>
+
+    <!-- Copyright -->
+    <div class="sfcw-copyright">
+      <p><i class="fas fa-copyright"></i><span id="sfcw-current-year"></span> आचार्य आशीष मिश्र एवं सहयोगी। सर्वाधिकार सुरक्षित। ब्रह्मांडीय चेतना से प्रेरित।</p>
+    </div>
+
+  </div> <!-- .sfcw-container -->
+</footer>
+<!-- ===== END: Screen Focus Cosmos Widget HTML ===== -->
+
+
+<!-- Script को Blogspot टेम्पलेट में </body> टैग से ठीक पहले पेस्ट करना बेहतर है -->
+<!-- या यदि आप केवल इस पोस्ट में JS चाहते हैं तो इसे HTML व्यू के अंत में रखें -->
+<script>
+    // Script for the main article functionalities (font size, print, share, TTS)
+    // And the Screen Focus Cosmos Widget functionalities (year update, particles)
+
+    let baseSize = 17.6; // Base font size for the main article content
+    const synth = window.speechSynthesis;
+    let defaultVoice = null;
+    let currentSpeakingElement = null;
+    let lastClickedEditorialBox = null; // To keep track of the last clicked editorial box
+
+    function changeFontSize(val) {
+      const targetElement = document.querySelector('.cnl-article-container .myPrintablePost .cnl-main-content');
+      if (targetElement) {
+          const currentPx = parseFloat(window.getComputedStyle(targetElement).fontSize);
+          let currentSizePx = isNaN(currentPx) || currentPx === 0 ? baseSize : currentPx;
+          let newSizePx = currentSizePx + val * 1.5;
+          if (newSizePx < 12) newSizePx = 12;
+          if (newSizePx > 27) newSizePx = 27;
+          targetElement.style.fontSize = newSizePx + "px";
+      } else {
+          console.error("Font size target element '.cnl-article-container .myPrintablePost .cnl-main-content' not found.");
+      }
+    }
+
+    function shareArticle() {
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: 'Check out this article: ' + document.title,
+                url: window.location.href
+            }).then(() => {
+            }).catch((error) => {
+                console.error('Error sharing:', error);
+                alert('Unable to share. Please copy and paste manually.');
+            });
+        } else {
+            const articleUrl = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                 navigator.clipboard.writeText(articleUrl).then(() => {
+                     alert('Sharing is not supported, but the link has been copied to your clipboard!');
+                 }).catch(err => {
+                      console.error('Failed to copy fallback link:', err);
+                      alert('Sharing is not supported. Please manually copy the link:\n\n' + articleUrl);
+                 });
+            } else {
+                alert('Sharing is not supported. Please manually copy the link:\n\n' + articleUrl);
+            }
+            console.warn('Web Share API not supported.');
+        }
+    }
+
+    function reportError() {
+        const subject = "Correction Request: " + document.title;
+        const body = "Article URL: " + window.location.href + "\n\nPlease describe the error or correction needed:\n\n";
+        window.open('mailto:your@email.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), '_blank');
+    }
+
+    function showFactCheckInfo() {
+        alert('This button provides information about our fact-checking policy. (This is a placeholder, you should put the link to your policy page here)');
+    }
+
+    function copyArticleLink() {
+        const articleUrl = window.location.href;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(articleUrl)
+                .then(() => {
+                    alert('Article link copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy article link using clipboard API: ', err);
+                    prompt("Failed to automatically copy the link. Please manually copy from the box below:", articleUrl);
+                });
+        } else {
+            console.warn('Clipboard API not supported. Using prompt fallback.');
+            prompt("Your browser does not support automatic copy. Please copy the link manually from the box below:", articleUrl);
+        }
+    }
+
+     function printMyPost() {
+       var content = document.querySelector('.myPrintablePost');
+       if (!content) {
+         alert("Printable content not found!");
+         return;
+       }
+       var myWindow = window.open('', '', 'width=900,height=650');
+       myWindow.document.write(`
+         <html>
+         <head>
+           <title>प्रिंट पूर्वावलोकन</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+           <style>
+             body { font-family: 'Noto Sans Devanagari', sans-serif; padding: 30px; line-height: 1.7; color: #111; }
+             h1,h2,h3,h4 { color: #2c3e50; margin-top: 1em; margin-bottom: 0.5em;}
+             p { margin-bottom: 1em; }
+             img { max-width: 100%; height: auto; display: block; margin: 1em auto; }
+             figure { margin: 1em auto; text-align: center;}
+             figcaption { font-size: 0.9em; color: #555; margin-top: 0.5em;}
+             blockquote { border-left: 4px solid #888; padding: 10px 15px; margin: 1em 0; font-style: italic; background-color: #f9f9f9;}
+             blockquote footer { font-size: 0.9em; color: #666; font-style: normal; margin-top: 0.5em;}
+             ul, ol { margin: 1em 0 1em 20px; padding: 0;}
+             li { margin-bottom: 0.5em; }
+             table { width: 100%; border-collapse: collapse; margin: 1em 0; }
+             th, td { border: 1px solid #888; padding: 8px; text-align: left; }
+             th { background-color: #eee; font-weight: bold; }
+
+             /* Print styles for themed boxes */
+             .cnl-fivew1h-full, .cnl-journalistic-box, .cnl-fact-box, .cnl-highlight-box,
+             .cnl-science-box, .cnl-court-box, .cnl-obituary-box, .cnl-investigative-box,
+             .cnl-editorial-opinion-box, /* Added editorial for print */
+             .cnl-certification-box, /* Added certification for print */
+             .cnl-suvichar-box, /* Added suvichar for print */
+             .cnl-security-points-box, /* Added security points for print */
+             .cnl-author-bio-box, /* Added author bio for print */
+             .cnl-comments-prompt-box /* Added comments prompt for print */
+             {
+                  padding: 15px !important;
+                  margin: 15px 0 !important;
+                  border: 1px solid #ccc !important;
+                  border-left: 4px solid #888 !important;
+                  background-color: #f9f9f9 !important;
+                  box-shadow: none !important;
+                  border-radius: 0 !important;
+                  color: #000 !important;
+                  animation: none !important;
+                  background-image: none !important;
+                  -webkit-text-fill-color: initial !important;
+                  background-clip: initial !important;
+                  -webkit-background-clip: initial !important;
+                  text-fill-color: initial !important;
+             }
+              .myPrintablePost .cnl-fivew1h-full h2,
+              .myPrintablePost .cnl-journalistic-box h4,
+               .myPrintablePost .cnl-editorial-opinion-box h2, /* Print h2 */
+               .myPrintablePost .cnl-certification-box h2, /* Print h2 */
+               .myPrintablePost .cnl-suvichar-box h2, /* Print h2 */
+               .myPrintablePost .cnl-security-points-box h3, /* Print h3 */
+               .myPrintablePost .cnl-comments-prompt-box h3 /* Print h3 */
+               {
+                  border-bottom: 1px solid #ccc !important;
+                  padding-bottom: 5px !important;
+                  margin-bottom: 10px !important;
+                   color: #333 !important; /* Dark color for heading in print */
+                    text-shadow: none !important; /* Remove text shadow */
+               }
+               .cnl-certification-box::before,
+               .cnl-certification-box::after,
+               .cnl-suvichar-box::before,
+               .cnl-security-points-box li::before /* Remove custom bullet for print */
+               {
+                    display: none !important; /* Remove pseudo-elements for print */
+               }
+                .cnl-security-points-box ul {
+                   list-style: disc !important; /* Use standard bullets for print */
+                   padding-left: 20px !important;
+                }
+                .cnl-security-points-box li {
+                    padding-left: 0 !important; /* Remove padding */
+                }
+
+                .cnl-author-bio-box img {
+                     border: none !important;
+                     box-shadow: none !important;
+                     margin-bottom: 10px !important;
+                }
+                 .myPrintablePost .cnl-author-info strong {
+                     color: #333 !important;
+                 }
+                  .myPrintablePost .cnl-author-info small {
+                     color: #555 !important;
+                  }
+                   .myPrintablePost .cnl-author-info a {
+                        color: #000 !important;
+                        text-decoration: underline !important;
+                        text-shadow: none !important;
+                   }
+
+
+             .cnl-timeline {
+                 border-left: 2px solid #888 !important;
+                 margin: 15px 0 15px 15px !important;
+                  padding: 15px 15px 15px 15px !important;
+                 background: none !important;
+                 color: #000 !important;
+                 box-shadow: none !important;
+                 border-radius: 0 !important;
+             }
+              .cnl-timeline-entry {
+                  margin-bottom: 15px !important;
+                  padding-bottom: 8px !important;
+                  border-bottom: 1px dashed #ccc !important;
+              }
+               .cnl-timeline-entry h4 { color: #333 !important; } /* Dark color for date in print */
+               .cnl-timeline-entry p { color: #000 !important; } /* Dark color for text in print */
+               .cnl-timeline-entry::before {
+                   content: '';
+                   position: absolute;
+                   left: -21px;
+                   top: 6px;
+                   width: 8px;
+                   height: 8px;
+                   background-color: #555;
+                   border-radius: 50%;
+                   border: 2px solid #fff;
+                   z-index: 1;
+               }
+
+             /* Hide elements not for print */
+             .cnl-tts-info-overlay, .cnl-tts-info-popup, .cnl-speaking-highlight,
+             .cnl-article-headline-section, .cnl-article-info-section,
+             .cnl-multimedia-gallery, .cnl-video-container, iframe, .cnl-accessibility-buttons,
+              .sfcw-widget /* Also hide widget in print */
+               {
+                   display: none !important;
+               }
+              /* Ensure images, tables, etc show */
+              img { display: block !important; }
+              figcaption { display: block !important; }
+              table { display: table !important; } /* Ensure tables are printed */
+
+
+           </style>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+         </head>
+         <body>
+           ${content.innerHTML}
+         </body>
+         </html>
+       `);
+       myWindow.document.close();
+       myWindow.focus();
+       myWindow.print();
+     }
+
+     function findDefaultVoice() {
+          const allVoices = synth.getVoices();
+          let foundVoice = null;
+          foundVoice = allVoices.find(v => v.lang === 'hi-IN' || v.lang.startsWith('hi'));
+           if (!foundVoice) {
+               foundVoice = allVoices.find(v => v.lang === 'en-IN');
+           }
+           if (!foundVoice) {
+                foundVoice = allVoices[0] || null;
+           }
+           defaultVoice = foundVoice;
+           if (!defaultVoice) {
+                console.warn("No suitable TTS voice found.");
+           }
+     }
+
+      function cleanTextForTTS(text) {
+          if (!text) return "";
+          // Remove HTML tags, symbols not useful for speech
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = text;
+          text = tempDiv.textContent || tempDiv.innerText || text;
+
+           // Remove list item markers like ✅, icons like fas classes, etc.
+           text = text.replace(/[\u2705\u2714\u2713]/g, ''); // Remove checkmarks etc.
+            // Remove Font Awesome icons based on class name pattern inside tags
+           text = text.replace(/<i\s+class=["'][^"']*fa-[^"']*["'][^>]*><\/i>/g, '');
+            // Attempt to remove other icons/emojis outside tags - this is less reliable
+            text = text.replace(/[\u{1F000}-\u{1FFFF}\u{20000}-\u{2FFFF}]/gu, '');
+
+          text = text.replace(/\s+/g, ' '); // Normalize whitespace
+          text = text.trim();
+          return text;
+      }
+
+      function removeHighlight() {
+          if (currentSpeakingElement) {
+              currentSpeakingElement.classList.remove('cnl-speaking-highlight');
+              currentSpeakingElement = null;
+          }
+      }
+
+      function startSpeakingElement(element) {
+          if (!synth || !defaultVoice) {
+              console.error("Text-to-speech or default voice not ready. Cannot start speaking.");
+              // Optionally try to load voices if they weren't ready initially
+              if (synth && synth.getVoices().length === 0) {
+                  synth.addEventListener('voiceschanged', () => {
+                       findDefaultVoice();
+                       if(defaultVoice) startSpeakingElement(element); // Retry after voices load
+                  }, { once: true });
+              } else {
+                  alert("आपके ब्राउज़र में टेक्स्ट-टू-SPEECH उपलब्ध नहीं है या हिंदी आवाज़ नहीं मिली।");
+              }
+              return;
+          }
+
+          const rawText = element.innerText; // Use innerText to get visible text
+          const textToSpeak = cleanTextForTTS(rawText);
+
+          if (!textToSpeak || textToSpeak.trim() === "") {
+               console.warn("Element has no readable text or only whitespace after cleaning. Skipping speaking.", element);
+              return;
+          }
+
+          if (synth.speaking) {
+               synth.cancel();
+               removeHighlight();
+          } else {
+              removeHighlight();
+          }
+
+          element.classList.add('cnl-speaking-highlight');
+          currentSpeakingElement = element;
+
+          const utterance = new SpeechSynthesisUtterance(textToSpeak);
+          utterance.voice = defaultVoice;
+           utterance.lang = defaultVoice.lang; // Set language explicitly
+
+          utterance.rate = 0.95; // Slightly slower for better understanding
+          utterance.pitch = 1;
+
+          utterance.onend = () => {
+              removeHighlight();
+          };
+
+          utterance.oncancel = () => {
+               removeHighlight(); // Ensure highlight is removed on cancel
+          };
+
+          synth.speak(utterance);
+      }
+
+    document.addEventListener("DOMContentLoaded", () => {
+          const mainContentForFont = document.querySelector('.cnl-article-container .myPrintablePost .cnl-main-content');
+          if(mainContentForFont) {
+             const computedPx = parseFloat(window.getComputedStyle(mainContentForFont).fontSize);
+             baseSize = isNaN(computedPx) || computedPx === 0 ? 17.6 : computedPx;
+          } else {
+              console.error("Main content element '.cnl-article-container .myPrintablePost .cnl-main-content' not found on load for font size.");
+          }
+
+          const articleBodyForReadTime = document.querySelector(".cnl-article-container .myPrintablePost .cnl-main-content");
+          const readTimeElement = document.getElementById("cnl-read-time");
+
+          if (articleBodyForReadTime && readTimeElement) {
+               const clone = articleBodyForReadTime.cloneNode(true);
+               // Remove elements that don't contribute to reading time or contain control text
+               clone.querySelectorAll('h2, h3, h4, figure, table, .cnl-fivew1h-full, .cnl-journalistic-box, .cnl-fact-box, .cnl-highlight-box, .cnl-science-box, .cnl-court-box, .cnl-obituary-box, .cnl-investigative-box, .cnl-timeline, .cnl-video-container, .cnl-multimedia-gallery, blockquote, .cnl-manual-box, .cnl-author-bio-box, .cnl-comments-prompt-box, script, style, .cnl-security-points-box').forEach(el => el.remove());
+
+              const text = clone.textContent || clone.innerText;
+              const words = text.split(/\s+/).filter(word => word.length > 0).length;
+              const time = Math.ceil(words / 200); // Assuming 200 words per minute reading speed
+              readTimeElement.innerHTML = `<i class="fas fa-hourglass-half"></i> रीडिंग टाइम: ${Math.max(1, time)} मिनट`;
+          } else if (readTimeElement) {
+              readTimeElement.style.display = 'none'; // Hide if not found
+          }
+
+
+         const mainContentForTTS = document.querySelector('.cnl-article-container .myPrintablePost .cnl-main-content');
+
+         if ('speechSynthesis' in window && mainContentForTTS) {
+             // Find voice immediately, and again if voices list changes
+             if (synth.getVoices().length > 0) {
+                 findDefaultVoice();
+             } else {
+                 synth.addEventListener('voiceschanged', findDefaultVoice, { once: true });
+             }
+
+             mainContentForTTS.addEventListener('click', (event) => {
+                 // Define selector for clickable text elements
+                 const readableSelector = 'p, h2, h4, blockquote, .cnl-fact-box li, .cnl-highlight-box li, .cnl-key-takeaways-box li, .cnl-fivew1h-block p, .cnl-timeline-entry p, .cnl-expert-opinion-box blockquote p, .cnl-editorial-opinion-box p, .cnl-certification-content, .cnl-suvichar-content, td, th, figcaption, .cnl-security-points-box li'; // Added security points li
+                 const targetElement = event.target.closest(readableSelector);
+                  const editorialBox = event.target.closest('.cnl-editorial-opinion-box'); // Find if click was inside editorial box
+
+
+                 // If the click was inside the main content but not on a specific readable element, stop speaking
+                 if (event.target.closest('.cnl-main-content') && !targetElement && !editorialBox) {
+                      if (synth.speaking) {
+                         synth.cancel();
+                         removeHighlight();
+                      }
+                      return;
+                 }
+
+                 // Handle Editorial Box click for background toggle
+                 if (editorialBox) {
+                      if (lastClickedEditorialBox && lastClickedEditorialBox !== editorialBox) {
+                          lastClickedEditorialBox.classList.remove('cnl-editorial-opinion-clicked');
+                      }
+                      editorialBox.classList.toggle('cnl-editorial-opinion-clicked');
+                      lastClickedEditorialBox = editorialBox.classList.contains('cnl-editorial-opinion-clicked') ? editorialBox : null;
+                 } else {
+                      // If click is outside editorial box, make sure any previously clicked editorial box is reset
+                       if (lastClickedEditorialBox) {
+                           lastClickedEditorialBox.classList.remove('cnl-editorial-opinion-clicked');
+                           lastClickedEditorialBox = null;
+                       }
+                 }
+
+                 // Handle TTS for readable elements
+                 if (targetElement) {
+                      startSpeakingElement(targetElement);
+                 } else if (synth.speaking) {
+                      // If click wasn't on a readable element OR editorial box, stop speaking
+                      synth.cancel();
+                      removeHighlight();
+                 }
+             });
+
+               synth.addEventListener('cancel', () => {
+                  removeHighlight();
+              });
+               synth.addEventListener('end', () => {
+                  removeHighlight();
+              });
+         } else {
+              console.warn("Speech Synthesis API not supported or main content element not found. TTS features disabled.");
+         }
+
+
+         /* ===== START: Screen Focus Cosmos Widget JS (v1.4 - Prefix: sfcw-) ===== */
+        // निर्देश: इस JS कोड को Blogspot टेम्पलेट के मुख्य JS स्थान (आमतौर पर </body> से पहले) में डालें।
+        // <script> टैग्स का उपयोग न करें। (Combined into the main script tag here)
+
+        // --- कॉपीराइट वर्ष अपडेट करें ---
+        const sfcwYearSpan = document.getElementById('sfcw-current-year'); // Prefixed ID
+        if (sfcwYearSpan) {
+          sfcwYearSpan.textContent = " " + new Date().getFullYear();
+        }
+
+        // --- कण कैनवास सेटअप ---
+        const sfcwCanvas = document.getElementById('sfcw-particle-canvas'); // Prefixed ID
+         if (!sfcwCanvas) {
+              // console.error("SFCW Particle canvas element not found!"); // त्रुटि लॉगिंग वैकल्पिक
+              // Canvas not found, skip particle animation setup
+         } else {
+             const sfcwCtx = sfcwCanvas.getContext('2d');
+             let sfcwParticles = [];
+             let sfcwAnimationFrameId = null; // एनिमेशन फ्रेम आईडी स्टोर करने के लिए
+
+             function sfcwResizeCanvas() { // Prefixed function name
+                 sfcwCanvas.width = sfcwCanvas.offsetWidth;
+                 sfcwCanvas.height = sfcwCanvas.offsetHeight;
+             }
+
+             // कण ऑब्जेक्ट क्लास (Prefixed)
+             class SFCW_Particle { // Prefixed class name
+                 constructor(x, y) {
+                     this.x = x || Math.random() * sfcwCanvas.width;
+                     this.y = y || Math.random() * sfcwCanvas.height;
+                     this.size = Math.random() * 2.5 + 1;
+                     this.speedX = (Math.random() * 1 - 0.5) * 0.5;
+                     this.speedY = (Math.random() * 1 - 0.5) * 0.5;
+                     // CSS वेरिएबल्स से रंग प्राप्त करें
+                     const rootStyle = getComputedStyle(document.documentElement);
+                     const starColor = rootStyle.getPropertyValue('--sfcw-star-color').trim() || 'rgba(240, 248, 255, 0.85)';
+                     const particleColor = rootStyle.getPropertyValue('--sfcw-particle-color').trim() || 'rgba(0, 160, 160, 0.5)';
+                     this.color = Math.random() > 0.1 ? starColor : particleColor;
+                     this.opacity = Math.random() * 0.6 + 0.2;
+                     this.initialOpacity = this.opacity;
+                     this.life = Math.random() * 2 + 1;
+                     this.initialLife = this.life;
+                 }
+                 update(deltaTime) {
+                     this.x += this.speedX * deltaTime * 30;
+                     this.y += this.speedY * deltaTime * 30;
+                     this.life -= deltaTime;
+                     if (this.life <= 0) {
+                          this.opacity = 0;
+                          if (this.life <= -0.5) { this.reset(); }
+                     } else {
+                          this.opacity = this.initialOpacity * (0.6 + Math.abs(Math.sin( (this.initialLife - this.life) * Math.PI / this.initialLife ) * 0.4));
+                     }
+                     // किनारों से धीरे से वापस मोड़ें
+                     if (this.x <= 0 || this.x >= sfcwCanvas.width) {
+                         this.speedX *= -1;
+                         this.x = Math.max(1, Math.min(this.x, sfcwCanvas.width - 1)); // थोड़ा अंदर रखें
+                     }
+                     if (this.y <= 0 || this.y >= sfcwCanvas.height) {
+                         this.speedY *= -1;
+                         this.y = Math.max(1, Math.min(this.y, sfcwCanvas.height - 1)); // थोड़ा अंदर रखें
+                     }
+                 }
+                 reset() {
+                     this.x = Math.random() * sfcwCanvas.width;
+                     this.y = Math.random() * sfcwCanvas.height;
+                     this.opacity = this.initialOpacity;
+                     this.life = this.initialLife;
+                     this.speedX = (Math.random() * 1 - 0.5) * 0.5;
+                     this.speedY = (Math.random() * 1 - 0.5) * 0.5;
+                 }
+                 draw() {
+                     if (this.opacity <= 0) return; // अदृश्य कणों को न बनाएं
+                     sfcwCtx.globalAlpha = this.opacity;
+                     sfcwCtx.fillStyle = this.color;
+                     sfcwCtx.beginPath();
+                     sfcwCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                     sfcwCtx.fill();
+                 }
+             }
+
+             function sfcwInitParticles() { // Prefixed function name
+                 sfcwParticles = [];
+                 let numberOfParticles = Math.floor(sfcwCanvas.width * sfcwCanvas.height / 15000);
+                 numberOfParticles = Math.max(50, Math.min(numberOfParticles, 150));
+                 for (let i = 0; i < numberOfParticles; i++) {
+                     sfcwParticles.push(new SFCW_Particle()); // Use prefixed class
+                 }
+             }
+
+             let sfcwLastTime = 0;
+             function sfcwAnimateParticles(timestamp) { // Prefixed function name
+                  if (document.hidden) { // यदि टैब निष्क्रिय है तो एनिमेशन रोकें
+                      sfcwLastTime = timestamp;
+                      sfcwAnimationFrameId = requestAnimationFrame(sfcwAnimateParticles); // लूप जारी रखें
+                      return;
+                  }
+
+                 const deltaTime = (timestamp - sfcwLastTime) / 1000;
+                 sfcwLastTime = timestamp;
+
+                 sfcwCtx.clearRect(0, 0, sfcwCanvas.width, sfcwCanvas.height);
+                 sfcwParticles.forEach(p => {
+                      if (deltaTime > 0 && deltaTime < 0.1) { // वैध डेल्टा टाइम
+                          p.update(deltaTime);
+                      } else if (deltaTime >= 0.1) { // बड़ा अंतराल
+                          p.reset(); // कणों को रीसेट करें ताकि वे अटके नहीं
+                      }
+                      p.draw();
+                 });
+                 sfcwCtx.globalAlpha = 1.0; // अल्फा रीसेट करें
+                 sfcwAnimationFrameId = requestAnimationFrame(sfcwAnimateParticles); // अगला फ्रेम
+             }
+
+             function sfcwStartAnimation() { // Start function
+                 sfcwResizeCanvas(); // आकार सेट करें
+                 sfcwInitParticles(); // कण बनाएं
+                 if (sfcwAnimationFrameId) { // यदि पहले से चल रहा है तो रोकें
+                      cancelAnimationFrame(sfcwAnimationFrameId);
+                 }
+                 sfcwLastTime = performance.now(); // टाइमर रीसेट करें
+                 sfcwAnimationFrameId = requestAnimationFrame(sfcwAnimateParticles); // एनिमेशन शुरू करें
+             }
+
+             // थोड़ा विलंब से एनिमेशन शुरू करें
+             const sfcwStartDelay = setTimeout(sfcwStartAnimation, 100);
+
+             // विंडो रीसाइज़ हैंडलर
+             let sfcwResizeTimeout;
+             window.addEventListener('resize', () => {
+                 clearTimeout(sfcwResizeTimeout);
+                 sfcwResizeTimeout = setTimeout(() => {
+                      // मौजूदा एनिमेशन रोकें और पुनः आरंभ करें
+                      if (sfcwAnimationFrameId) {
+                          cancelAnimationFrame(sfcwAnimationFrameId);
+                      }
+                      sfcwStartAnimation();
+                 }, 500);
+             });
+
+             // पेज छोडते समय एनिमेशन साफ करें (वैकल्पिक)
+             window.addEventListener('beforeunload', () => {
+                  if (sfcwAnimationFrameId) {
+                      cancelAnimationFrame(sfcwAnimationFrameId);
+                  }
+                  clearTimeout(sfcwStartDelay);
+                  clearTimeout(sfcwResizeTimeout);
+             });
+         }
+
+        /* ===== END: Screen Focus Cosmos Widget JS ===== */
+    }); // End of DOMContentLoaded
+
+</script>
